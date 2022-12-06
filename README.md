@@ -1,7 +1,5 @@
 <div id="top"></div>
 
-
-
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -10,12 +8,12 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-
 
 <!-- PROJECT LOGO -->
 <br />
@@ -41,15 +39,13 @@
 </div>
 
 ### Integrantes del proyecto ADA:
-- [Juanse Mastrangelo](https://github.com/JuanseMastrangelo/) - Organizador
 
-
-
-
-
+-   [Juanse Mastrangelo](https://github.com/JuanseMastrangelo/) - Organizador
+-   [Nicolas Smael](https://github.com/SmaelNicolas) - Desarrollador
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [contributors-shield]: https://img.shields.io/github/contributors/ProgramadoresArgentina/proyecto-ada.svg?style=for-the-badge
 [contributors-url]: https://github.com/ProgramadoresArgentina/proyecto-ada/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/ProgramadoresArgentina/proyecto-ada.svg?style=for-the-badge
