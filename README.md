@@ -41,6 +41,7 @@
 ### Integrantes del proyecto ADA:
 
 -   [Juanse Mastrangelo](https://github.com/JuanseMastrangelo/) - Organizador
+-   [Ian Rosales](https://github.com/sampxcs/) - Desarrollador
 -   [Nicolas Smael](https://github.com/SmaelNicolas) - Desarrollador
 
 <!-- MARKDOWN LINKS & IMAGES -->
