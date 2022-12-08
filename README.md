@@ -42,6 +42,8 @@
 
 - [Juanse Mastrangelo](https://github.com/JuanseMastrangelo/) - Organizador
 - [Ian Rosales](https://github.com/sampxcs/) - Desarrollador
+- [Daniela Martinez ](https://github.com/DanMartinez01) - Desarrolladora
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
