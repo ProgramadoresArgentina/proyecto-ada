@@ -44,6 +44,7 @@
 - [Ian Rosales](https://github.com/sampxcs/) - Desarrollador
 - [Nicolas Smael](https://github.com/SmaelNicolas) - Desarrollador
 - [Elam Cano](https://github.com/ElamCano) - Desarrollador
+- [Nico Sammaritano](https://github.com/Nicolius888) - Desarrollador
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
