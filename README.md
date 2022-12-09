@@ -40,9 +40,10 @@
 
 ### Integrantes del proyecto ADA:
 
--   [Juanse Mastrangelo](https://github.com/JuanseMastrangelo/) - Organizador
--   [Ian Rosales](https://github.com/sampxcs/) - Desarrollador
--   [Nicolas Smael](https://github.com/SmaelNicolas) - Desarrollador
+- [Juanse Mastrangelo](https://github.com/JuanseMastrangelo/) - Organizador
+- [Ian Rosales](https://github.com/sampxcs/) - Desarrollador
+- [Nicolas Smael](https://github.com/SmaelNicolas) - Desarrollador
+- [Elam Cano](https://github.com/ElamCano) - Desarrollador
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
