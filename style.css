@@ -1,0 +1,13 @@
+*, body {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 22px;
+    color: #ff0000;
+}
+
+p {
+    color: black;
+}
