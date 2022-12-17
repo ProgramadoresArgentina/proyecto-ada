@@ -42,6 +42,7 @@
 
 
 - [Juanse Mastrangelo](https://github.com/JuanseMastrangelo/) - Organizador
+- [Neri Heredia](https://github.com/neriheredia/) - Organizador
 - [Ian Rosales](https://github.com/sampxcs/) - Desarrollador
 - [Nicolas Smael](https://github.com/SmaelNicolas) - Desarrollador
 - [Elam Cano](https://github.com/ElamCano) - Desarrollador
