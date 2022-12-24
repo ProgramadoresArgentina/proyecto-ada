@@ -46,6 +46,7 @@
 - [Ian Rosales](https://github.com/sampxcs/) - Desarrollador
 - [Nicolas Smael](https://github.com/SmaelNicolas) - Desarrollador
 - [Elam Cano](https://github.com/ElamCano) - Desarrollador
+- [Nico Sammaritano](https://github.com/Nicolius888) - Desarrollador
 - [Carolina Riddick](https://github.com/Carolina-Riddick) - Desarrolladora
 
 <!-- MARKDOWN LINKS & IMAGES -->
