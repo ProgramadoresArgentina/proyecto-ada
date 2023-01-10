@@ -40,9 +40,15 @@
 
 ### Integrantes del proyecto ADA:
 
+
 - [Juanse Mastrangelo](https://github.com/JuanseMastrangelo/) - Organizador
+- [Neri Heredia](https://github.com/neriheredia/) - Organizador
 - [Ian Rosales](https://github.com/sampxcs/) - Desarrollador
-- [Daniela Martinez ](https://github.com/DanMartinez01) - Desarrolladora
+- [Daniela Martinez](https://github.com/DanMartinez01) - Desarrolladora
+- [Nicolas Smael](https://github.com/SmaelNicolas) - Desarrollador
+- [Elam Cano](https://github.com/ElamCano) - Desarrollador
+- [Nico Sammaritano](https://github.com/Nicolius888) - Desarrollador
+- [Carolina Riddick](https://github.com/Carolina-Riddick) - Desarrolladora
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
