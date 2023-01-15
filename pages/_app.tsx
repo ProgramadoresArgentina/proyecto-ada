@@ -1,12 +1,12 @@
 import { NextPage } from 'next'
 import { AppProps } from 'next/app'
-import Nav from '../Components/Nav'
 import '../styles/globals.css'
+import NavBar from '../components/NavBar'
 
 const MyApp: NextPage = ({ Component, pageProps }: AppProps) => {
   return (
     <>
-      <Nav />
+      <NavBar />
       <Component {...pageProps} />
     </>
   )
