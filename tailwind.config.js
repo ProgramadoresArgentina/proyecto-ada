@@ -9,6 +9,11 @@ module.exports = {
       fontFamily: {
         'custom': ['Manrope', 'sans-serif'],
       },
+      colors: {
+        indigo: {
+          500: '#607FF2'
+        }
+      }
     },
   },
   plugins: [],

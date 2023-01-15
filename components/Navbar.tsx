@@ -9,7 +9,7 @@ const Navbar: NextPage = () => {
                 <h1 className='ml-11'>Bolsa de talentos</h1>
                 <h1 className='ml-11'>Contacto</h1>
                 <h1 className='ml-11'>Nosotros</h1>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded ml-11">
+                <button className="bg-indigo-500  text-white  py-2 px-4 rounded ml-11">
                     Generar mi CV
                 </button>
             </div>
