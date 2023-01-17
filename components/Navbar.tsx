@@ -1,9 +1,11 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
+import { useState } from 'react';
 
 const Navbar: NextPage = () => {
+    let [open, setOpen] = useState(false);
     return (
-        <div className='flex justify-between items-center mt-8  mr-16 ml-28'  >
+        <div className='flex justify-between items-center shadow-md w-full fixed top-0 p-4'  >
             <Link href="">LOGO</Link>
             <div className='flex justify-end items-center'>
                 <Link href="" className='ml-11 font-normal'>Proyectos</Link>
