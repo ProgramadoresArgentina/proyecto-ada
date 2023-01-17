@@ -4,8 +4,12 @@ import Navbar from '../components/Navbar'
 import '../styles/globals.css'
 
 const MyApp: NextPage = ({ Component, pageProps }: AppProps) => {
-  <Navbar />
-  return <Component {...pageProps} />
+  return (
+    <>
+      <Navbar />
+      <Component {...pageProps} />
+    </>
+  )
 }
 
 export default MyApp
