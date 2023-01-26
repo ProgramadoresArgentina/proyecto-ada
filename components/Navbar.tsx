@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
                         ))
                     }
                     <button className={`font-normal bg-indigo-500 text-sm text-white rounded-lg  py-2 px-4 ${open ? 'ml-0 mt-4' : 'ml-6'}`}>
-                        <a href="/">Generar mi CV</a>
+                        <Link href="/">Generar mi CV</Link>
                     </button>
                 </ul>
             </div>
