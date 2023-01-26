@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
             <div className='md:flex items-center justify-between'>
 
                 {/* Logo */}
-                <Link href="">
+                <Link href="/">
                     <Image src={Logo} alt='Programadores Argentina'
                     />
                 </Link>
@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
                     {
                         Links.map((link: Link) => (
                             <li key={link.name} className={`font-normal ${open ? 'ml-0 mt-4' : 'ml-6'}`}>
-                                <a href={link.path}>{link.name}</a>
+                                <Link href={link.path}>{link.name}</Link>
                             </li>
                         ))
                     }
