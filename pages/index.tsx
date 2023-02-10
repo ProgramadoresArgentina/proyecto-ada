@@ -1,9 +1,10 @@
-import { NextPage } from 'next'
+import { NextPage } from "next";
+import { Hero } from "../components/Hero/Hero";
 
-const Home: NextPage = () => {
-  return (
-    <h1 className='text-3xl font-bold underline'>Hello World!</h1>
-  )
-}
+const Home: NextPage = () => (
+		<div className="w-full min-h-screen">
+			<Hero />
+		</div>
+	);
 
 export default Home;

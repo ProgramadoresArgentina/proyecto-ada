@@ -1,9 +1,20 @@
 import { NextPage } from 'next'
 import { AppProps } from 'next/app'
+import Head from 'next/head'
+import Navbar from '../components/navbar'
 import '../styles/globals.css'
 
 const MyApp: NextPage = ({ Component, pageProps }: AppProps) => {
-  return <Component {...pageProps} />
+  return (
+    <>
+        <Head>
+            <link rel="shortcut icon" href="/static/favicon.ico" />
+            <title>Programadores Argentina - Comunidad</title>
+        </Head>
+        <Navbar />
+        <Component {...pageProps} />
+    </>
+  )
 }
 
 export default MyApp
