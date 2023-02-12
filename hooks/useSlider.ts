@@ -25,11 +25,5 @@ export const useSlider = (data: any) => {
     ref.current.style.transform = `translateX(-${indexSlider}00%)`
   }, [indexSlider])
 
-  useEffect(() => {
-    setInterval(() => {
-      handleSlide({ next: true })
-    }, 5000)
-  }, [handleSlide])
-
   return { ref, indexSlider, handleSlide }
 }
