@@ -18,21 +18,21 @@ export default function StaffCarousel() {
       <div
         ref={ref}
         className={`flex items-center justify-start w-full h-full
-      ${sizeScreen > BREAKPOINT ? 'overflow-visible' : 'snap-x overflow-x-scroll no-scrollbar gap-8'}`}
+      ${sizeScreen > BREAKPOINT ? 'overflow-visible' : 'snap-x snap-mandatory overflow-x-scroll no-scrollbar gap-8'}`}
       >
         {staff.map(({ id, imgUrl, name, position, github }: any) => (
-          <StaffCarouselCard
-            github={github}
-            imgUrl={imgUrl}
-            innerRef={ref}
-            key={id}
-            name={name}
-            position={position}
-          />
+          <StaffCarouselCard github={github} imgUrl={imgUrl} innerRef={ref} key={id} name={name} position={position} />
         ))}
       </div>
-      <div className={`absolute ${ sizeScreen > BREAKPOINT ? "top-[70%] right-[10%]" : "bottom-0"}`}>
-        <CarouselPagination indexSlider={indexSlider} sizeScreen={1000} breakpoint={600} data={staff} divide={1} handleSlide={handleSlide} />
+      <div className={`absolute ${sizeScreen > BREAKPOINT ? 'top-[70%] right-[10%]' : 'bottom-0'}`}>
+        <CarouselPagination
+          indexSlider={indexSlider}
+          sizeScreen={1000}
+          breakpoint={600}
+          data={staff}
+          divide={1}
+          handleSlide={handleSlide}
+        />
       </div>
     </div>
   )
