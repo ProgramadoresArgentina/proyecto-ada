@@ -2,7 +2,7 @@ import Image from "next/image";
 import { FC } from "react";
 
 export const Hero_Image: FC = () => (
-	<div className="absolute w-full min-[1000px]:w-1/2  flex justify-end min-[1000px]:relative">
+	<div className="absolute right-0 w-full min-[1000px]:w-1/2 flex justify-end min-[1000px]:relative">
 		<Image
 			alt="figure"
 			className="right-0 top-0 -z-10 hidden max-[1099px]:flex w-auto"
