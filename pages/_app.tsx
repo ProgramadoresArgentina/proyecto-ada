@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { NextPage } from "next";
 import { AppProps } from "next/app";
 import ButtonUp from "../components/ButtonUp";
@@ -5,10 +6,17 @@ import Head from "next/head";
 import Navbar from "../components/navbar";
 import "../styles/globals.css";
 import Followers from "../Components/Followers/Followers";
+=======
+import { NextPage } from 'next'
+import { AppProps } from 'next/app'
+import Nav from '../Components/Nav'
+import '../styles/globals.css'
+>>>>>>> effbdb1fc357164c518450d7d788dc74e0b3e21c
 
 const MyApp: NextPage = ({ Component, pageProps }: AppProps) => {
   return (
     <>
+<<<<<<< HEAD
       <Head>
         <link rel="shortcut icon" href="/static/favicon.ico" />
         <title>Programadores Argentina - Comunidad</title>
@@ -170,5 +178,12 @@ const MyApp: NextPage = ({ Component, pageProps }: AppProps) => {
     </>
   );
 };
+=======
+      <Nav />
+      <Component {...pageProps} />
+    </>
+  )
+}
+>>>>>>> effbdb1fc357164c518450d7d788dc74e0b3e21c
 
 export default MyApp;
