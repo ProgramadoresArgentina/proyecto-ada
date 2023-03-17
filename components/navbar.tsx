@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
     }
     let [open, setOpen] = useState(false);
     return (
-        <div className='max-w-screen-2xl p-4 bg-white z-10 mx-1 relative'>
+        <div className='max-w-screen-2xl p-4 bg-white z-10 relative'>
             <div className='md:flex items-center justify-between'>
 
                 {/* Logo */}
