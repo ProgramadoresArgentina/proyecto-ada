@@ -7,8 +7,8 @@ import { Hero_Pattern } from "./Hero_Pattern";
 import { Hero_Title } from "./Hero_Title";
 
 export const Hero: FC = () => (
-	<section className="m-auto md:w-full min-h-max flex flex-col justify-start  items-center pt-2 md:pt-16 pb-20 md:pb-36 pl-2 sm:pl-5 md:pl-0">
-		<div className=" w-full h-auto flex flex-row justify-start items-start relative px-8">
+	<section className="m-auto md:w-full min-h-max flex flex-col justify-start  items-center pt-2 md:pt-8 pb-20 md:pb-36 pl-2 sm:pl-5 md:pl-0">
+		<div className=" w-full h-auto flex flex-row justify-start items-start relative pl-8">
 			<div className="w-full md:w-1/2 h-auto flex flex-col justify-start items-start gap-2 my-5 md:pt-6 lg:pt-1 pl-2 min-[360px]:pl-5 ">
 				<Hero_Title />
 				<Hero_Paragraph />
