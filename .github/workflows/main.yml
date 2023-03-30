@@ -1,0 +1,13 @@
+name: CI
+on: [push, pull_request]
+jobs:
+ test:
+   runs-on: ubuntu-latest
+   steps:
+     - uses: actions/checkout@v3
+       with:
+         node-version: lts
+     - name: Install modules
+       run: yarn
+     - name: Run RTL tests
+       run: yarn test:ci

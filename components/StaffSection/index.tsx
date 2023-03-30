@@ -8,7 +8,7 @@ export default function StaffSection() {
   return (
     <section className='font-manrope py-16 flex flex-col gap-12 sm:gap-24 items-center justify-center'>
       <div className='flex flex-col gap-3 text-center'>
-        <h2 className='text-4xl font-bold tracking-tight'>Staff</h2>
+        <h2 className='text-4xl font-bold tracking-tight' data-testid='text-staff'>Staff</h2>
         <h3 className='text-xl tracking-tight text-[#757575]'>La comunidad no sería posible sin ellos</h3>
       </div>
       <div className='flex w-full items-center justify-center max-w-7xl'>
