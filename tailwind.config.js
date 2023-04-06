@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-const plugin = require('tailwindcss/plugin')
+const plugin = require("tailwindcss/plugin");
 
 module.exports = {
   content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
@@ -27,7 +27,6 @@ module.exports = {
         blueNormal: "#5D5FEF",
         blueNormalHover: "#494abc",
         'indigo-800': "#523BA2",
-        orange: "#FF8400",
         orange: "#FF8400"
       },
       backgroundImage: {
