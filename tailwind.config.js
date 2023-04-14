@@ -9,12 +9,17 @@ module.exports = {
       fontFamily: {
         manrope: ['Manrope', 'sans-serif'],
         poppins: ['Poppins', 'sans-serif'],
+        ibm: ['IBM', 'sans-serif']
       },
       colors: {
         grey: '#565656;',
         blueStrong: '#2E3E5C;',
         shadeBlue: '#607FF2;',
         shadeBlueHover: '#4965cc;',
+        redButton: '#F26060',
+        secondaryGrey: '#EFF2F9',
+        textGrey: '#6F7482',
+        yellow: '#EACA78'
       },
       backgroundImage: {
         'background-vector': "url('/carousel/background-vector.svg')",
