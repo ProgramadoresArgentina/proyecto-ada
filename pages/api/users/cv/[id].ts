@@ -10,9 +10,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             try{
                 const {id} = query
                 const getOneCv = await prisma.cv.findUnique({
-                    where: {
-                        id: Number(id),
-                    }, include: {
+                    where: { userId : Number(id), }, 
+                    include: {
                         user: true,
                         certifications: true,
                         education: true,
@@ -52,7 +51,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                                 // user:{connect: {id: Number(id)}}
                         },
                         where: {
-                            id: Number(id)
+                            userId : Number(id), 
                         },  
                         include:{
                                 certifications:true,
@@ -61,7 +60,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                         }
                     })
                     res.json({updatedCv})
-
                 }catch(err:any){
                     res.status(404).json(err.message);            
             }
@@ -75,11 +73,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                     // return
                 }
                 const deleteCv = await prisma.cv.delete({
-                    where: {id: Number(id)}
+                    where: { userId : Number(id), }
                 }) 
                 res.json(deleteCv)
+                break; 
             }catch(err:any){           
-                res.status(404).json('ID NOT FOUND');            
+                res.status(404).json("DOESN'T_EXIST_CV_FOR_THIS_USER");            
             break;
                 }
             default:

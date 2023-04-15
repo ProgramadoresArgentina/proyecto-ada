@@ -35,12 +35,11 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
             
         case "PUT":
             try{
-                const {username, email} =  body
+                const {username} =  body
                 const updateOneUser = await prisma.user.update({
                     where: { id : Number(query.id)},
                     data: {
                         username : username,
-                        email : email,
                     }
                 })
                 res.json({ updateOneUser })

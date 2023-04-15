@@ -12,16 +12,21 @@ export default async (req:NextApiRequest, res:NextApiResponse)=>{
         case "GET":
            try{
             const {id} = query
-            const getOneExperience = await prisma.experience.findUnique({
+            const getOneExperience = await prisma.cv.findUnique({
                     where: { id : Number(id) },
+                    select:{
+                        _count: true,
+                        userId : true,
+                        user : true,
+                        title: true,
+                    }
             })
                 if (getOneExperience === null) {
                 throw new Error()
                 }
             res.json({ getOneExperience })
-
         }catch(e:any){
-            res.status(200).json({message: `EXPERIENCE WITH ID: ${query.id} NOT FOUND`})
+            res.status(200).json({message: `EXPERIENCES WITH THIS CV: ${query.id} NOT FOUND`})
         }
         break;
         
@@ -35,8 +40,11 @@ export default async (req:NextApiRequest, res:NextApiResponse)=>{
                         startYear, //"2012-04-23T18:28:43.511Z" 
                         endYear, //"2012-04-23T18:28:43.511Z"
                         description,
-                        experience:{connect :{ id: Number(id)}}
-                    },
+                        experienceId: Number(id) 
+                    },select:{
+                        experience: true,
+                        title: true
+                    }
                   }
                 );
                 res.json(createExperience);

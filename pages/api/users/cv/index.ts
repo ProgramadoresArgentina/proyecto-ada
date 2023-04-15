@@ -10,7 +10,9 @@ export default async function cv (req: NextApiRequest, res: NextApiResponse) {
                     include:{
                         certifications: true,
                         experience: true,
-                        education: true
+                        education: true,
+                        user: true,
+                        _count: true,
                     }
                 })
                 res.json(getCv)

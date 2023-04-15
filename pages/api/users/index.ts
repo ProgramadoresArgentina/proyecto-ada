@@ -32,7 +32,7 @@ export default async function users(req:NextApiRequest, res:NextApiResponse) {
                 res.json({ createUser });
             }catch(e:any){
                 console.log(e.message);
-                res.status(404).json("ERROR_CREATING_USER");
+                res.status(226).json("ERROR:EXISTING_USER");
             }
             break;
     }

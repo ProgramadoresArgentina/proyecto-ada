@@ -12,16 +12,20 @@ export default async (req:NextApiRequest, res:NextApiResponse)=>{
         case "GET":
            try{
             const {id} = query
-            const getOneEducation = await prisma.education.findUnique({
+            const getOneEducation = await prisma.cv.findUnique({
                     where: { id : Number(id) },
+                    select:{
+                        userId : true,
+                        title: true,
+                        education : true,
+                    }
             })
                 if (getOneEducation === null) {
                 throw new Error()
                 }
             res.json({ getOneEducation })
-
         }catch(e:any){
-            res.status(200).json({message: `EDUCATION WITH ID: ${query.id} NOT FOUND`})
+            res.status(200).json({message: `EDUCATION_WITH_CV_NUMBER: ${query.id} NOT_FOUND`});
         }
         break;
         
@@ -35,8 +39,12 @@ export default async (req:NextApiRequest, res:NextApiResponse)=>{
                         startYear, //"2012-04-23T18:28:43.511Z" 
                         endYear, //"2012-04-23T18:28:43.511Z"
                         description,
-                        education:{connect :{ id: Number(id)}}
+                        educationId : Number(id),
                     },
+                    select:{
+                        education:true,  // Este es el numero de ID del CV
+                        title: true,
+                    }
                   }
                 );
                 res.json(createEducation);
@@ -57,6 +65,10 @@ export default async (req:NextApiRequest, res:NextApiResponse)=>{
                             startYear,
                             endYear,
                             description
+                        },
+                        select:{
+                            education: true,
+                            educationId: true,
                         }
                     })
                 res.json({ updateEducation })

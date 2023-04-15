@@ -5,7 +5,7 @@ import { prisma } from "../../../../prismaClient/db";
 // POST api/users Create user
 
 export default async function userSettings(req:NextApiRequest, res:NextApiResponse) {  
-    const {method, body} = req;
+    const {method} = req;
     switch (method) {
         case "GET":
             try{

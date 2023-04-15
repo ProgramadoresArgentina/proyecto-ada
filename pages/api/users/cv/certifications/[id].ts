@@ -12,16 +12,21 @@ export default async (req:NextApiRequest, res:NextApiResponse)=>{
         case "GET":
            try{
             const {id} = query
-            const getOneCertificate = await prisma.certifications.findUnique({
+            const getOneCertificate = await prisma.cv.findUnique({
                     where: { id : Number(id) },
+                    select:{
+                        _count: true,
+                        userId : true,
+                        user : true,
+                        title: true,
+                        certifications: true,
+                    }
             })
                 if (getOneCertificate === null) {
-                throw new Error()
-                }
+                throw new Error() }
             res.json({ getOneCertificate })
-
         }catch(e:any){
-            res.status(200).json({message: `CERTIFICATE WITH ID: ${query.id} NOT FOUND`})
+            res.status(200).json({message: `CERTIFICATES_WITH_CV_NUMBER: ${query.id} NOT_FOUND`})
         }
         break;
         
@@ -35,8 +40,11 @@ export default async (req:NextApiRequest, res:NextApiResponse)=>{
                         startYear, //"2012-04-23T18:28:43.511Z" 
                         endYear, //"2012-04-23T18:28:43.511Z"
                         description,
-                        certifications:{connect :{ id: Number(id)}}
-                    },
+                        certificationsId : Number(id),
+                    },select:{
+                        certifications:true,  // Este es el numero de ID del CV
+                        title: true,
+                    }
                   }
                 );
                 res.json(createCertificate);
@@ -57,11 +65,15 @@ export default async (req:NextApiRequest, res:NextApiResponse)=>{
                             startYear,
                             endYear,
                             description
+                        }, 
+                        select:{
+                            certifications: true,
+                            certificationsId: true,
                         }
                     })
                 res.json({ updateCertificate })
             }catch(e){
-                res.status(200).json({message : "ERROR TRYING TO UPDATE USER CERTIFICATE"});
+                res.status(200).json({message : "ERROR_TRYING_TO_UPDATE_USER_CERTIFICATE"});
             }
             break;
 

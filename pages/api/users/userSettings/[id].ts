@@ -17,7 +17,7 @@ export default async (req:NextApiRequest, res:NextApiResponse)=>{
            try{
             const {id} = query
             const getOneUserSettings = await prisma.userSettings.findUnique({
-                    where: { id : Number(id) },
+                    where: { userId: Number(id) },
                     include: {
                         user: true,
                     }
@@ -58,7 +58,7 @@ export default async (req:NextApiRequest, res:NextApiResponse)=>{
                 const {id} = query
                 const {firstName, lastName, avatar, description } =  body
                 const updateOneUserSettings = await prisma.userSettings.update({
-                    where: { id : Number(id)},
+                    where: { userId: Number(id) },
                     data: {
                             firstName,
                             lastName,
@@ -77,10 +77,9 @@ export default async (req:NextApiRequest, res:NextApiResponse)=>{
                 const {id} = query
                 if(!id){
                     throw new Error(`User ${id} does not exist`)
-                    return
                 }
                 const deleteOneUserSettings = await prisma.userSettings.delete({
-                    where: { id : Number(id) },
+                    where: { userId: Number(id) },
                 })
                 res.json({ deleteOneUserSettings }) 
             }catch(e) {
