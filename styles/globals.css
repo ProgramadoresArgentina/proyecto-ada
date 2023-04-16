@@ -15,6 +15,79 @@
   }
 }
 
+/* CONFIGURACION DE ESTILOS DEL EDITOR DE TEXTO ENRIQUECIDO QUILL.JS */
+.ql-editor-container .ql-container.ql-snow {
+  margin: 0 auto !important;
+  min-height: 50vh !important;
+  width: 100% !important;
+}
+
+.ql-snow.ql-toolbar button,
+.ql-snow .ql-toolbar button,
+.ql-snow .ql-color-picker,
+.ql-snow .ql-icon-picker {
+  align-items: center !important;
+  border-radius: .25rem;
+  display: flex !important;
+  height: 2rem !important;
+  justify-content: center !important;
+  width: 2rem !important;
+}
+
+.ql-snow.ql-toolbar button:hover,
+.ql-snow .ql-toolbar button:hover,
+.ql-snow .ql-color-picker:hover,
+.ql-snow .ql-icon-picker:hover {
+  background-color: rgb(224 231 255) !important;
+  color: rgb(99 102 241) !important;
+}
+
+.ql-snow.ql-toolbar button:hover .ql-stroke,
+.ql-snow .ql-icon-picker:hover .ql-stroke {
+  stroke: rgb(99 102 241) !important;
+}
+
+.ql-snow .ql-picker {
+  font-size: 1rem !important;
+  height: 2rem !important;
+}
+
+.ql-snow .ql-picker-label {
+  align-items: center !important;
+  display: flex !important;
+  justify-content: left !important;
+}
+
+
+.ql-editor.ql-blank::before {
+  color: #8993A4 !important;
+  font-style: normal !important;
+  left: 1.5rem !important;
+}
+
+.ql-editor-container .ql-container.ql-snow .ql-editor {
+  height: auto !important;
+  min-height: 50vh !important;
+  padding: 1.5rem !important;
+}
+
+.ql-container.ql-snow,
+.ql-toolbar.ql-snow {
+  border: none !important;
+  font-size: 1.125rem !important;
+}
+
+.ql-toolbar.ql-snow {
+  padding: 0.875rem 1rem !important;
+}
+
+.ql-snow .ql-editor pre.ql-syntax {
+  background: #0d1117 !important;
+  color: #c9d1d9 !important;
+  font-size: .875rem;
+  overflow-x: auto !important;
+  white-space: pre !important;
+}
 @layer components {
     .gradient-button {
         background-image: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%);
