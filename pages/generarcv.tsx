@@ -19,31 +19,31 @@ const generarcv: React.FC = () => {
                     <div className="w-full md:w-1/5 h-36 flex flex-wrap absolute top-60 left-10 -z-10">
                         {dots.map((ellipsis, index) => (
                             <Image
-                                key={index}
-                                className="mx-3 my-2"
-                                src={ellipsis}
                                 alt="ellipsis"
+                                className="mx-3 my-2"
+                                key={index}
+                                src={ellipsis}
                             />
                         ))}
                     </div>
                 </div>
                 <div className="relative">
                     <Image
+                        alt="cv"
                         className="mx-auto md:mr-0"
+                        height={454}
                         src={cvimg}
                         width={319}
-                        height={454}
-                        alt="cv"
                     />
                     <DownloadSampleBtn
                         onClick={() => alert("Downloaded")}
                     />
                     <Image
+                        alt="rectangle"
                         className=" absolute -z-10 top-1/2 -right-40 -translate-x-1/2 -translate-y-1/2 rotate-20"
+                        height={75}
                         src={rectangle}
                         width={150}
-                        height={75}
-                        alt="rectangle"
                     />
                 </div>
             </div>
@@ -51,9 +51,9 @@ const generarcv: React.FC = () => {
                 <FormLayout />
                 <div className="flex flex-col w-full mx-auto  md: mr-0 md:w-1/3  md:mt-20 px-6 py-8 md:bg-secondaryGrey  h-full  relative">
                     <Image
+                        alt="cv"
                         className="mx-auto lg:ml-2 w-full h-full  md:h-132"
                         src={cvimg}
-                        alt="cv"
                     />
                     <div className="flex flex-wrap justify-center lg:justify-end lg:absolute z-1 lg:-bottom-6 lg:right-2">
                         <SaveBtn onClick={() => alert("Guardado")} />
