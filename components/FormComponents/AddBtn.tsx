@@ -6,9 +6,9 @@ interface Props {
 const AddBtn: React.FC<Props> = ({ onClick, label }) => {
     return (
         <button
-            type="button"
             className="bg-shadeBlue  rounded w-48 h-10 content-center justify-center"
             onClick={onClick}
+            type="button"
         >
             <p className="text-white text-xs font-normal">{label}</p>
         </button>
