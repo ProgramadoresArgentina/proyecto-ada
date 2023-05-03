@@ -5,10 +5,56 @@
 /* FONTS IMPORTS */
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost&family=Roboto&display=swap');
 
 @layer utilities {
   .background-pattern {
     background: radial-gradient(circle at center, #f4f4f4 25%, transparent 25%), white;
     background-size: 14px 14px;
   }
+}
+
+@layer components {
+    .gradient-button {
+        background-image: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%);
+        border-radius: 8px;
+        border-style: none;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        flex-shrink: 0;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 0.8rem 1.2rem;
+        text-align: center;
+        text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+        transition: all .5s;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+    .gradient-button:hover {
+        box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+        transition-duration: .1s;
+    }
+
+    .plain-button {
+        font-size: 16px;
+        font-weight: 200;
+        letter-spacing: 1px;
+        padding: 13px 20px 13px;
+        outline: 0;
+        border: 1px solid black;
+        cursor: pointer;
+        position: relative;
+        background-color: rgba(0, 0, 0, 0);
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+    .plain-button:hover {
+        background-image: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%);
+        color: white;
+        border-color: white;
+    }
 }
