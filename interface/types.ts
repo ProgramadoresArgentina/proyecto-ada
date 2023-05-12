@@ -1,8 +1,9 @@
+import { Dispatch, ReactNode, SetStateAction } from "react";
+
 export interface AvatarsProps {
 	followers: number;
 	members?: [];
 }
-import { ReactNode } from "react";
 
 export interface CommentProps {
 	date?: Date;
@@ -23,3 +24,5 @@ export interface MarqueeCustomProps {
 	onInit?: () => void;
 	scatterRandomly: boolean;
 }
+
+export type SetState<T> = Dispatch<SetStateAction<T>>;

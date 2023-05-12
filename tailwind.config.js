@@ -25,8 +25,11 @@ module.exports = {
 				greylight: "##1D1D1D",
 				greyMedium: "#777777",
 				greyDark: "#808080",
-                'indigo-800': "#523BA2",
-                orange: "#FF8400"
+				blueNavy: "#0F0E2C",
+				blueNormal: "#5D5FEF",
+				blueNormalHover: "#494abc",
+        'indigo-800': "#523BA2",
+        orange: "#FF8400"
 			},
 			backgroundImage: {
 				"background-vector": "url('/carousel/background-vector.svg')",
