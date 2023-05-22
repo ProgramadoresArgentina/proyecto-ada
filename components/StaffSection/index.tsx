@@ -1,39 +1,99 @@
+import Link from 'next/link'
 import React from 'react'
-import Image from 'next/image'
-
-import StaffCarousel from './StaffCarousel'
-import StaffImages from './StaffImages'
+const people = [
+    {
+        name: 'Juanse Mastrangelo',
+        url: 'https://instagram.com/juansemastrangelo',
+        role: 'Co-Founder',
+        imageUrl: '/staff/Avatar-JuanseMastrangelo.png',
+    },
+    {
+        name: 'Gonzalo Martinese',
+        url: 'https://github.com/DevMartinese',
+        role: 'Co-Founder',
+        imageUrl: '/staff/Avatar-GonzaloMartinese.jpg',
+    },
+    {
+        name: 'Neri Heredia',
+        url: 'https://github.com/neriheredia',
+        role: 'Administrador',
+        imageUrl: '/staff/Avatar-NeriHeredia.jpg',
+    },
+    {
+        name: 'Ian Rosales',
+        url: 'https://github.com/sampxcs',
+        role: 'Full-stack Developer',
+        imageUrl: '/staff/Avatar-IanRosales.jpg',
+    },
+    {
+        name: 'Carolina Riddick',
+        url: 'https://github.com/Carolina-Riddick',
+        role: 'Full-stack Developer',
+        imageUrl: '/staff/Avatar-CarolinaRiddick.jpg',
+    },
+    {
+        name: 'Elam Cano',
+        url: 'https://github.com/ElamCano',
+        role: 'Full-stack Developer',
+        imageUrl: '/staff/Avatar-ElamCano.jpg',
+    },
+    {
+        name: 'Nico Sammaritano',
+        url: 'https://github.com/Nicolius888',
+        role: 'Full-stack Developer',
+        imageUrl: '/staff/Avatar-NicoSammaritano.jpg',
+    },
+    {
+        name: 'Nicolas Smael',
+        url: 'https://github.com/SmaelNicolas',
+        role: 'Full-stack Developer',
+        imageUrl: '/staff/Avatar-SmaelNicolas.jpg',
+    },
+    {
+        name: 'Daniela Martinez',
+        url: 'https://github.com/DanMartinez01',
+        role: 'Full-stack Developer',
+        imageUrl: '/staff/Avatar-DanielaMartinez.jpg',
+    },
+    {
+        name: 'Manuel Badell',
+        url: 'https://github.com/ManuelBadellCartasso',
+        role: 'QA Tester',
+        imageUrl: '/staff/Avatar-ManuelBadell.jpg',
+    },
+    {
+        name: 'Alexis Aguero',
+        url: 'https://github.com/AlexisAguero',
+        role: 'QA Tester',
+        imageUrl: '/staff/Avatar-AlexisAguero.jpg',
+    }
+]
 
 export default function StaffSection() {
-  return (
-    <section className='font-manrope py-16 flex flex-col gap-12 sm:gap-24 items-center justify-center'>
-      <div className='flex flex-col gap-3 text-center'>
-        <h2 className='text-4xl font-bold tracking-tight'>Staff</h2>
-        <h3 className='text-xl tracking-tight text-[#757575]'>La comunidad no sería posible sin ellos</h3>
-      </div>
-      <div className='flex w-full items-center justify-center max-w-7xl'>
-        <div className='w-full sm:w-[36rem] h-[14rem] sm:h-[23rem] xl:h-[24rem] relative xl:w-[60%]'>
-          <Image
-            alt='deco'
-            className='w-[8.75rem] h-[6.25rem] sm:w-[12.25rem] sm:h-[9.75rem] absolute top-[-10%] left-[30%] -z-50'
-            height={600}
-            src='/staff/dot.svg'
-            width={600}
-          />
-          <Image
-            alt='deco'
-            className='w-[5rem] h-[5rem] sm:w-[7.5rem] sm:h-[7.5rem] absolute left-[10%] sm:left-0 bottom-[10%] sm:bottom-0 -z-50'
-            height={600}
-            src='/staff/ellipse94.svg'
-            width={600}
-          />
-          <div className='hidden xl:block w-[24rem] aspect-square absolute rounded-l-full rounded-br-full shadow-[10px_20px_50px_rgba(0,0,0,0.10)]' />
-          <StaffCarousel />
+    return (
+
+        <div className="bg-white py-14 sm:py-20">
+            <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
+                <div className="max-w-2xl">
+                    <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Conoce a nuestro equipo</h2>
+                    <p className="mt-6 text-lg leading-8 text-gray-600">
+                        La comunidad no sería posible sin ellos. 
+                    </p>
+                </div>
+                <ul role="list" className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2">
+                    {people.map((person) => (
+                        <li key={person.name}>
+                            <div className="flex items-center gap-x-6">
+                                <img className="h-16 w-16 rounded-full" src={person.imageUrl} alt="" />
+                                <div>
+                                    <a target="_blank" href={person.url} className="text-base font-semibold leading-7 tracking-tight text-gray-900 hover:underline">{person.name}</a>
+                                    <p className="text-sm font-semibold leading-6 text-indigo-600">{person.role}</p>
+                                </div>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
-        <div className='hidden w-[40%] h-[14rem] sm:h-[23rem] xl:h-[24rem] lg:block'>
-          <StaffImages />
-        </div>
-      </div>
-    </section>
-  )
+    )
 }
