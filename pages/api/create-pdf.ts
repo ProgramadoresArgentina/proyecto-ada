@@ -9,13 +9,13 @@ const jsonDirectory = path.join(process.cwd(), 'json');
 var html = fs.readFileSync(jsonDirectory +"/../pages/api/template.html", "utf8");
 
 var options = {
-    format: "A3",
+    format: "A4",
     orientation: "portrait",
     border: "10mm",
     footer: {
         height: "28mm",
         contents: {
-            first: 'Comunidad Programadores Argentina - programadoresargentina.com',
+            first: 'programadoresargentina.com',
             2: 'Second page', // Any page number is working. 1-based index
             default: '<span style="color: #444;">{{page}}</span>/<span>{{pages}}</span>', // fallback value
             last: 'Last Page'
@@ -37,23 +37,27 @@ var users = [
         age: "26",
     },
 ];
-var document = {
-    html: html,
-    data: {
-        users: users,
-    },
-    path: "./output.pdf",
-    type: "",
-};
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
+    const { body } = req
+
+    const document = {
+        html: html,
+        data: body,
+        path: "./public/output.pdf",
+        type: "",
+    };
+
     pdf
     .create(document, options)
-    .then((res) => {
-        console.log(res);
+    .then((_) => {
+        const filePath = path.join(process.cwd(), 'public', 'output.pdf');
+        const fileStream = fs.createReadStream(filePath);
+        res.setHeader('Content-Disposition', 'attachment; filename=output.pdf');
+        res.setHeader('Content-Type', 'application/pdf');
+        fileStream.pipe(res);
     })
     .catch((error) => {
         console.error(error);
     });
-    res.status(200).json({ name: 'John Doe' })
 }
