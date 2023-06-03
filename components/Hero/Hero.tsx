@@ -1,55 +1,75 @@
-import { FC } from "react";
-import { Hero_Avatars } from "./Hero_Avatars";
-import { Hero_Button } from "./Hero_Button";
-import { Hero_Image } from "./Hero_Image";
-import { Hero_Paragraph } from "./Hero_Paragraph";
-import { Hero_Pattern } from "./Hero_Pattern";
-import { Hero_Title } from "./Hero_Title";
-import ProjectsSection from "../ProjectsSection";
-import { commentsList } from '../../data/dummy-data'
-import { CommentsSection } from "../CommentsSection/CommentsSection";
-import Link from "next/link";
+import Link from "next/link"
 
-export const Hero: FC = () => (
-    <section className="m-auto md:w-full min-h-max flex flex-col items-center bg-gradient-to-r
-    from-indigo-900 via-indigo-800 to-indigo-900 pt-32 pb-28 relative">
-        <div className="absolute w-full h-full z-0"
-    style={{backgroundImage: 'url("http://demo.tophivetheme.com/metafans/wp-content/uploads/2022/08/bg.png")',
-    backgroundPosition: 'center center', backgroundSize: 'contain', backgroundRepeat: 'no-repeat',
-    top: 0, left: 0}}></div>
-    <div className="z-10 text-center">
-        <h5 className="text-[10px] md:text-[20px] sm:w-[80%] m-auto
-        text-white font-roboto tracking-[5px]">ESPACIO PARA PROGRAMADORES Y PERSONAS DEL MUNDO IT⚡️</h5>
-        
-        <h5 className="mt-5 m-auto p-0 text-[3rem] text-white font-jost font-bold sm:w-[20ch] md:w-[30ch]">
-            La mejor manera de predecir el futuro es implementarlo 
-        </h5>
-        {/* <span className="text-[1rem] text-indigo-100">Alan Kay</span> */}
-        <div>
-			<button className="bg-shadeBlue hover:bg-shadeBlueHover ease-in duration-100 text-white font-normal tracking-tight md:tracking-normal text-xs min-[360px]:text-sm md:text-base rounded-full py-3 mt-10 px-8 ">
-                <Link href="/blog">Ir al blog</Link>
-			</button>
-			<button className="bg-gray-800 hover:bg-gray-700 ease-in duration-100 text-white font-normal tracking-tight md:tracking-normal text-xs min-[360px]:text-sm md:text-base rounded-full py-3 mt-10 px-8 ml-5">
-                Quiero ser parte del próximo proyecto 🎉
-			</button>
+const links = [
+    { name: 'Bolsa de Talentos', href: '/talentos' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Posiciones abiertas', href: 'https://www.linkedin.com/company/programadores-argentina/' },
+    { name: 'Becas y Cursos', href: 'https://linktr.ee/ProgramadoresArgentina' },
+]
+
+export default function Hero() {
+    return (
+        <div className="relative isolate overflow-hidden py-24 sm:py-32 bg-black">
+            <img
+                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-y=.8&w=2830&h=1500&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply"
+                alt=""
+                className="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center"
+            />
+            <div
+                className="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl"
+                aria-hidden="true"
+            >
+                <div
+                    className="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-20"
+                    style={{
+                        clipPath:
+                            'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+                    }}
+                />
+            </div>
+            <div
+                className="absolute -top-52 left-1/2 -z-10 -translate-x-1/2 transform-gpu blur-3xl sm:top-[-28rem] sm:ml-16 sm:translate-x-0 sm:transform-gpu"
+                aria-hidden="true"
+            >
+                <div
+                    className="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-20"
+                    style={{
+                        clipPath:
+                            'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+                    }}
+                />
+            </div>
+            <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                <div className="mx-auto max-w-2xl lg:mx-0">
+                    <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">Comunidad de Programadores Argentina</h2>
+                    <p className="mt-6 text-lg leading-8 text-gray-300">
+                        ESPACIO PARA PROGRAMADORES Y PERSONAS DEL MUNDO IT⚡️
+                    </p>
+                </div>
+                <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
+                    <div className="grid grid-cols-1 gap-x-8 gap-y-6 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10">
+                        {links.map((link) => (
+                            <a key={link.name} href={link.href} target="_blank">
+                                {link.name} <span aria-hidden="true">&rarr;</span>
+                            </a>
+                        ))}
+                    </div>
+                    <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
+                        <div className="flex flex-col-reverse">
+                            <dt className="text-base leading-7 text-gray-300">Miembros en <Link className="underline hover:text-orange" href="https://www.linkedin.com/company/programadores-argentina">LinkedIn</Link></dt>
+                            <dd className="text-2xl font-bold leading-9 tracking-tight text-white">21.8K</dd>
+                        </div>
+                        <div className="flex flex-col-reverse">
+                            <dt className="text-base leading-7 text-gray-300">Miembros en <Link className="underline hover:text-orange" href="https://www.instagram.com/programadores_argentina/">Instagram</Link></dt>
+                            <dd className="text-2xl font-bold leading-9 tracking-tight text-white">21.5K</dd>
+                        </div>
+                        <div className="flex flex-col-reverse">
+                            <dt className="text-base leading-7 text-gray-300">Miembros en <Link className="underline hover:text-orange" href="https://linktr.ee/ProgramadoresArgentina">Grupos</Link></dt>
+                            <dd className="text-2xl font-bold leading-9 tracking-tight text-white">1.2K</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
         </div>
-    </div>
-    <div className="w-full mt-[6rem] mb-10">
-        <CommentsSection commentsList={commentsList} />
-    </div>
-    </section>
-);
-
-
-	{/* <section className="m-auto md:w-full min-h-max flex flex-col justify-start  items-center pt-2 md:pt-8 pb-20 md:pb-36 pl-2 sm:pl-5 md:pl-0">
-		<div className=" w-full h-auto flex flex-row justify-start items-start relative pl-8">
-			<div className="w-full md:w-1/2 h-auto flex flex-col justify-start items-start gap-2 my-5 md:pt-6 lg:pt-1 pl-2 min-[360px]:pl-5 ">
-				<Hero_Title />
-				<Hero_Paragraph />
-				<Hero_Avatars followers={20} />
-				<Hero_Button />
-				<Hero_Pattern />
-			</div>
-			<Hero_Image />
-		</div>
-	</section> */}
+    )
+}
