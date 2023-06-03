@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import { useUser } from '@auth0/nextjs-auth0/client';
 import Link from "next/link";
+import { saveAs } from 'file-saver';
 
 
 const User: NextPage = () => {
@@ -9,6 +10,17 @@ const User: NextPage = () => {
   if (isLoading) return <div className="flex justify-center" >Loading...</div>;
   if (error) return <div className="flex justify-center" >{error.message}</div>;
   if (!user) return <div className="flex justify-center" >You are not logged in</div>
+
+  const downloadResume = () => {
+    fetch('api/create-pdf')
+    .then(response => response.blob())
+    .then(blob => {
+        saveAs(blob, "hello world.pdf");
+    })
+    .catch(error => {
+      // Manejo de errores
+    });
+  }
 
   return (
     user && (
@@ -21,6 +33,8 @@ const User: NextPage = () => {
                 Logout
             </button>
         </Link>
+
+        <button onClick={() => downloadResume()}>Download resume</button>
       </div>
     )
   );
