@@ -15,7 +15,7 @@ const User: NextPage = () => {
     fetch('api/create-pdf')
     .then(response => response.blob())
     .then(blob => {
-        saveAs(blob, "hello world.pdf");
+        saveAs(blob, `${user.name}-${user.updated_at}.pdf` );
     })
     .catch(error => {
       // Manejo de errores

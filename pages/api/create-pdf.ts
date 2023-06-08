@@ -38,26 +38,29 @@ var users = [
     },
 ];
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+
     const { body } = req
+    console.log(JSON.stringify(body))
+    res.send(body)
 
     const document = {
         html: html,
         data: body,
-        path: "./public/output.pdf",
+        path: './public/output.pdf',  //'./storage/cv/output.pdf', 
         type: "",
-    };
+    }
 
     pdf
     .create(document, options)
     .then((_) => {
-        const filePath = path.join(process.cwd(), 'public', 'output.pdf');
+        const filePath = path.join(process.cwd(), 'public', 'output.pdf'); // public
         const fileStream = fs.createReadStream(filePath);
         res.setHeader('Content-Disposition', 'attachment; filename=output.pdf');
         res.setHeader('Content-Type', 'application/pdf');
         fileStream.pipe(res);
     })
     .catch((error) => {
-        console.error(error);
+        console.error(`Aca esta el error ${error}`);
     });
 }
