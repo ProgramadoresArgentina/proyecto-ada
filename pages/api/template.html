@@ -15,11 +15,12 @@
 
     <body>
         <div class="resume-container">
+            {{#each basic}}
             <div class="header">
                 <div class="header__name">
                     <img class="header__logo" src="https://i.ibb.co/BTLkxMs/Logo-Programadores-argentina-final-sin-fondo-recortado.png" />
                     <div class="header__name__text">
-                        <h1>{{firstName}}</h1>
+                        <h1>{{this.name}}</h1>
                         <span>Full-stack Developer</span>
                     </div>
                 </div>
@@ -51,6 +52,8 @@
                 <br />
                 Comprometido con las buenas prácticas y la documentación.
             </p>
+
+            {{/each}}
 
             <div class="content">
                 <!-- Experiences Section -->

@@ -15,31 +15,14 @@ var options = {
     footer: {
         height: "28mm",
         contents: {
-            first: 'programadoresargentina.com',
-            2: 'Second page', // Any page number is working. 1-based index
-            default: '<span style="color: #444;">{{page}}</span>/<span>{{pages}}</span>', // fallback value
-            last: 'Last Page'
+            default: 'programadoresargentina.com'
         }
     }
 };
 
-var users = [
-    {
-        name: "Shyam",
-        age: "26",
-    },
-    {
-        name: "Navjot",
-        age: "26",
-    },
-    {
-        name: "Vitthal",
-        age: "26",
-    },
-];
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-    const { body } = req
+    const { body } = req;
 
     const document = {
         html: html,
