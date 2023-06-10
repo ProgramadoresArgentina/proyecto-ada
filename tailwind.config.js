@@ -12,8 +12,9 @@ module.exports = {
 			fontFamily: {
 				manrope: ["Manrope", "sans-serif"],
 				poppins: ["Poppins", "sans-serif"],
-				roboto: ["Roboto", "sans-serif"],
-				jost: ["Jost", "sans-serif"],
+        ibm: ['IBM', 'sans-serif'],
+        roboto: ["Roboto", "sans-serif"],
+        jost: ["Jost", "sans-serif"],
 			},
 			colors: {
 				secondary: "#01233F",
@@ -35,7 +36,7 @@ module.exports = {
 				orangePAHover: "#fc8d14;",
 				greyText: "#B8B8B8;",
 				greyTextLight: "#D9D9D9;",
-				greyBackground: "#3A3A3A;",
+				greyBackground: "#3A3A3A;"
 			},
 			backgroundImage: {
 				"background-vector": "url('/carousel/background-vector.svg')",

@@ -55,9 +55,9 @@ export const CommentsSection: FC<ComentsSectionProps> = ({
 
 	return (
 		<section
-			className="m-auto w-full min-h-[200px] py-1 flex justify-start relative
+			className="m-auto w-full min-h-[200px] pt-14 flex justify-start relative
 						md:min-h-[100px]
-						lg:h-[260px]"
+						lg:h-[300px]"
 			onMouseDown={handleStopMarquee}
 			onMouseUp={handleStartMarquee}
 			onTouchEnd={handleStartMarquee}
