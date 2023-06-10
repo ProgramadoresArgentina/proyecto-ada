@@ -2,6 +2,7 @@ import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik';
 import { basicSchema } from '../../schemas/basicSchema';
 import AddBtn from './AddBtn';
 import RemoveBtn from './RemoveBtn';
+import { saveAs } from 'file-saver';
 
 const FormLayout: React.FC<{}> = () => {
 
@@ -82,13 +83,32 @@ const FormLayout: React.FC<{}> = () => {
         }]
     }
 
+    const onSubmit = (values, actions) => {
+        console.log(values);
+        fetch('api/create-pdf',{
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(values)
+        })
+        .then(response => response.blob())
+        .then(blob => {
+            saveAs(blob, "hello world.pdf");
+            // actions.resetForm();
+        })
+        .catch(error => {
+          // Manejo de errores
+          console.error(error);
+        });
+    }
+
     return (
         <Formik
-
             initialValues={initialValues}
             onSubmit={(values, actions) => {
-                console.log(values)
-                actions.resetForm();
+                onSubmit(values, actions);
             }}
             validationSchema={basicSchema}
         >
