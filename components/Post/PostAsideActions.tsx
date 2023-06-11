@@ -32,6 +32,9 @@ export default function PostAsideActions({ linkedIn, facebook, twitter }: UserTy
       <a href={twitter} title='Twitter' className='hover:brightness-50 transition-opacity' target='_blank' rel='noreferrer'>
         <Image src='/icons/Twitter.svg' width={100} height={100} alt='Twitter' className='w-5' />
       </a>
+      <a href={twitter} title='Instagram' className='hover:brightness-50 transition-opacity' target='_blank' rel='noreferrer'>
+        <Image src='/icons/Instagram.svg' width={100} height={100} alt='Twitter' className='w-5' />
+      </a>
       <CopyToClipboard text={location.href}>
         <button onClick={handleCopyLink} title='Compartir' className=' transition-opacity relative flex items-center justify-center z-10'>
           <Image src='/icons/url.svg' width={100} height={100} alt='Copy URL' className='w-5 hover:brightness-50' />
