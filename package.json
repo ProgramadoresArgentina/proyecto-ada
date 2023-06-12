@@ -9,17 +9,28 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@algolia/autocomplete-core": "1.8.3",
     "@auth0/nextjs-auth0": "^2.2.2",
+    "@emailjs/browser": "^3.10.0",
+    "@headlessui/react": "^1.7.14",
+    "@heroicons/react": "^2.0.18",
     "@prisma/client": "^4.12.0",
+    "file-saver": "^2.0.5",
+    "formik": "^2.2.9",
     "highlight.js": "^11.7.0",
     "next": "13.0.7",
+    "pdf-creator-node": "^2.3.5",
     "quill": "^1.3.7",
-    "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-marquee-slider": "^1.1.5",
-    "react-quilljs": "^1.3.3"
+    "react-quilljs": "^1.3.3",
+    "react-type-animation": "^3.0.1",
+    "react": "18.2.0",
+    "yup": "^1.0.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
     "@types/node": "18.11.15",
     "@types/react": "18.0.26",
     "autoprefixer": "^10.4.13",
@@ -27,6 +38,7 @@
     "eslint-config-next": "13.0.7",
     "postcss": "^8.4.20",
     "prisma": "^4.10.1",
-    "tailwindcss": "^3.2.4"
+    "tailwindcss": "^3.2.4",
+    "typescript": "4.9.5"
   }
 }
