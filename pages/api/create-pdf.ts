@@ -5,8 +5,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 
 // Read HTML Template
-const jsonDirectory = path.join(process.cwd(), 'json');
-var html = fs.readFileSync(jsonDirectory +"/../pages/api/template.html", "utf8");
+const jsonDirectory = path.join(process.cwd(), 'pages'); //  -> 'json'
+var html = fs.readFileSync(jsonDirectory +"/api/template.html", "utf8"); // ->  "/../pages/api/template.html"
 
 var options = {
     format: "A4",
@@ -27,20 +27,42 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const document = {
         html: html,
         data: body,
-        path: "./public/output.pdf",
+        path: "./storage/cv/output.pdf", // ./public
         type: "",
     };
 
     pdf
     .create(document, options)
     .then((_) => {
-        const filePath = path.join(process.cwd(), 'public', 'output.pdf');
+        const filePath = path.join(process.cwd(), 'storage/cv', 'output.pdf'); //   public
         const fileStream = fs.createReadStream(filePath);
         res.setHeader('Content-Disposition', 'attachment; filename=output.pdf');
         res.setHeader('Content-Type', 'application/pdf');
         fileStream.pipe(res);
     })
     .catch((error) => {
-        console.error(error);
+        console.error(`ERROR ACA : ${error}`);
     });
 }
+
+// Formateo de Fecha
+function dateFormat(req : NextApiRequest) {
+    const {dateSince, dateTo} = req.body
+
+    fetch('api/create-pdf', {
+        method: 'POST',
+        body : JSON.stringify(dateSince, dateTo)
+    })
+    .then(response => response.text())
+    .then(result => {
+        return {
+            // dateSince: moment().format(‘MM YYYY’), // Enero  2020
+            // dateto: moment().format(‘MM YYYY’)
+            // "Jul 2021"
+        }
+        console.log(result)
+    })
+    .catch(error => {
+        console.log(error)
+    })
+}   

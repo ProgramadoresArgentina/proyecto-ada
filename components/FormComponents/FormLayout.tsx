@@ -95,7 +95,7 @@ const FormLayout: React.FC<{}> = () => {
         })
         .then(response => response.blob())
         .then(blob => {
-            saveAs(blob, "hello world.pdf");
+            saveAs(blob, `${values.basic[0].name}-${Date.now()}.pdf`); 
             // actions.resetForm();
         })
         .catch(error => {

@@ -3,7 +3,6 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 import Link from "next/link";
 import { saveAs } from 'file-saver';
 
-
 const User: NextPage = () => {
   const { user, error, isLoading } = useUser();
 
@@ -15,9 +14,10 @@ const User: NextPage = () => {
     fetch('api/create-pdf')
     .then(response => response.blob())
     .then(blob => {
-        saveAs(blob, "hello world.pdf");
+        saveAs(blob, `${user.name}-${user.updated_at}.pdf`); 
     })
     .catch(error => {
+      console.log(error)
       // Manejo de errores
     });
   }
