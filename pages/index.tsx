@@ -8,10 +8,12 @@ import { ContactSection } from '../components/Contact/ContactSection';
 const Home: NextPage = () => {
     return (
         <div className='w-full min-h-screen'>
-          <Hero />
-          <StaffSection />
-          <ContactSection />
-          <CommentsSection commentsList={commentsList}></CommentsSection>
+            <div>
+                <Hero />
+                <StaffSection />
+                <CommentsSection commentsList={commentsList}></CommentsSection>
+                <ContactSection />
+            </div>
         </div>
       )
 }

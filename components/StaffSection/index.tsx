@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 const people = [
     {
         name: 'Juanse Mastrangelo',
@@ -70,28 +70,37 @@ const people = [
 ]
 
 export default function StaffSection() {
+    const [showAll, setShowAll] = useState(false);
+    const displayedPeople = showAll ? people : people.slice(0, 4);
+
     return (
 
-        <div className="bg-white py-14 sm:py-20">
+        <div className="bg-[#0d1117] pt-10 pb-36">
             <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
                 <div className="max-w-2xl">
-                    <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Conoce a nuestro equipo</h2>
+                    <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Conoce a nuestro <span className='degrade-text'>equipo</span></h2>
                     <p className="mt-6 text-lg leading-8 text-gray-600">
                         La comunidad no sería posible sin ellos. 
                     </p>
                 </div>
-                <ul role="list" className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2">
-                    {people.map((person) => (
-                        <li key={person.name}>
+                <ul role="list" className="grid gap-x-8 gap-y-5 sm:grid-cols-2 sm:gap-y-5 xl:col-span-2">
+                    {displayedPeople.map((person) => (
+                        <li key={person.name} className="bg-[#161B22] p-10 rounded-md shadow-md">
                             <div className="flex items-center gap-x-6">
                                 <img className="h-16 w-16 rounded-full" src={person.imageUrl} alt="" />
                                 <div>
-                                    <a target="_blank" href={person.url} rel="noreferrer" className="text-base font-semibold leading-7 tracking-tight text-gray-900 hover:underline">{person.name}</a>
-                                    <p className="text-sm font-semibold leading-6 text-indigo-600">{person.role}</p>
+                                    <a target="_blank" href={person.url} rel="noreferrer" className="text-base font-semibold leading-7 tracking-tight text-white hover:underline">{person.name}</a>
+                                    <p className="text-sm font-semibold leading-6 text-[#F78001]">{person.role}</p>
                                 </div>
                             </div>
                         </li>
                     ))}
+                    {
+                        !showAll &&
+                        <div className="text-center" onClick={() => setShowAll(true)}>
+                            <button className="hover:underline text-white">Mostrar más</button>
+                        </div>
+                    }
                 </ul>
             </div>
         </div>

@@ -19,16 +19,15 @@ function classNames(...classes) {
 
 export default function Navbar() {
     const { user } = useUser();
-    console.log(user)
     return (
-        <Disclosure as="nav" className="bg-white">
+        <Disclosure as="nav" className="bg-transparent fixed top-0 z-50 w-full">
             {({ open }) => (
                 <>
                     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                         <div className="relative flex h-16 items-center justify-between">
                             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                                 {/* Mobile menu button*/}
-                                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-800">
+                                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-white">
                                     <span className="sr-only">Open main menu</span>
                                     {open ? (
                                         <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -51,14 +50,14 @@ export default function Navbar() {
                                         <a
                                             key={item.name}
                                             href={item.path}
-                                            className="rounded-md px-3 py-2 text-sm font-[600] hover:text-indigo-800"
+                                            className="rounded-md px-3 text-white py-2 text-sm font-[600] hover:text-indigo-800"
                                         >
                                             {item.name}
                                         </a>
                                     ))}
                                     <a
                                         href="/generarcv"
-                                        className="rounded-md px-3 py-2 text-sm hover:text-indigo-800 plain-button"
+                                        className="rounded-md px-3 py-2  text-sm hover:text-indigo-800 plain-button"
                                     >Generar mi CV</a>
                                 </div>
                             </div>
@@ -66,13 +65,14 @@ export default function Navbar() {
                                 {/* Profile dropdown */}
                                 <Menu as="div" className="relative ml-3">
                                     <div className='flex items-center'>
-                                        <Menu.Button className="flex rounded-full bg-gray-800 text-sm">
+                                        <Menu.Button className="flex rounded-full text-sm items-center gap-5">
                                             <span className="sr-only">Open user menu</span>
                                             <img
                                                 className="h-8 w-8 rounded-full"
                                                 src={user ? user.picture : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmEedEwy284CMHPcPoYXz8i9K1BkGpLyHRUo2IleoVqnEa9cVD3pgtZdu0AHVQUnTDqKY&usqp=CAU'}
                                                 alt={user ? user.name : 'Iniciar sesión'}
                                             />
+                                            <span className="text-white">Ingresar</span>
                                         </Menu.Button>
                                     </div>
                                     <Transition

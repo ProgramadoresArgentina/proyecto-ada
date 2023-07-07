@@ -23,6 +23,22 @@ var options = {
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const { body } = req;
+    console.log(body);
+    /* const bodyParser = body.map((obj) => {
+        obj.experiences = obj.experiences.map(exp => {
+            exp.dateTo = exp.currently ? 'Actualidad' : exp.dateTo;
+            return exp;
+        });
+        obj.education = obj.education.map(edu => {
+            edu.dateTo = edu.currently ? 'Actualidad' : edu.dateTo;
+            return edu;
+        });
+        obj.education = obj.education.map(edu => {
+            edu.dateTo = edu.currently ? 'Actualidad' : edu.dateTo;
+            return edu;
+        });
+        return obj;
+    }); */
 
     const document = {
         html: html,

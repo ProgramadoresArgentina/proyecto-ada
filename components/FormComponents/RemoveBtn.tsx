@@ -9,10 +9,10 @@ const RemoveBtn: React.FC<Props> = ({ onClick }) => {
     return (
         <button
             type="button"
-            className="bg-redButton rounded w-8 h-4 "
+            className="bg-gray-100 hover:bg-red-400 rounded px-3 py-2 text-black"
             onClick={onClick}
         >
-            <p className="text-white text-xs font-normal">x</p>
+            <p className="text-xs font-normal">eliminar</p>
         </button>
 
     )
