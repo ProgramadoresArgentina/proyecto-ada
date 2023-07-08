@@ -1,13 +1,10 @@
 // import { useUser } from "@auth0/nextjs-auth0/client";
 import { NextPage } from "next";
 import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
 import { useFetch } from "../../hooks/useFetch";
 
 const Validate: NextPage = () => {
-	const { push } = useRouter();
-	// const { user } = useUser();
 	const divMessageRef = useRef(null);
 	const searchParams = useSearchParams();
 	const urlParam = searchParams.get("redirect");
@@ -15,29 +12,22 @@ const Validate: NextPage = () => {
 
 	const updateStatus = (value: string, redirect: string) => {
 		divMessageRef.current.innerText = value;
-		setTimeout(() => {
-			push(redirect);
-		}, 2000);
 	};
+
+    useEffect(() => {
+		fetchData("/api/auth/first-validation", "GET", {
+			redirectTo: urlParam
+		});
+    }, [])
 
 	useEffect(() => {
 		if (error)
-			// updateStatus(`Error al validar , redireccionando a Home`, error.redirectTo);
 			updateStatus(`Error al validar , redireccionando a Home`, "/");
 		if (data)
-			// updateStatus(`Usuario valido , redireccionando a ${param}`, data.redirectTo);
 			updateStatus(
 				`Usuario valido , redireccionando a ${urlParam}`,
 				urlParam
 			);
-
-		fetchData("https://jsonplaceholder.typicode.com/posts", "POST", {
-			userId: 24,
-			title: "Titulo Test",
-			body: "Body Test",
-		});
-
-		// fetchData("https://jsonplaceholder.typicode.com/posts");
 	}, [loading]);
 
 	return (

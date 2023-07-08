@@ -2,7 +2,7 @@ import { handleAuth, handleLogin } from "@auth0/nextjs-auth0";
 
 const getLoginState = (req, loginOptions) => {
     return {
-        returnTo: req.headers.referer
+        returnTo: '/validate'
     };
 };
 

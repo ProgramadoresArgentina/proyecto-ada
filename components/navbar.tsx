@@ -72,7 +72,9 @@ export default function Navbar() {
                                                 src={user ? user.picture : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmEedEwy284CMHPcPoYXz8i9K1BkGpLyHRUo2IleoVqnEa9cVD3pgtZdu0AHVQUnTDqKY&usqp=CAU'}
                                                 alt={user ? user.name : 'Iniciar sesión'}
                                             />
-                                            <span className="text-white">Ingresar</span>
+                                            <span className="text-white">
+                                                {user ? user.name : 'Ingresar'}
+                                            </span>
                                         </Menu.Button>
                                     </div>
                                     <Transition

@@ -14,7 +14,7 @@ export default withApiAuthRequired(async function validate(req: NextApiRequest, 
 
         if (userExists) {
             
-           res.redirect(302, redirectTo || '/').json({ message: "USER_FOUND" });
+           res.status(200).json({});
            
         } else {
             try {
@@ -25,11 +25,11 @@ export default withApiAuthRequired(async function validate(req: NextApiRequest, 
                     }
                 });
 
-                res.redirect(201, redirectTo || '/').json({ message:"USER_CREATED", newUser })
+                res.redirect(201, redirectTo || '/');
 
             } catch (err) {
                 console.error(err)
-                res.status(500).json({ message:"ERROR_CREATING_USER", err });
+                res.status(500).json({ message: "ERROR_CREATING_USER", error: err });
             }                                         
         }
 }
