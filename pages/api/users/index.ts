@@ -14,7 +14,7 @@ export default async function users(req:NextApiRequest, res:NextApiResponse) {
                      include: 
                      {
                         userSettings: true,
-                        cv : true,
+                        cv: true,
                     } 
                 })
             res.json({ getUsers });
