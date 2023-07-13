@@ -13,8 +13,8 @@ export default async function users(req:NextApiRequest, res:NextApiResponse) {
                 {
                      include: 
                      {
-                        userSettings: true,
-                        cv : true,
+                        userSettingsId: true,
+                        cvId : true,
                     } 
                 })
             res.json({ getUsers });
@@ -27,12 +27,11 @@ export default async function users(req:NextApiRequest, res:NextApiResponse) {
             try{
                 const { username, email } = body
                 const createUser = await prisma.user.create({
-                  data:{ username, email}
+                  data:{ username , email },
                 });
                 res.json({ createUser });
             }catch(e:any){
-                console.log(e.message);
-                res.status(226).json("ERROR:EXISTING_USER");
+                res.status(226).json("ERROR_CREATING_USER");
             }
             break;
     }

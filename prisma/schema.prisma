@@ -36,9 +36,11 @@ model UserSettings{
   avatar String
   description String
 
+  // Representa el mail del usuario
   email User @relation("UserEmail", fields: [emailUser], references: [email], onUpdate: Restrict, onDelete: Cascade)
   emailUser String @unique
 
+  // Representa el ID del usuario
   user User @relation("UserId", fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
   userId Int @unique
 }
@@ -49,14 +51,14 @@ model Cv {
   title String
   published Boolean @default(false)
 
-   // Relation 1:1 with User and Email
+  // Representa el ID del usuario
   user User @relation("UserId", fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
   userId Int @unique
 
+  // Representa el mail del usuario
   email User @relation("UserEmail", fields: [emailUser], references: [email], onUpdate: Restrict, onDelete: Cascade)
   emailUser String @unique
   
-  // Relation 1:n
   experience Experience[]
   education Education[]
   certifications Certifications[]
@@ -83,7 +85,6 @@ model Education{
   education Cv @relation(fields: [educationId], references: [id], onUpdate: Restrict, onDelete: Cascade)
   educationId Int 
 }
-
 
 model Certifications {
   id Int @id @default(autoincrement())

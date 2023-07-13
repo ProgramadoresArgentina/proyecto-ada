@@ -19,8 +19,8 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
             const getOneUser = await prisma.user.findUnique({
                     where: { id : Number(id) },
                     include: {
-                        cv: true,
-                        userSettings: true,
+                        cvId: true,
+                        userSettingsId: true,
                     }
             })
                 if (getOneUser === null) {
