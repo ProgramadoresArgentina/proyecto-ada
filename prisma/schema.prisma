@@ -1,9 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
-  // previewFeatures = ["createMany"]
 }
 
 datasource db {
@@ -11,92 +7,83 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// MODELO DE USUARIO
 model User {
-  id Int @id @default(autoincrement())
-  username String 
-  email String @unique
-  published Boolean @default(true)
-  createdAt DateTime @default(now()) 
-  updateAt DateTime  @updatedAt 
-  
-  cvId Cv? @relation("UserId")
-  cvEmail Cv? @relation("UserEmail")
-
-  userSettingsId UserSettings? @relation("UserId")
+  id                Int           @id @default(autoincrement())
+  username          String
+  email             String        @unique
+  published         Boolean       @default(true)
+  createdAt         DateTime      @default(now())
+  updateAt          DateTime      @updatedAt
+  cvEmail           Cv?           @relation("UserEmail")
+  cvId              Cv?           @relation("UserId")
   userSettingsEmail UserSettings? @relation("UserEmail")
+  userSettingsId    UserSettings? @relation("UserId")
 }
 
-// MODELO PERFIL
-model UserSettings{
-  id Int @id @default(autoincrement())
-  firstName String
-  lastName String
-  role Role @default(USER)
-  avatar String
+model UserSettings {
+  id          Int    @id @default(autoincrement())
+  firstName   String
+  lastName    String
+  role        Role   @default(USER)
+  avatar      String
   description String
-
-  email User @relation("UserEmail", fields: [emailUser], references: [email], onUpdate: Restrict, onDelete: Cascade)
-  emailUser String @unique
-
-  user User @relation("UserId", fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
-  userId Int @unique
+  emailUser   String @unique
+  userId      Int    @unique
+  email       User   @relation("UserEmail", fields: [emailUser], references: [email], onDelete: Cascade, onUpdate: Restrict)
+  user        User   @relation("UserId", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Restrict)
 }
 
-// MODELO DE CV
 model Cv {
-  id Int @id @default(autoincrement())
-  title String
-  published Boolean @default(false)
-
-   // Relation 1:1 with User and Email
-  user User @relation("UserId", fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
-  userId Int @unique
-
-  email User @relation("UserEmail", fields: [emailUser], references: [email], onUpdate: Restrict, onDelete: Cascade)
-  emailUser String @unique
-  
-  // Relation 1:n
-  experience Experience[]
-  education Education[]
+  id             Int              @id @default(autoincrement())
+  title          String
+  published      Boolean          @default(false)
+  userId         Int              @unique
+  emailUser      String           @unique
   certifications Certifications[]
+  email          User             @relation("UserEmail", fields: [emailUser], references: [email], onDelete: Cascade, onUpdate: Restrict)
+  user           User             @relation("UserId", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  education      Education[]
+  experience     Experience[]
 }
 
 model Experience {
-    id Int @id @default(autoincrement())
-    title String
-    startYear DateTime
-    endYear DateTime
-    description Json ?
-    //Relation 1:n with CV
-    experience Cv @relation(fields: [experienceId], references: [id], onUpdate: Restrict, onDelete: Cascade) 
-    experienceId Int
+  id           Int      @id @default(autoincrement())
+  title        String
+  startYear    DateTime
+  endYear      DateTime
+  description  Json?
+  experienceId Int
+  experience   Cv       @relation(fields: [experienceId], references: [id], onDelete: Cascade, onUpdate: Restrict)
 }
 
-model Education{
-  id Int @id @default(autoincrement())
-  title String
-  startYear DateTime 
-  endYear DateTime
-  description Json ?
-  //Relation 1:n with CV
-  education Cv @relation(fields: [educationId], references: [id], onUpdate: Restrict, onDelete: Cascade)
-  educationId Int 
+model Education {
+  id          Int      @id @default(autoincrement())
+  title       String
+  startYear   DateTime
+  endYear     DateTime
+  description Json?
+  educationId Int
+  education   Cv       @relation(fields: [educationId], references: [id], onDelete: Cascade, onUpdate: Restrict)
 }
-
 
 model Certifications {
-  id Int @id @default(autoincrement())
-  title String ?
-  description Json?
-  startYear DateTime
-  endYear DateTime
-  //Relation 1:n with CV
-  certifications Cv @relation(fields: [certificationsId], references: [id], onUpdate: Restrict, onDelete: Cascade)
+  id               Int      @id @default(autoincrement())
+  title            String?
+  description      Json?
+  startYear        DateTime
+  endYear          DateTime
   certificationsId Int
+  certifications   Cv       @relation(fields: [certificationsId], references: [id], onDelete: Cascade, onUpdate: Restrict)
 }
 
-// ROLES
+model Events {
+  id        Int      @id @default(autoincrement())
+  title     String
+  link      String
+  createdAt DateTime
+  expiredAt DateTime
+}
+
 enum Role {
   USER
   ADMIN
