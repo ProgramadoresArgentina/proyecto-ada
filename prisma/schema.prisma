@@ -31,7 +31,7 @@ model UserSettings{
   role Role @default(USER)
   avatar String
   description String
-
+  
   // Relation
   user User @relation(fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
   userId Int @unique
@@ -43,7 +43,6 @@ model Cv {
   title String
   published Boolean @default(false)
 
-  // Relation
   user User @relation(fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
   userId Int @unique
   

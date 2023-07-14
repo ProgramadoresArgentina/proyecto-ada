@@ -13,8 +13,8 @@ export default async function users(req:NextApiRequest, res:NextApiResponse) {
                 {
                      include: 
                      {
-                        userSettingsId: true,
-                        cvId : true,
+                        userSettings: true,
+                        cv : true,
                     } 
                 })
             res.json({ getUsers });
