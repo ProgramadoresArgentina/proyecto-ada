@@ -3,7 +3,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  // previewFeatures = ["createMany"]
 }
 
 datasource db {
@@ -20,11 +19,8 @@ model User {
   createdAt DateTime @default(now()) 
   updateAt DateTime  @updatedAt 
   
-  cvId Cv? @relation("UserId")
-  cvEmail Cv? @relation("UserEmail")
-
-  userSettingsId UserSettings? @relation("UserId")
-  userSettingsEmail UserSettings? @relation("UserEmail")
+  cv Cv?
+  userSettings UserSettings? 
 }
 
 // MODELO PERFIL
@@ -35,11 +31,9 @@ model UserSettings{
   role Role @default(USER)
   avatar String
   description String
-
-  email User @relation("UserEmail", fields: [emailUser], references: [email], onUpdate: Restrict, onDelete: Cascade)
-  emailUser String @unique
-
-  user User @relation("UserId", fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
+  
+  // Relation
+  user User @relation(fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
   userId Int @unique
 }
 
@@ -49,14 +43,9 @@ model Cv {
   title String
   published Boolean @default(false)
 
-   // Relation 1:1 with User and Email
-  user User @relation("UserId", fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
   userId Int @unique
-
-  email User @relation("UserEmail", fields: [emailUser], references: [email], onUpdate: Restrict, onDelete: Cascade)
-  emailUser String @unique
   
-  // Relation 1:n
   experience Experience[]
   education Education[]
   certifications Certifications[]
@@ -83,7 +72,6 @@ model Education{
   education Cv @relation(fields: [educationId], references: [id], onUpdate: Restrict, onDelete: Cascade)
   educationId Int 
 }
-
 
 model Certifications {
   id Int @id @default(autoincrement())

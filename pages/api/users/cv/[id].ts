@@ -33,8 +33,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                         title,
                         published: true,
                         user:{ connect: { id: Number(id) },
-                    }, 
-        }})
+                    }}, 
+        })
                 res.json(createCv)
             }catch(err:any){
                 console.log(err)
