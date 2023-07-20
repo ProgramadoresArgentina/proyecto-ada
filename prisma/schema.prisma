@@ -21,6 +21,7 @@ model User {
   
   cv Cv?
   userSettings UserSettings? 
+  articles Articles[]
 }
 
 // MODELO PERFIL
@@ -88,4 +89,29 @@ model Certifications {
 enum Role {
   USER
   ADMIN
+}
+
+// MODELO DE ARTICULOS
+model Articles {
+  id Int @id @default(autoincrement())
+  title String
+  content String
+  image Bytes
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relation 1-n con usuario
+  user User @relation(fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
+  userId Int @unique
+
+  // Relation m-n con Hashtags
+  hashtags Hashtags[] 
+}
+
+// MODELO DE HASHTAGS
+model Hashtags {
+  id Int @id @default(autoincrement())
+  name String 
+  // Relation m-n con Articulos
+  articles Articles[]
 }
