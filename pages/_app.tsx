@@ -6,6 +6,7 @@ import ButtonUp from "../components/ButtonUp";
 import Navbar from "../components/navbar";
 import "../styles/globals.css";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
+import { Tooltip } from "react-tooltip";
 
 const MyApp: NextPage = ({ Component, pageProps }: AppProps) => {
 	return (
@@ -18,6 +19,7 @@ const MyApp: NextPage = ({ Component, pageProps }: AppProps) => {
 			<Component {...pageProps} />
 			<ButtonUp />
 			<Footer />
+            <Tooltip id="tooltip" />
 		</UserProvider>
 	);
 };
