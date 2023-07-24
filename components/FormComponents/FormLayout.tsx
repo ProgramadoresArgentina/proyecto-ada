@@ -98,7 +98,7 @@ const FormLayout: React.FC<{}> = () => {
         .then(response => response.blob())
         .then(blob => {
             setLoading(false);
-            saveAs(blob, "hello world.pdf");
+            saveAs(blob, `${values.basic[0].name}-${Date.now()}.pdf`);
             // actions.resetForm();
         })
         .catch(error => {
@@ -161,7 +161,8 @@ const FormLayout: React.FC<{}> = () => {
 
                 return (
                     <Form className="w-full font-ibm text-textGrey z-10 bg-[#161B22] p-10 rounded-md shadow-md">
-                        <ol className="mb-10 flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base">
+                        <ol className="mb-10 items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base
+                        grid-cols-3 grid md:flex md:grid-cols-none">
                             {
                                 steps.map((step, i) => (
                                     <li key={i} className={`flex items-center cursor-pointer ${((i+1) === stepNo) && "text-[#F78001] "}
@@ -193,7 +194,7 @@ const FormLayout: React.FC<{}> = () => {
                                                 {values.basic.length > 0 &&
                                                     values.basic.map((basic, index) => (
                                                         <div key={index} className="flex flex-wrap -mx-3 mb-6 gap-y-2">
-                                                            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                                            <div className="w-full md:w-1/2 px-3 mb-0">
                                                                 <label className="text-white">
                                                                     Nombre Completo * 
                                                                     {
@@ -208,7 +209,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                     id={getIn(errors, `basic.${index}.name`) && 'invalid'}
                                                                 />
                                                             </div>
-                                                            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                                            <div className="w-full md:w-1/2 px-3 mb-0">
                                                                 <label className=' flex whitespace-nowrap text-white'>
                                                                     Posición actual/buscada  *
                                                                     {
@@ -223,7 +224,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                     id={getIn(errors, `basic.${index}.position`) && 'invalid'}
                                                                 />
                                                             </div>
-                                                            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                                            <div className="w-full md:w-1/2 px-3 mb-0">
                                                                 <label className="text-white">
                                                                     Sitio web/Portfolio
                                                                 </label>
@@ -235,7 +236,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                     id={getIn(errors, `basic.${index}.portfolio`) && 'invalid'}
                                                                 />
                                                             </div>
-                                                            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                                            <div className="w-full md:w-1/2 px-3 mb-0">
                                                                 <label className="text-white">
                                                                     Linkedin user
                                                                 </label>
@@ -247,7 +248,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                     id={getIn(errors, `basic.${index}.linkedIn`) && getIn(touched, `basic.${index}.linkedIn`) && 'invalid'}
                                                                 />
                                                             </div>
-                                                            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                                            <div className="w-full md:w-1/2 px-3 mb-0">
                                                                 <label className="text-white">
                                                                     Github user
                                                                 </label>
@@ -259,7 +260,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                     id={getIn(errors, `basic.${index}.github`) && getIn(touched, `basic.${index}.github`) && 'invalid'}
                                                                 />
                                                             </div>
-                                                            <div className="w-full px-3 mb-6 md:mb-0">
+                                                            <div className="w-full px-3 mb-0">
                                                                 <label className="text-white">Descripción</label>
                                                                 <Field 
                                                                     className="mt-2 appearance-none block w-full text-white border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none bg-[#2D3138]"
@@ -299,7 +300,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                     </div>
                                                                 }
                                                                 <div className="flex flex-wrap -mx-3 mb-6">
-                                                                    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                                                    <div className="w-full md:w-1/2 px-3 mb-0">
                                                                         <label className="text-white">
                                                                             Titulo  *
                                                                             {
@@ -314,7 +315,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                             id={getIn(errors, `education.${index}.degree`) && 'invalid'}
                                                                         />
                                                                     </div>
-                                                                    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                                                    <div className="w-full md:w-1/2 px-3 mb-0">
                                                                         <label className="text-white">
                                                                             Institución  *
                                                                             {
@@ -329,7 +330,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                             id={getIn(errors, `education.${index}.university`) && 'invalid'}
                                                                         />
                                                                     </div>
-                                                                    <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+                                                                    <div className="w-full md:w-1/4 px-3 mb-0">
                                                                         <label className="text-white">
                                                                             Desde *
                                                                             {
@@ -342,7 +343,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                             type="date" placeholder="Desde"
                                                                             id={getIn(errors, `education.${index}.dateSince`) && !education.currently && 'invalid'} />
                                                                     </div>
-                                                                    <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+                                                                    <div className="w-full md:w-1/4 px-3 mb-0">
                                                                         <label className="text-white">
                                                                             Hasta
                                                                             {
@@ -424,7 +425,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                     </div>
                                                                 }
                                                                 <div className="flex flex-wrap -mx-3 mb-6">
-                                                                    <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                                                    <div className="w-full md:w-1/3 px-3 mb-0">
                                                                         <label className="text-white" htmlFor ={`certificates.${index}.degree`}>
                                                                             Titulo  *
                                                                             {
@@ -439,7 +440,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                             id={getIn(errors, `certificates.${index}.degree`) && 'invalid'}
                                                                         />
                                                                     </div>
-                                                                    <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                                                    <div className="w-full md:w-1/3 px-3 mb-0">
                                                                         <label className="text-white" htmlFor ={`certificates.${index}.university`}>
                                                                             Institucion  *
                                                                             {
@@ -453,7 +454,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                             id={getIn(errors, `certificates.${index}.university`) && 'invalid'}
                                                                         />
                                                                     </div>
-                                                                    <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                                                    <div className="w-full md:w-1/3 px-3 mb-0">
                                                                         <label className="text-xs mb-2 text-white" >
                                                                             Link/Id certificado *
                                                                             {
@@ -506,7 +507,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                     </div>
                                                                 }
                                                                 <div className="flex flex-wrap -mx-3 mb-6 font-ibm">
-                                                                    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                                                    <div className="w-full md:w-1/2 px-3 mb-0">
                                                                         <label className="text-white" htmlFor ={`experiences.${index}.title`}>
                                                                             Titulo *
                                                                             {
@@ -521,7 +522,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                             id={getIn(errors, `experiences.${index}.title`) && 'invalid'}
                                                                         />
                                                                     </div>
-                                                                    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                                                    <div className="w-full md:w-1/2 px-3 mb-0">
                                                                         <label className="text-white" htmlFor ={`experiences.${index}.company`}>
                                                                             Empresa *
                                                                             {
@@ -535,7 +536,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                             id={getIn(errors, `experiences.${index}.company`) && 'invalid'}
                                                                         />
                                                                     </div>
-                                                                    <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+                                                                    <div className="w-full md:w-1/4 px-3 mb-0">
                                                                         <label className="text-white" htmlFor={`experiences.${index}.dateSince`}>
                                                                             Desde *
                                                                             {
@@ -551,7 +552,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                         />
                                                                     </div>
                                                                     <div
-                                                                        className="w-full md:w-1/4 px-3 mb-6 md:mb-0"
+                                                                        className="w-full md:w-1/4 px-3 mb-0"
                                                                     >
                                                                         <label className="text-white" htmlFor ={`experiences.${index}.dateTo`}>
                                                                             Hasta
@@ -641,7 +642,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                     </div>
                                                                 }
                                                                 <div className="flex flex-wrap -mx-3 mb-6 font-ibm">
-                                                                    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                                                    <div className="w-full md:w-1/2 px-3 mb-0">
                                                                         <label className="text-white" htmlFor ={`languages.${index}.name`}>
                                                                             Idioma *
                                                                             {
@@ -660,7 +661,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                             <option value="Portugués">Portugués</option>
                                                                         </Field>
                                                                     </div>
-                                                                    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                                                    <div className="w-full md:w-1/2 px-3 mb-0">
                                                                         <label className="text-white" htmlFor ={`languages.${index}.level`}>
                                                                             Nivel *
                                                                             {

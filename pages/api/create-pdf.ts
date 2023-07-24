@@ -5,7 +5,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 
 // Read HTML Template
-const jsonDirectory = path.join(process.cwd(), 'json');
+const jsonDirectory = path.join(process.cwd(), 'pages');
 var html = fs.readFileSync(jsonDirectory +"/../pages/api/template.html", "utf8");
 
 var options = {
@@ -35,17 +35,19 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         }
     });
 
+    const pdfName = body.basic[0].name.replace(/\s+/g, '_') + '.pdf';
+
     const document = {
         html: html,
         data: body,
-        path: "./public/output.pdf",
+        path: `./storage/cv/${pdfName}`,
         type: "",
     };
 
     pdf
     .create(document, options)
     .then((_) => {
-        const filePath = path.join(process.cwd(), 'public', 'output.pdf');
+        const filePath = path.join(process.cwd(), 'storage/cv', pdfName);
         const fileStream = fs.createReadStream(filePath);
         res.setHeader('Content-Disposition', 'attachment; filename=output.pdf');
         res.setHeader('Content-Type', 'application/pdf');
