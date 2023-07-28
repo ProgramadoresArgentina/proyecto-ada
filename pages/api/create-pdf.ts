@@ -36,12 +36,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     });
 
     const pdfName = body.basic[0].name.replace(/\s+/g, '_') + '.pdf';
+    var option={
+        "phantomPath": "../../node_modules/phantomjs-prebuilt/bin/phantomjs", 
+    }
 
     const document = {
         html: html,
-        data: body,
-        path: `./storage/cv/${pdfName}`,
+        data: body,    
+        path: "./output.pdf",
         type: "",
+        options: option
     };
 
     pdf
