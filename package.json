@@ -10,20 +10,23 @@
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^2.2.2",
-    "formik": "^2.2.9",
     "@emailjs/browser": "^3.10.0",
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.18",
     "@prisma/client": "^4.12.0",
+    "@vercel/analytics": "^1.0.1",
     "file-saver": "^2.0.5",
+    "formik": "^2.2.9",
     "next": "13.0.7",
     "pdf-creator-node": "^2.3.5",
     "react": "18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "18.2.0",
+    "react-icons": "^4.10.1",
     "react-marquee-slider": "^1.1.5",
-    "yup": "^1.0.2",
-    "react-type-animation": "^3.0.1"
+    "react-tooltip": "^5.18.1",
+    "react-type-animation": "^3.0.1",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",

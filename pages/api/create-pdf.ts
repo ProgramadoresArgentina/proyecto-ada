@@ -5,52 +5,53 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 
 // Read HTML Template
-const jsonDirectory = path.join(process.cwd(), 'json');
+const jsonDirectory = path.join(process.cwd(), 'pages');
 var html = fs.readFileSync(jsonDirectory +"/../pages/api/template.html", "utf8");
 
 var options = {
     format: "A4",
     orientation: "portrait",
-    border: "10mm",
-    footer: {
-        height: "28mm",
-        contents: {
-            default: 'programadoresargentina.com'
-        }
-    }
+    border: "10mm"
 };
 
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const { body } = req;
-    console.log(body);
-    /* const bodyParser = body.map((obj) => {
-        obj.experiences = obj.experiences.map(exp => {
-            exp.dateTo = exp.currently ? 'Actualidad' : exp.dateTo;
-            return exp;
-        });
-        obj.education = obj.education.map(edu => {
-            edu.dateTo = edu.currently ? 'Actualidad' : edu.dateTo;
-            return edu;
-        });
-        obj.education = obj.education.map(edu => {
-            edu.dateTo = edu.currently ? 'Actualidad' : edu.dateTo;
-            return edu;
-        });
-        return obj;
-    }); */
+    body.experiences.forEach((experience: any) => {
+        if (experience.dateSince) {
+          experience.dateSince = formatDate(experience.dateSince);
+        }
+        if (experience.dateTo) {
+          experience.dateTo = experience.currently ? "Actualidad" : formatDate(experience.dateTo);
+        }
+    });
+      
+    body.education.forEach((education: any) => {
+        if (education.dateSince) {
+            education.dateSince = formatDate(education.dateSince);
+        }
+        if (education.dateTo) {
+            education.dateTo = education.currently ? "Actualidad" : formatDate(education.dateTo);
+        }
+    });
+
+    const pdfName = body.basic[0].name.replace(/\s+/g, '_') + '.pdf';
+    var option={
+        "phantomPath": "../../node_modules/phantomjs-prebuilt/bin/phantomjs", 
+    }
 
     const document = {
         html: html,
-        data: body,
-        path: "./public/output.pdf",
+        data: body,    
+        path: "storage/cv/"+pdfName,
         type: "",
+        options: option
     };
 
     pdf
     .create(document, options)
     .then((_) => {
-        const filePath = path.join(process.cwd(), 'public', 'output.pdf');
+        const filePath = path.join(process.cwd(), 'storage/cv', pdfName);
         const fileStream = fs.createReadStream(filePath);
         res.setHeader('Content-Disposition', 'attachment; filename=output.pdf');
         res.setHeader('Content-Type', 'application/pdf');
@@ -59,4 +60,14 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     .catch((error) => {
         console.error(error);
     });
+}
+
+// To "DD MMM AAAA". ex: 15 Feb 2017
+function formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const monthNames = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+    const monthIndex = date.getMonth();
+    const year = date.getFullYear();
+    return `${day} ${monthNames[monthIndex]} ${year}`;
 }
