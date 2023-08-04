@@ -43,7 +43,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const document = {
         html: html,
         data: body,    
-        path: "./output.pdf",
+        path: "storage/cv/"+pdfName,
         type: "",
         options: option
     };
