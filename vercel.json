@@ -1,0 +1,9 @@
+{
+    "build": {
+        "env": {
+            "OPENSSL_CONF": "/dev/null",
+            "PHANTOMJS_PATH": "/opt/nodejs/executables/executables/phantomjs_linux-x86_64",
+            "PHANTOMJS_SCRIPT": "/opt/nodejs/executables/executables/scripts/pdf_a4_portrait.js"
+        }
+    }
+}

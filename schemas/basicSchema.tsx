@@ -3,10 +3,6 @@ import * as yup from "yup";
 // const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 // min 5 characters, 1 upper case letter, 1 lower case letter, 1 numeric digit.
 
-export const initialExperience = { title: '', company: '', dateSince: '', place: '', description: '' };
-export const initialEducation = { degree: '', university: '', dateSince: '', place: '', description: '' };
-export const initialCerticate = { degree: '', university: '', dateSince: '', place: '', description: '' };
-
 export const basicSchema = yup.object().shape({
     // email: yup.string().email("Please enter a valid email").required("Required"),
     // age: yup.number().positive().integer().required("Required")
@@ -14,36 +10,49 @@ export const basicSchema = yup.object().shape({
     basic: yup.array().of(
         yup.object().shape({
             //   name: Yup.string().required("Name required"),
-            email: yup.string().required("email required").email("Ingresa un email valido"),
-            name: yup.string().required("Ingresa tu nombre"),
-            position: yup.string().required("Ingresa tu puesto")
+            name: yup.string().required("requerido"),
+            position: yup.string().required("requerido"),
+            descripcion: yup.string()
         })
     ),
     experiences: yup.array().of(
         yup.object().shape({
-            title: yup.string().required("Ingresa tu titulo"),
-            company: yup.string().required("Ingresa tu empresa"),
-            dateSince: yup.string().required("Ingresa fecha de inicio"),
-            place: yup.string().required("Ingresa el lugar"),
-            description: yup.string().required("Ingresa una descripcion")
+            title: yup.string().required("requerido"),
+            company: yup.string().required("requerido"),
+            dateSince: yup.string().required("requerido"),
+            description: yup.string().required("requerido"),
+            dateTo: yup.date()
+            .when('currently', {
+                is: false,
+                then: yup.date().required('requerido')
+            }),
+            currently: yup.boolean()
         })
     ),
     education: yup.array().of(
         yup.object().shape({
-
-            degree: yup.string().required("Ingresa tu titulo"),
-            university: yup.string().required("Ingresa la institucion"),
-            dateSince: yup.string().required("Ingresa fecha de inicio"),
-            place: yup.string().required("Ingresa el lugar"),
-            description: yup.string().required("Ingresa una descripcion")
+            degree: yup.string().required("requerido"),
+            university: yup.string().required("requerido"),
+            dateSince: yup.string().required("requerido"),
+            dateTo: yup.date().when('currently', {
+                is: false,
+                then: yup.date().required('requerido')
+            }),
+            currently: yup.boolean(),      
+            description: yup.string()
         })
     ),
     certificates: yup.array().of(
         yup.object().shape({
-            degree: yup.string().required("Ingresa tu titulo"),
-            university: yup.string().required("Ingresa el lugar"),
-            dateSince: yup.string().required("Ingresa fecha de inicio"),
-            description: yup.string().required("Ingresa una descripcion")
+            degree: yup.string().required("requerido"),
+            university: yup.string().required("requerido"),
+            linkId: yup.string().required("requerido")
+        })
+    ),
+    languages: yup.array().of(
+        yup.object().shape({
+            name: yup.string().required("requerido"),
+            level: yup.string().required("requerido")
         })
     )
 
