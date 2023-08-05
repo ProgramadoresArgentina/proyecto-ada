@@ -13,7 +13,7 @@ export default async function userSettings(req:NextApiRequest, res:NextApiRespon
                 {
                      include: { user:true } 
                 })
-            res.json({ getUserSettings });
+                res.json({ getUserSettings });
             }catch(e)
             {
                 res.status(200).json({ message:"ERROR_FINDING_USER_SETTINGS"});

@@ -8,7 +8,7 @@ const generarcv: React.FC = () => {
             <section className="w-full pt-24 px-6 z-10">
                 <div className="flex flex-wrap mx-auto max-w-7xl justify-between">
                     <div className="z-10">
-                        <div className="mt-12">
+                        <div className="md:mt-12">
                             <div className="max-w-2xl">
                             <h2 className="text-base font-semibold leading-7 text-[#F78001]">Generador de CV</h2>
                             <p className="mt-2 text-6xl font-bold tracking-tight font-roboto text-white"

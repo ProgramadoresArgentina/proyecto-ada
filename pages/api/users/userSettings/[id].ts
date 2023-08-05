@@ -17,7 +17,7 @@ export default async (req:NextApiRequest, res:NextApiResponse)=>{
            try{
             const {id} = query
             const getOneUserSettings = await prisma.userSettings.findUnique({
-                    where: { userId: Number(id) },
+                    where: { id: Number(id) },
                     include: {
                         user: true,
                     }
@@ -37,15 +37,14 @@ export default async (req:NextApiRequest, res:NextApiResponse)=>{
                 const {id} = query
                 const {firstName, lastName, avatar, description} = body
                 const createUser = await prisma.userSettings.create({
-                  data: {
+                   data: {
                         firstName,
                         lastName,
                         avatar,
                         description,
-                        user:{connect :{ id: Number(id)}}
-                    },
-                  }
-                );
+                        user:{connect :{ id: Number(id)}},
+                  }}
+                )
                 res.json(createUser);
             }catch(e:any){
                 console.log(e.message);
@@ -58,7 +57,7 @@ export default async (req:NextApiRequest, res:NextApiResponse)=>{
                 const {id} = query
                 const {firstName, lastName, avatar, description } =  body
                 const updateOneUserSettings = await prisma.userSettings.update({
-                    where: { userId: Number(id) },
+                    where: { id: Number(id) },
                     data: {
                             firstName,
                             lastName,
@@ -79,7 +78,7 @@ export default async (req:NextApiRequest, res:NextApiResponse)=>{
                     throw new Error(`User ${id} does not exist`)
                 }
                 const deleteOneUserSettings = await prisma.userSettings.delete({
-                    where: { userId: Number(id) },
+                    where: { id: Number(id) },
                 })
                 res.json({ deleteOneUserSettings }) 
             }catch(e) {

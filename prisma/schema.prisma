@@ -8,16 +8,16 @@ datasource db {
 }
 
 model User {
-  id                Int           @id @default(autoincrement())
-  username          String
-  email             String        @unique
-  published         Boolean       @default(true)
-  createdAt         DateTime      @default(now())
-  updateAt          DateTime      @updatedAt
-  cvEmail           Cv?           @relation("UserEmail")
-  cvId              Cv?           @relation("UserId")
-  userSettingsEmail UserSettings? @relation("UserEmail")
-  userSettingsId    UserSettings? @relation("UserId")
+  id Int @id @default(autoincrement())
+  username String 
+  email String @unique
+  published Boolean @default(true)
+  createdAt DateTime @default(now()) 
+  updateAt DateTime  @updatedAt 
+  
+  cv Cv?
+  userSettings UserSettings? 
+  articles Articles[]
 }
 
 model UserSettings {
@@ -27,23 +27,23 @@ model UserSettings {
   role        Role   @default(USER)
   avatar      String
   description String
-  emailUser   String @unique
-  userId      Int    @unique
-  email       User   @relation("UserEmail", fields: [emailUser], references: [email], onDelete: Cascade, onUpdate: Restrict)
-  user        User   @relation("UserId", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+ 
+  // Relation
+  user User @relation(fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
+  userId Int @unique
 }
 
 model Cv {
-  id             Int              @id @default(autoincrement())
-  title          String
-  published      Boolean          @default(false)
-  userId         Int              @unique
-  emailUser      String           @unique
+  id Int @id @default(autoincrement())
+  title String
+  published Boolean @default(false)
+
+  user User @relation(fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
+  userId Int @unique
+  
+  experience Experience[]
+  education Education[]
   certifications Certifications[]
-  email          User             @relation("UserEmail", fields: [emailUser], references: [email], onDelete: Cascade, onUpdate: Restrict)
-  user           User             @relation("UserId", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Restrict)
-  education      Education[]
-  experience     Experience[]
 }
 
 model Experience {
@@ -87,4 +87,29 @@ model Events {
 enum Role {
   USER
   ADMIN
+}
+
+// MODELO DE ARTICULOS
+model Articles {
+  id Int @id @default(autoincrement())
+  title String
+  content String
+  image Bytes
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relation 1-n con usuario
+  user User @relation(fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
+  userId Int @unique
+
+  // Relation m-n con Hashtags
+  hashtags Hashtags[] 
+}
+
+// MODELO DE HASHTAGS
+model Hashtags {
+  id Int @id @default(autoincrement())
+  name String 
+  // Relation m-n con Articulos
+  articles Articles[]
 }
