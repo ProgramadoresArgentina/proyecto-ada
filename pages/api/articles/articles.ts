@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../prismaClient/db"
 
 export default async function articles(req:NextApiRequest, res:NextApiResponse) { 
-    
+  
     const {method} = req
     if (method == 'GET') {
         try{

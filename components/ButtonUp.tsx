@@ -1,39 +1,41 @@
 import { useState, useEffect } from 'react';
+import { FaArrowUp } from 'react-icons/fa';
 
 const ButtonUp: React.FC = () => {
-    const [isVisible, setIsVisible] = useState(false)
+    const [showButton, setShowButton] = useState(false);
+    const [scrollPercentage, setScrollPercentage] = useState(0);
 
-    const toggleVisibility = (): void => {
-        if (window.pageYOffset > 300) {
-            setIsVisible(true)
-        } else {
-            setIsVisible(false)
-        }
-    }
+    const handleScroll = () => {
+        const scrolled = document.documentElement.scrollTop;
+        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const percentage = (scrolled / windowHeight) * 100;
+        setScrollPercentage(percentage);
+        setShowButton(scrolled > 200); // Mostrar el botón solo cuando el scroll es mayor a 200px
+    };
 
-    const handleClick = (): void => {
+    const scrollToTop = () => {
         window.scrollTo({
             top: 0,
-            behavior: "smooth"
-        })
-    }
+            behavior: 'smooth',
+        });
+    };
 
     useEffect(() => {
-        window.addEventListener('scroll', toggleVisibility)
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
-        return () => {
-            window.removeEventListener('scroll', toggleVisibility)
-        }
-    }, [])
     return (
+        <>
+            {showButton && (
+                <div className="scroll-up-button" onClick={scrollToTop}
+                data-tooltip-id="tooltip" data-tooltip-content="Volver arriba"
+                style={{background: `conic-gradient(#008fff ${scrollPercentage}%, rgba(192, 192, 255, .5) ${scrollPercentage}%)`}}>
+                    <span><FaArrowUp /></span>
+                </div>
+            )}
+        </>
+    );
 
-        <button className={`${isVisible ? "bg-[#FFFFFF] text-white font-bold py-2 px-4 rounded fixed bottom-5 right-14 border shadow-lg"
-            : "hidden"}`} title="Volver arriba"
-            onClick={() => handleClick()}
-        >
-            <img src="https://64.media.tumblr.com/39c0656670e6013bb3806455fd2bf532/tumblr_myzobdh4d51svwlszo1_500.gif" style={{width: 30}} />
-        </button>
-
-    )
 }
 export default ButtonUp
