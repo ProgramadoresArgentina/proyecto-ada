@@ -32,6 +32,7 @@ model UserSettings{
   role Role @default(USER)
   avatar String
   description String
+  url String @unique @default(uuid())
   
   // Relation
   user User @relation(fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
