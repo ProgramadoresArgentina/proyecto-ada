@@ -3,13 +3,14 @@ import { prisma } from "../../../prismaClient/db"
 
 export default async function articles(req:NextApiRequest, res:NextApiResponse) { 
     
-    const {method} = req.query
+    const {method} = req
     if (method == 'GET') {
         try{
             const getAllArticles = await prisma.articles.findMany({
                 include : {
                     user : true,
                     hashtags : true, 
+                    _count: true, 
                 }  
             })
             return res.json({getAllArticles});
