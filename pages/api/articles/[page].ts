@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../prismaClient/db"
 
+//endpoint para obtener todos los articulos pero paginados.
 //e.g: /api/blog/<num_de_pagina>
 export default async (req: NextApiRequest, res: NextApiResponse)=> {
     const {page} = req.query   
