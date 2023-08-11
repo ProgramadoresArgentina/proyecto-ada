@@ -40,7 +40,7 @@ module.exports = {
 			},
 			backgroundImage: {
 				"background-vector": "url('/carousel/background-vector.svg')",
-				"background-blog-world": "url('/blog/world.svg')",
+				"background-blog-world": "url('/blog/world.png')",
 			},
 			keyframes: {
 				showAlertPopup: {
