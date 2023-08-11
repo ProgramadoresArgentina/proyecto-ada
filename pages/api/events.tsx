@@ -12,7 +12,7 @@ export default async function events(req: NextApiRequest, res: NextApiResponse) 
                     {
                         where: {
                             expiredAt: {
-                                lte: new Date() // Filtrar eventos que ocurren después de la fecha actual
+                                gte: new Date() // Filtrar eventos que ocurren después de la fecha actual
                             }
                         }
                     })
