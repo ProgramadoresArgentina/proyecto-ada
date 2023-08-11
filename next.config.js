@@ -2,7 +2,7 @@
 const nextConfig = {
 	reactStrictMode: true,
 	images: {
-		domains: ["i.pravatar.cc"],
+		domains: ["i.pravatar.cc", "picsum.photos"],
 	},
 	env: {
 		SERVICE_ID_EMAILJS: process.env.EMAIL_SERVICE_ID,

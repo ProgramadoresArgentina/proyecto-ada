@@ -27,7 +27,9 @@ model UserSettings {
   role        Role   @default(USER)
   avatar      String
   description String
- 
+
+  url String @unique @default(uuid())
+
   // Relation
   user User @relation(fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
   userId Int @unique
@@ -94,13 +96,13 @@ model Articles {
   id Int @id @default(autoincrement())
   title String
   content String
-  image Bytes
+  image String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   // Relation 1-n con usuario
   user User @relation(fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
-  userId Int @unique
+  userId Int
 
   // Relation m-n con Hashtags
   hashtags Hashtags[] 
