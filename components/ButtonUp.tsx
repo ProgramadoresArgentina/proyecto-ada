@@ -29,8 +29,8 @@ const ButtonUp: React.FC = () => {
         <>
             {showButton && (
                 <div className="scroll-up-button" onClick={scrollToTop}
-                data-tooltip-id="tooltip" data-tooltip-content="Volver arriba"
-                style={{background: `conic-gradient(#008fff ${scrollPercentage}%, rgba(192, 192, 255, .5) ${scrollPercentage}%)`}}>
+                    data-tooltip-id="tooltip" data-tooltip-content="Volver arriba"
+                    style={{ background: `conic-gradient(#008fff ${scrollPercentage}%, rgba(192, 192, 255, .5) ${scrollPercentage}%)` }}>
                     <span><FaArrowUp /></span>
                 </div>
             )}
