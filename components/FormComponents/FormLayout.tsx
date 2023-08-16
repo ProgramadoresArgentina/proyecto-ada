@@ -166,8 +166,7 @@ const FormLayout: React.FC<{}> = () => {
                             {
                                 steps.map((step, i) => (
                                     <li key={i} className={`flex items-center cursor-pointer ${((i+1) === stepNo) && "text-[#F78001] "}
-                                     ${((i+1) !== steps.length) && "after:hidden md:w-full sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700 sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1"}`}
-                                     onClick={() => isStepValid(i+1) && (i < 5) && setStepNo(i + 1)}>
+                                     ${((i+1) !== steps.length) && "after:hidden md:w-full sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700 sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1"}`}>
                                         <span className={`${(steps.length !== (i+1)) ? "flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500":"mr-2 flex font-roboto"}`}>
                                             {
                                                 isStepValid(i+1) && (i < 5) ?
