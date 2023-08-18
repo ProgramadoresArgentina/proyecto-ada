@@ -1,16 +1,11 @@
-// Se utiliza mockapi.io por ahora mientras no se tenga el endpoint a la base de datos
-// la API trae 100 users con data random y campos personalizables
-const mockApiURL = 'https://6430ba593adb1596515f492e.mockapi.io/user/'
-
 const getUsers = async (id?: string | string[]) => {
-  try {
-    const url = id ? mockApiURL + id : mockApiURL
-    const res = await fetch(url)
-    const res_1 = await res.json()
-    return res_1
-  } catch (err) {
-    throw new Error(err)
-  }
-}
+	try {
+		const res = await fetch(`http://localhost:3000/api/users/${id}`);
+		const userData = await res.json();
+		return userData;
+	} catch (err) {
+		throw new Error(err);
+	}
+};
 
-export default getUsers
+export default getUsers;
