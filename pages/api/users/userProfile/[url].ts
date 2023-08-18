@@ -35,6 +35,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 							firstName: true,
 							lastName: true,
 							avatar: true,
+							// estatus: true,
 							description: true,
 						},
 					});

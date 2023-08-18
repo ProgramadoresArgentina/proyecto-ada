@@ -25,6 +25,7 @@ model UserSettings {
   firstName   String
   lastName    String
   role        Role   @default(USER)
+  status Estatus @default(null)
   avatar      String
   description String
 
@@ -89,6 +90,12 @@ model Events {
 enum Role {
   USER
   ADMIN
+}
+
+enum Estatus {
+	CONTRATANDO
+	BUSCANDO
+  null
 }
 
 // MODELO DE ARTICULOS
