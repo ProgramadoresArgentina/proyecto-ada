@@ -25,7 +25,7 @@ export default function Hero() {
             <img
                 src="https://i.ibb.co/bsWBX7L/star-bg-1.png"
                 alt=""
-                className="absolute top-0 -z-10 h-full w-full object-cover object-right md:object-center"
+                className="fixed top-0 -z-10 h-full w-full object-cover object-right md:object-center"
             />
             {/* <img
                 src="https://i.ibb.co/r61MLCP/Auto-Layout-Horizontal.png"
