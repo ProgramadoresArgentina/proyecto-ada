@@ -18,6 +18,7 @@ model User {
   cv Cv?
   userSettings UserSettings? 
   articles Articles[]
+  achievements Achievements[]
 }
 
 model UserSettings {
@@ -115,4 +116,11 @@ model Hashtags {
   name String 
   // Relation m-n con Articulos
   articles Articles[]
+}
+
+model Achievements {
+  id Int @id @default(autoincrement())
+  name String
+  icon String
+  users User[]
 }

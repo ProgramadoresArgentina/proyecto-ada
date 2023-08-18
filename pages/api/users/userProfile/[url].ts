@@ -45,6 +45,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 						email: true,
 						createdAt: true,
 						cv: true,
+						achievements: true
 					},
 				});
 
