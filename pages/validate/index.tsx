@@ -14,7 +14,7 @@ const Validate: NextPage = () => {
 	const updateStatus = (value: string, redirect: string) => {
 		divMessageRef.current.innerText = value;
 		setTimeout(() => {
-			// router.push(redirect);
+			router.push(redirect);
 		}, 1000);
 	};
 
