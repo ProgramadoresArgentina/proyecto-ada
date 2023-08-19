@@ -27,8 +27,8 @@ model User {
 // MODELO PERFIL
 model UserSettings{
   id Int @id @default(autoincrement())
-  firstName String
-  lastName String
+  firstName String?
+  lastName String?
   role Role @default(USER)
   avatar String
   description String
