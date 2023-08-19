@@ -21,14 +21,16 @@ model User {
   achievements Achievements[]
 }
 
-model UserSettings {
-  id          Int    @id @default(autoincrement())
-  firstName   String
-  lastName    String
-  role        Role   @default(USER)
+// MODELO PERFIL
+model UserSettings{
+  id Int @id @default(autoincrement())
+  firstName String?
+  lastName String?
+  role Role @default(USER)
   status Estatus @default(null)
-  avatar      String
+  avatar String
   description String
+
 
   url String @unique @default(uuid())
 
