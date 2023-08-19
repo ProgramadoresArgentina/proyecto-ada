@@ -8,6 +8,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost&family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&family=Manrope&family=Montserrat&display=swap');
 
+@import url('../pages/blog/blog.css');
+
+
+@font-face {
+    font-family: "Mona Sans";
+    font-style: normal;
+    font-weight: 300;
+    src: url('http://localhost:3000/static/fonts/mona-sans.woff2') format('truetype');
+}
+
 @layer utilities {
   .background-pattern {
     background: radial-gradient(circle at center, #f4f4f4 25%, transparent 25%), white;
@@ -310,3 +320,23 @@ input:disabled {
     font-weight: 600;
     font-size: 20px;
   }
+
+
+::-webkit-scrollbar-track
+{
+	background-color: transparent;
+}
+
+::-webkit-scrollbar
+{
+	width: 10px;
+	height: 10px;
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb
+{
+    border-radius: 20px;
+	background-color: #ddd;
+	border: none;
+}

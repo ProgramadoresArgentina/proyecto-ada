@@ -5,12 +5,23 @@ export default async function(req: NextApiRequest, res: NextApiResponse) {
     
     const {method} = req
     const blogId = Number(req.query.id)
-
+    
     if(method === "GET"){
         try {
+
+            await prisma.articles.update({
+                where:{id: blogId},
+                data:{
+                    views: {
+                        increment: 1
+                    }
+                }
+            })
+
             const getBlog = await prisma.articles.findUnique({
                 where:{id: blogId},
                 include:{
+                    hashtags: true,
                     user: {
                         select: {
                             username: true,
@@ -23,6 +34,7 @@ export default async function(req: NextApiRequest, res: NextApiResponse) {
                             },
                             articles:{
                                 select: {
+                                    id: true,
                                     title: true,
                                     image: true
                                 }

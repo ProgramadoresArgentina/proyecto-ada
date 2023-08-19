@@ -1,8 +1,7 @@
 import { NextPage } from "next";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { NotFound } from "../../../components/Portfolio/404";
+import { useEffect } from "react";
+import { NotFound } from "../../../components/NotFound/NotFound";
 import { Portfolio } from "../../../components/Portfolio/Portfolio";
 import Spinner from "../../../components/Spinner";
 import { useFetch } from "../../../hooks/useFetch";
@@ -36,7 +35,17 @@ const UserPorfolio: NextPage = () => {
 			</div>
 		);
 
-	if (error) return <NotFound />;
+	if (error)
+		return (
+			<NotFound
+				title={"Usuario no encontrado"}
+				content={
+					"No encontramos al usuario en nuestra base de datos. Si eres un nuevo usuario, te invitamos a registrarte y completar tu	CV. Si ya formas parte de Programadores Argentina, verifica	que hayas generado correctamente el CV."
+				}
+				url={"/login"}
+				buttonName={"Completar CV"}
+			/>
+		);
 
 	return <Portfolio user={data} />;
 };

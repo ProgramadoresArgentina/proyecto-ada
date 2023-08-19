@@ -15,6 +15,7 @@ module.exports = {
 				ibm: ["IBM", "sans-serif"],
 				roboto: ["Roboto", "sans-serif"],
 				jost: ["Jost", "sans-serif"],
+				monaSans: ["Mona Sans", "sans-serif"],
 			},
 			colors: {
 				secondary: "#01233F",
@@ -40,7 +41,8 @@ module.exports = {
 			},
 			backgroundImage: {
 				"background-vector": "url('/carousel/background-vector.svg')",
-				"background-blog-world": "url('/blog/world.svg')",
+				"background-blog-world": "url('/blog/world.png')",
+				"background-blog-header": "url('/blog-header.jpg')",
 			},
 			keyframes: {
 				showAlertPopup: {

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --port 4400",
     "lint": "next lint"
   },
   "dependencies": {
@@ -24,6 +24,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",
     "react-marquee-slider": "^1.1.5",
+    "react-toastify": "^9.1.3",
     "react-tooltip": "^5.18.1",
     "react-type-animation": "^3.0.1",
     "yup": "^0.32.11"
