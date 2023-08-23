@@ -7,9 +7,7 @@ import { Fragment, useState } from "react";
 import { UpdateProfile } from "../components/UpdateProfile/UpdateProfile";
 import Logo from "../public/LogoProgramadoresArgentina.png";
 
-const returnLink = `/api/auth/login?returnTo=${encodeURIComponent(
-	"/validate?redirect=/"
-)}`;
+const returnLink = `/api/auth/login?returnTo=${encodeURIComponent("/")}`;
 const navigation = [
 	{ name: "Blog", path: "/blog" },
 	{ name: "Bolsa de Talentos", path: "/talentos" },
