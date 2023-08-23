@@ -1,5 +1,6 @@
 import Link from "next/link";
 import scrollImage from '../../public/scroll-down.gif';
+import ActiveEvents from "../ActiveEvents";
 
 const links = [
     { name: 'Bolsa de Talentos', href: '/talentos' },
@@ -9,12 +10,14 @@ const links = [
 ]
 
 export default function Hero() {
+    
     return (
         <div className="relative isolate  min-h-screen overflow-hidden pb-40 pt-44 bg-[#1B1F24]"
         style={{'background': 'linear-gradient(180deg, #08081F 0%, rgba(13,17,23,1) 100%'}}>\
             <div className='bg-[#F7850B] absolute top-20 w-full'>
-                <div className="w-1/2 text-center m-auto py-2">
-                    <p className="text-white font-manrope">Sorteo de beca clickeando <a className="plain-button px-1 py-1 text-sm rounded-sm">AQUÍ</a>. Finaliza el domingo</p>
+                <div className="w-full text-center m-auto py-2">
+                    {/* <p className="text-white font-manrope">Sorteo de beca clickeando <a className="plain-button px-1 py-1 text-sm rounded-sm">AQUÍ</a>. Finaliza el domingo</p> */}
+                    <ActiveEvents/>
                 </div>
             </div>
             {/* <img
