@@ -163,6 +163,20 @@ export default function Navbar() {
 														<Menu.Item>
 															{({ active }) => (
 																<Link
+																	href="/myblogs"
+																	className={classNames(
+																		active
+																			? "bg-gray-100"
+																			: "",
+																		"block px-4 py-2 text-sm text-gray-700"
+																	)}>
+																	Mis Blogs
+																</Link>
+															)}
+														</Menu.Item>
+														<Menu.Item>
+															{({ active }) => (
+																<Link
 																	href="/api/auth/logout"
 																	className={classNames(
 																		active
