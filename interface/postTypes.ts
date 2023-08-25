@@ -1,31 +1,47 @@
-import { UserType } from './userTypes'
+import { UserType } from "./userTypes";
 
 export interface PostType {
-  id?: string
-  content?: string
-  coverImage?: string
-  createdAt?: string
-  hashtags?: string
-  title?: string
-  userId?: number
+	id?: string;
+	content?: string;
+	coverImage?: string;
+	createdAt?: string;
+	hashtags?: string;
+	title?: string;
+	userId?: number;
+}
+
+export interface Post {
+	id: string;
+	image: string;
+	title: string;
+	content: string;
+	views: number;
+	createdAt?: string;
+	createdBy?: string;
+	hashtags?: string;
+	userId?: number;
+	user?: number;
+}
+export interface PostUSerType {
+	post: Post;
 }
 
 export interface PostWithUserType {
-  id?: string
-  content?: string
-  coverImage?: string
-  createdAt?: string
-  createdBy?: UserType
-  hashtags?: string
-  title?: string
+	id?: string;
+	content?: string;
+	coverImage?: string;
+	createdAt?: string;
+	createdBy?: UserType;
+	hashtags?: string;
+	title?: string;
 }
 
 export interface UsePostsStateType {
-  post?: PostWithUserType | undefined
-  suggestionsPosts?: PostWithUserArrType | undefined
-  isLoading?: boolean
-  onError?: boolean
+	post?: Post | undefined;
+	suggestionsPosts?: PostWithUserArrType | undefined;
+	isLoading?: boolean;
+	onError?: boolean;
 }
 
-export type PostArrType = PostType[]
-export type PostWithUserArrType = PostWithUserType[]
+// export type PostArrType = PostType[];
+export type PostWithUserArrType = PostWithUserType[];

@@ -1,20 +1,27 @@
-import PostAsideActions from './PostAsideActions'
-import PostAsideUserInfo from './PostAsideUserInfo'
-import PostAsideSuggestions from './PostAsideSuggestions'
-import PostAsideLoginButton from './PostAsideLoginButton'
-import { UsePostsStateType } from '../../interface/postTypes'
+import PostAsideActions from "./PostAsideActions";
+import PostAsideSuggestions from "./PostAsideSuggestions";
+import PostAsideUserInfo from "./PostAsideUserInfo";
 
-export default function PostAside({ post, suggestionsPosts }: UsePostsStateType) {
-  const { name, username, avatar, description, linkedIn, facebook, twitter } = post.createdBy
+export default function PostAside({ post }) {
+	const { username, description, userSettings, linkedIn, facebook, twitter } =
+		post.createdBy.restult;
 
-  return (
-    <aside className='w-full md:max-w-[22rem] p-6'>
-      <PostAsideActions linkedIn={linkedIn} facebook={facebook} twitter={twitter} />
-      <PostAsideLoginButton />
-      <div className='hidden md:flex flex-col gap-4'>
-        <PostAsideUserInfo name={name} username={username} avatar={avatar} description={description} />
-        <PostAsideSuggestions suggestionsPosts={suggestionsPosts} />
-      </div>
-    </aside>
-  )
+	return (
+		<aside className="w-full md:max-w-[22rem] p-6">
+			<PostAsideActions
+				linkedIn={linkedIn}
+				facebook={facebook}
+				twitter={twitter}
+			/>
+			<div className="hidden md:flex flex-col gap-4">
+				<PostAsideUserInfo
+					name={username}
+					username={username}
+					userSettings={userSettings}
+					description={description}
+				/>
+				<PostAsideSuggestions />
+			</div>
+		</aside>
+	);
 }

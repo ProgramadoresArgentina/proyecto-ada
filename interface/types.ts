@@ -26,3 +26,26 @@ export interface MarqueeCustomProps {
 }
 
 export type SetState<T> = Dispatch<SetStateAction<T>>;
+
+export interface ColumnTableProps {
+	id: number;
+	header: string;
+}
+export interface ArticleTableProps {
+	id: number;
+	title: string;
+	image: string;
+	createdAt: Date;
+	views: number;
+	likes?: number;
+	comments?: number;
+	bookmarks?: number;
+}
+
+export interface NotFoundProps {
+	title: string;
+	content: string;
+	url: string;
+	buttonName: string;
+	showRegister?: boolean;
+}
