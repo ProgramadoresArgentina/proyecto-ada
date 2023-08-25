@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start --port 4400",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "next build && pm2 start npm --name 'ada' -- start"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^2.2.2",

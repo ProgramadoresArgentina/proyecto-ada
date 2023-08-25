@@ -8,6 +8,7 @@ import "../styles/globals.css";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { Tooltip } from "react-tooltip";
 import { Analytics } from '@vercel/analytics/react';
+import Script from "next/script";
 
 const MyApp: NextPage = ({ Component, pageProps }: AppProps) => {
 	return (
@@ -22,6 +23,17 @@ const MyApp: NextPage = ({ Component, pageProps }: AppProps) => {
 			<Footer />
             <Tooltip id="tooltip" />
             <Analytics />
+
+            <Script src="https://www.googletagmanager.com/gtag/js?id=G-90V0GHL08C" />
+            <Script id="gtm-script" strategy="afterInteractive">
+            {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', 'G-90V0GHL08C');
+            `}
+            </Script>
 		</UserProvider>
 	);
 };
