@@ -1,5 +1,15 @@
 import { UserType } from "./userTypes";
 
+export interface PostType {
+	id?: string;
+	content?: string;
+	coverImage?: string;
+	createdAt?: string;
+	hashtags?: string;
+	title?: string;
+	userId?: number;
+}
+
 export interface Post {
 	id: string;
 	image: string;
