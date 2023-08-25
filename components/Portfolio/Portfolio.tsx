@@ -1,14 +1,10 @@
-import exp from "constants";
 import Image from "next/image";
 import { FC } from "react";
-import {
-	articlesMock,
-	certificationsMock,
-	educationMock,
-	experienceMock,
-	projectsMock,
-} from "../../data/dummy-data";
+import { projectsMock } from "../../data/dummy-data";
 import { openInNewTab } from "../../helpers/openInNewTab";
+import { Certifications } from "../../interfacesModels/Certifications";
+import { Education } from "../../interfacesModels/Education";
+import { Experience } from "../../interfacesModels/Experience";
 import BadgeBlogs from "../../public/portfolio/blogger.svg";
 import IconCert from "../../public/portfolio/certification.svg";
 import BadgeProfile from "../../public/portfolio/complete-profile.svg";
@@ -24,6 +20,14 @@ import IconProy from "../../public/portfolio/proyects.svg";
 import IconSocials from "../../public/portfolio/socials.svg";
 
 export const Portfolio: FC<any> = ({ user }) => {
+	const {
+		getDataFromArticles,
+		getDataFromCv,
+		getDataFromUser,
+		getDataFromUserSettings,
+		getProyectsFromUser = null,
+	} = user;
+
 	const HeaderTitle = ({ url, name }) => (
 		<div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
 			<Image className="w-5 h-5" alt={name} src={url} />
@@ -49,14 +53,7 @@ export const Portfolio: FC<any> = ({ user }) => {
 			</span>
 		</div>
 	);
-	const ArticleCard = ({
-		id,
-		title,
-		description,
-		link,
-		hashtags,
-		createdAt,
-	}) => (
+	const ArticleCard = ({ id, title, content, hashtags, createdAt }) => (
 		<div className="flex max-w-[24rem] flex-col rounded-md bg-gray-800 text-white shadow-md p-4">
 			<Image
 				src="https://i.pravatar.cc/550"
@@ -68,11 +65,9 @@ export const Portfolio: FC<any> = ({ user }) => {
 			<h4 className="text-xl font-semibold text-gray-100 mt-4">
 				{title}
 			</h4>
-			<p className="text-l font-normal text-gray-500 mt-4">
-				{description}
-			</p>
+			<p className="text-l font-normal text-gray-500 mt-4">{content}</p>
 			<h3
-				onClick={() => openInNewTab(link)}
+				onClick={() => openInNewTab(`/pro/${id}`)}
 				className="text-blue-600 font-lg text-semibold cursor-pointer mt-6">
 				Link
 			</h3>
@@ -84,7 +79,7 @@ export const Portfolio: FC<any> = ({ user }) => {
 						</div>
 					))}
 				</div>
-				<p className="text-xs">{createdAt}</p>
+				<p className="text-xs">{convertToDate(createdAt)}</p>
 			</div>
 		</div>
 	);
@@ -122,18 +117,27 @@ export const Portfolio: FC<any> = ({ user }) => {
 	);
 	const CertificationCard = ({
 		title,
-		institution,
-		link,
+		institution = null,
+		link = null,
 		startYear,
 		endYear,
 		description,
 	}) => (
 		<li>
 			<div className="text-gray-100">{title}</div>
-			<div className="text-gray-500 text-xs">{institution}</div>
-			<div className="text-gray-500 text-xs">{link}</div>
+			{institution && (
+				<div className="text-gray-500 text-xs">{institution}</div>
+			)}
+			{link && (
+				<div
+					onClick={() => openInNewTab(link)}
+					className="text-gray-500 text-xs">
+					{link}
+				</div>
+			)}
 			<div className="text-gray-500 text-xs">
-				{startYear} - {endYear ? endYear : "Actualidad"}
+				{convertToDate(startYear)} -{" "}
+				{endYear ? convertToDate(endYear) : "Actualidad"}
 			</div>
 			<div className="text-gray-500 text-xs">{description}</div>
 		</li>
@@ -142,7 +146,8 @@ export const Portfolio: FC<any> = ({ user }) => {
 		<li>
 			<div className="text-white">{title}</div>
 			<div className="text-gray-500 text-xs">
-				{startYear} -{endYear ? endYear : "Actualidad"}
+				{convertToDate(startYear)} -
+				{endYear ? convertToDate(endYear) : "Actualidad"}
 			</div>
 			<div className="text-gray-500 text-xs">{description}</div>
 		</li>
@@ -151,13 +156,18 @@ export const Portfolio: FC<any> = ({ user }) => {
 		<li>
 			<div className="text-white">{title}</div>
 			<div className="text-gray-500 text-xs">
-				{startYear} - {endYear ? endYear : "Actualidad"}
+				{convertToDate(startYear)} -{" "}
+				{endYear ? convertToDate(endYear) : "Actualidad"}
 			</div>
 			<div className="text-gray-500 text-xs">{description}</div>
 		</li>
 	);
 
 	const Divider = () => <div className="my-4"></div>;
+
+	const convertToDate = (date: Date) => {
+		return new Date(date).toLocaleDateString();
+	};
 
 	return (
 		<div className="bg-[#0D1116] min-h-screen pt-16 font-ibm">
@@ -167,26 +177,24 @@ export const Portfolio: FC<any> = ({ user }) => {
 					<div className="w-full md:w-3/12 md:mx-2">
 						<div className="bg-[#161B22] p-3 border-t-4 border-[#673fd7]">
 							<div className="image overflow-hidden">
-								<Image
+								<img
 									width={100}
 									height={100}
 									className="h-auto w-full mx-auto"
-									src="https://i.pravatar.cc/450"
-									alt=""
+									src={getDataFromUserSettings.avatar}
+									alt={getDataFromUserSettings.firstName}
 								/>
 							</div>
 							{/* LEFT CARD DESCRIPTION */}
 							<h1 className="text-white font-bold text-xl leading-8 my-1">
-								Jane Doe
+								{getDataFromUserSettings.firstName}{" "}
+								{getDataFromUserSettings.lastName}
 							</h1>
 							<h3 className="text-gray-500 font-lg text-semibold leading-6">
 								Web Developer
 							</h3>
 							<p className="text-sm text-gray-300 hover:text-gray-600 leading-6">
-								Lorem ipsum dolor sit amet consectetur
-								adipisicing elit. Reprehenderit, eligendi
-								dolorum sequi illum qui unde aspernatur non
-								deserunt
+								{getDataFromUserSettings.description}
 							</p>
 							{/* END LEFT CARD DESCRIPTION */}
 
@@ -204,14 +212,19 @@ export const Portfolio: FC<any> = ({ user }) => {
 									<span className="text-white">Status</span>
 									<span className="ml-auto md:ml-0 md:items-start lg:ml-auto">
 										<span className="py-1 px-2 rounded text-gray-300 text-sm">
-											En busqueda
+											{getDataFromUserSettings.status ===
+											"null"
+												? "En búsqueda"
+												: getDataFromUserSettings.status}
 										</span>
 									</span>
 								</li>
 								<li className="flex items-center md:flex-col md:items-start  lg:flex-row py-3">
 									<span className="text-white">Miembro</span>
 									<span className="ml-auto md:ml-0 lg:ml-auto text-gray-300">
-										Nov 07, 2016
+										{convertToDate(
+											getDataFromUser.createdAt
+										)}
 									</span>
 								</li>
 								<li className="flex items-center md:flex-col md:items-start  lg:flex-row py-3">
@@ -274,7 +287,7 @@ export const Portfolio: FC<any> = ({ user }) => {
 											<a
 												className="text-blue-800"
 												href="mailto:jane@example.com">
-												programadores@argentina.com
+												{getDataFromUser.email}
 											</a>
 										</div>
 									</div>
@@ -294,96 +307,113 @@ export const Portfolio: FC<any> = ({ user }) => {
 						{/* EXP && EDUCATION */}
 						<div className="bg-[#161B22] p-3 shadow-sm rounded-sm">
 							<div className="grid grid-cols-1 md:grid-cols-2">
-								{/* EDUCATION */}
-								<div>
-									<HeaderTitle
-										name={"Experiencia"}
-										url={IconExp}
-									/>
-									<ul className="list-inside space-y-2">
-										{experienceMock.map((experience) => (
-											<ExperienceCard
-												key={experience.id}
-												{...experience}
-											/>
-										))}
-									</ul>
-								</div>
 								{/* EXP */}
-								<div className="mt-4 md:mt-0">
-									<HeaderTitle
-										name={"Education"}
-										url={IconEdu}
-									/>
-									<ul className="list-inside space-y-2">
-										{educationMock.map((education) => (
-											<EducationCard
-												key={education.id}
-												{...education}
-											/>
-										))}
-									</ul>
-								</div>
+								{getDataFromCv?.experience.length > 0 && (
+									<div>
+										<HeaderTitle
+											name={"Experiencia"}
+											url={IconExp}
+										/>
+										<ul className="list-inside space-y-2">
+											{getDataFromCv.experience.map(
+												(experience: Experience) => (
+													<ExperienceCard
+														key={experience.id.toString()}
+														{...experience}
+													/>
+												)
+											)}
+										</ul>
+									</div>
+								)}
+								{/* EDUCATION */}
+								{getDataFromCv.education.length > 0 && (
+									<div className="mt-4 md:mt-0">
+										<HeaderTitle
+											name={"Education"}
+											url={IconEdu}
+										/>
+										<ul className="list-inside space-y-2">
+											{getDataFromCv.education.map(
+												(education: Education) => (
+													<EducationCard
+														key={education.id.toString()}
+														{...education}
+													/>
+												)
+											)}
+										</ul>
+									</div>
+								)}
 							</div>
 						</div>
 						{/*END EXP && EDUCATION  */}
 						<Divider />
 						{/* CARTIFICATES */}
-						<div className="bg-[#161B22] p-3 shadow-sm rounded-sm">
-							<div className="grid grid-cols-1">
-								<HeaderTitle
-									name={"Certificaciones"}
-									url={IconCert}
-								/>
-								<ul className="list-inside space-y-2 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-									{certificationsMock.map((certifaction) => (
-										<CertificationCard
-											key={certifaction.id}
-											{...certifaction}
-										/>
-									))}
-								</ul>
+						{getDataFromCv?.certifications.length > 0 && (
+							<div className="bg-[#161B22] p-3 shadow-sm rounded-sm">
+								<div className="grid grid-cols-1">
+									<HeaderTitle
+										name={"Certificaciones"}
+										url={IconCert}
+									/>
+									<ul className="list-inside space-y-2 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+										{getDataFromCv.certifications.map(
+											(certifaction: Certifications) => (
+												<CertificationCard
+													key={certifaction.id.toString()}
+													{...certifaction}
+												/>
+											)
+										)}
+									</ul>
+								</div>
 							</div>
-						</div>
+						)}
 						{/* END CARTIFICATES */}
 						<Divider />
 						{/* LAST ARTICLES */}
-						<div className="bg-[#161B22] p-3 shadow-sm rounded-sm">
-							<div className="grid grid-cols-1">
-								<HeaderTitle
-									name={"Últimos Articulos"}
-									url={IconProy}
-								/>
-								<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-									{articlesMock.map((article) => (
-										<ArticleCard
-											key={article.id}
-											{...article}
-										/>
-									))}
+						{getDataFromArticles?.length > 0 && (
+							<div className="bg-[#161B22] p-3 shadow-sm rounded-sm">
+								<div className="grid grid-cols-1">
+									<HeaderTitle
+										name={"Últimos Articulos"}
+										url={IconProy}
+									/>
+									<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+										{getDataFromArticles?.map((article) => (
+											<ArticleCard
+												key={article.id.toString()}
+												{...article}
+											/>
+										))}
+									</div>
 								</div>
 							</div>
-						</div>
+						)}
+
 						{/* END LAST ARTICLES */}
 						<Divider />
 						{/* HIGHLIGHTED PROYECTS  */}
-						<div className="bg-[#161B22] p-3 shadow-sm rounded-sm">
-							<div className="grid grid-cols-1">
-								<HeaderTitle
-									name={"Proyectos Destacados"}
-									url={IconProy}
-								/>
-								<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-									{projectsMock.map((project) => (
-										<ProyectCard
-											key={project.id}
-											{...project}
-										/>
-									))}
+						{getProyectsFromUser?.length > 0 && (
+							<div className="bg-[#161B22] p-3 shadow-sm rounded-sm">
+								<div className="grid grid-cols-1">
+									<HeaderTitle
+										name={"Proyectos Destacados"}
+										url={IconProy}
+									/>
+									<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+										{projectsMock.map((project) => (
+											<ProyectCard
+												key={project.id}
+												{...project}
+											/>
+										))}
+									</div>
+									{/* END PROYECTOS DESTACADOS */}
 								</div>
-								{/* END PROYECTOS DESTACADOS */}
 							</div>
-						</div>
+						)}
 						{/* END HIGHLIGHTED PROYECTS  */}
 						<Divider />
 					</div>
