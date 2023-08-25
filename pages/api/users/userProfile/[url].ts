@@ -35,7 +35,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 							firstName: true,
 							lastName: true,
 							avatar: true,
-							status : true,
+							status: true,
 							description: true,
 						},
 					});
@@ -46,7 +46,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 						email: true,
 						createdAt: true,
 						cv: true,
-						achievements: true
+						achievements: true,
 					},
 				});
 
@@ -68,8 +68,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 					getDataFromArticles,
 				});
 			} catch (error: any) {
-				res.status(200).json({
+				res.status(404).json({
 					message: `USER_WITH_URL: ${query.url} NOT_FOUND`,
+					statusCode: 404,
 				});
 			}
 			break;
