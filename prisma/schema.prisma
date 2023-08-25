@@ -108,6 +108,7 @@ model Articles {
   content String
   image String
   views Int @default(0)
+  url String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
