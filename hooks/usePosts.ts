@@ -14,7 +14,7 @@ import { UserType } from "../interface/userTypes";
 export const usePosts = () => {
 	const router = useRouter();
 	const { id } = router.query;
-	const [state, setState] = useState<UsePostsStateType>({
+	const [state, setState] = useState({
 		post: undefined,
 		isLoading: true,
 		onError: false,
@@ -35,7 +35,7 @@ export const usePosts = () => {
 		if (id) {
 			setState((prev) => ({ ...prev, isLoading: true, onError: false }));
 			getPostAndUser(id)
-				.then((post: PostWithUserType) => {
+				.then((post) => {
 					setState((prev) => ({ ...prev, post }));
 				})
 				.catch((err) => {
