@@ -11,7 +11,16 @@ export default async function(req:NextApiRequest, res:NextApiResponse) {
         
         try{
 
+            //buscar o crear los hashtags, devuelve los IDs.
             const hashtagsIds = (await findOrCreate(hashtags)).map((el) => ({id: el.id}));
+
+            //genera la custom url para el blog.
+            const url = title
+            .replace(/[^a-zA-Z0-9\s]+/g, '')  //remueve caracteres especiales.
+            .replace(/\s+/g, '-')       //reemplaza espacios por guiones.
+            .substr(0, 50)           //toma los primeros 50 caracteres.
+            .replace(/-+$/, '')        //borra guiones finales
+            + "-" + Math.random().toString(36).substring(2) // agrega -id_alfanumerico
 
             
             const article = await prisma.articles.create({
@@ -20,6 +29,7 @@ export default async function(req:NextApiRequest, res:NextApiResponse) {
                     content: content,
                     image: image,
                     userId: userId,
+                    url: url,
                     hashtags: {
                         connect: hashtagsIds
                     }
