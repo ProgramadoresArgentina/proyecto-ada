@@ -8,22 +8,22 @@ import { getSession } from '@auth0/nextjs-auth0';
 export default async function editUrl(req: NextApiRequest, res: NextApiResponse) {
 
 	const { method, body } = req;
-	const {userLogged} = await getSession(req, res); // User is logged in 
-	console.log({ userLogged }, body)
-	if (userLogged && method == "PUT") {
+	const {user} = await getSession(req, res); // User is logged in 
+    const userIdFromDB = await prisma.user.findUnique({ where: { email: user.email }, select: {id: true}  });
+	if (user && method == "PUT") {
 		try {
-			const newUrl = body // new url
-			console.log(newUrl)
-			cleanUrl(newUrl);
+			let newUrl = body.data // new url
+			newUrl = cleanUrl(newUrl);
 			const urlUploaded = await prisma.userSettings.update({
-				where: { id: userLogged.user.id },
+				where: { userId: userIdFromDB.id },
 				data: {
 					url: newUrl
 				}
 			})
-			res.status(200).json(` New URL => ${urlUploaded}`)
+			res.status(200).json({res: 'Url updated'});
 		}
 		catch (error) {
+            console.log(error);
 			res.status(404).json({ message: "ERROR TRYING TO UPDATE URL FROM USER " });
 		}
 	} else {
@@ -32,7 +32,7 @@ export default async function editUrl(req: NextApiRequest, res: NextApiResponse)
 };
 
 
-function cleanUrl(url: string) {
+function cleanUrl(url: string): string {
 	const finalUrl = url.replace(/[\s^*@!"#$%&/()=?¡!¿'\\]/gi, '');	
 	return finalUrl;
 }

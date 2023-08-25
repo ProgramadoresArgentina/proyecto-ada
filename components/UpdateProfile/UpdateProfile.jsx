@@ -33,8 +33,7 @@ export const UpdateProfile = ({ openDialog, handleDialog }) => {
 			data: urlUpdate,
 		};
 
-		fetchData("https://jsonplaceholder.typicode.com/posts/1", "PUT", body);
-		// fetchData("/api/users/userSettings/url", "PUT", body);
+		fetchData("/api/users/userSettings/editUrl", "PUT", body);
 	};
 
 	useEffect(() => {
@@ -42,6 +41,9 @@ export const UpdateProfile = ({ openDialog, handleDialog }) => {
 			setPlaceholder(urlUpdate);
 			setUrlUpdate("");
 			launchToast("success", "URL actualizada");
+            setTimeout(() => {
+                dialogRef.current.close()
+            }, 1000);
 		}
 		if (error) {
 			launchToast("error", "Error al actualizar la URL");
@@ -55,7 +57,8 @@ export const UpdateProfile = ({ openDialog, handleDialog }) => {
 	useEffect(() => {
 		dataUrl
 			? setPlaceholder(dataUrl.title)
-			: fetchUrl("https://jsonplaceholder.typicode.com/posts/1");
+			// : fetchUrl("/api/users/userSettings/");
+            : '';
 		console.log(dataUrl);
 	}, [dataUrl]);
 

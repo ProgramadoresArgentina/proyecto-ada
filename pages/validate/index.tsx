@@ -18,11 +18,11 @@ const Validate: NextPage = () => {
 		}, 1000);
 	};
 
-	useEffect(() => {
+	/* useEffect(() => {
 		fetchData("/api/auth/first-validation", "GET", {
 			redirectTo: urlParam,
 		});
-	}, []);
+	}, []); */
 
 	useEffect(() => {
 		if (error)

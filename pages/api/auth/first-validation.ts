@@ -10,21 +10,13 @@ export default withApiAuthRequired(async function validate(req: NextApiRequest, 
         const {user} = await getSession(req, res);
         
         const userExists = await prisma.user.findUnique({ where: { email: user.email } });
-
-
         if (userExists) {
             
            res.status(200).json({});
            
         } else {
             try {
-                const newUser = await prisma.user.create({
-                    data: {
-                        email: user.email,
-                        username: user.name,
-                    }
-                });
-
+                
                 res.redirect(201, redirectTo || '/');
 
             } catch (err) {
