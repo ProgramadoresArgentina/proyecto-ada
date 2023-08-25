@@ -1,6 +1,6 @@
 import { NextPage } from "next";
-import { Hero } from "../../components/BlogPage/Hero/Hero";
-import PostAsideSuggestions from "../../components/Post/PostAsideSuggestions";
+import Image from "next/image";
+import BannerBlog from "../../public/banner-blog.png";
 
 const Blog: NextPage = () => {
 	const articlesMap = Array.from({ length: 16 });
