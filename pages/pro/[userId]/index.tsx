@@ -12,20 +12,9 @@ const UserPorfolio: NextPage = () => {
 	const { loading, data, error, fetchData } = useFetch();
 
 	useEffect(() => {
-		//test si no existe usuario
 		if (userId) {
-			if (+userId < 10) {
-				fetchData(
-					`https://jsonplaceholder.typicode.com/users/${userId}`
-				);
-			} else {
-				fetchData(
-					`https://jsooooonplaceholder.typicode.com/users/${userId}`
-				);
-			}
+			fetchData(`/api/users/userProfile/${userId}`);
 		}
-
-		// userId && fetchData(`https://jsonplaceholder.typicode.com/users/${userId}`);
 	}, [userId]);
 
 	if (loading)
@@ -35,14 +24,14 @@ const UserPorfolio: NextPage = () => {
 			</div>
 		);
 
-	if (error)
+	if (error || data.statusCode === 404)
 		return (
 			<NotFound
 				title={"Usuario no encontrado"}
 				content={
-					"No encontramos al usuario en nuestra base de datos. Si eres un nuevo usuario, te invitamos a registrarte y completar tu	CV. Si ya formas parte de Programadores Argentina, verifica	que hayas generado correctamente el CV."
+					"No encontramos al usuario en nuestra base de datos o el perfil no ha completado su CV. Si eres nuevo , te invitamos a registrarte y completar tu CV. Si ya formas parte de Programadores Argentina, verifica que lo hayas generado correctamente."
 				}
-				url={"/login"}
+				url={"/generarcv"}
 				buttonName={"Completar CV"}
 			/>
 		);
