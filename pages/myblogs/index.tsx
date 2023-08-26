@@ -1,7 +1,7 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { NextPage } from "next";
 import Link from "next/link";
-import { use, useEffect } from "react";
+import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import { NotFound } from "../../components/NotFound/NotFound";
 import Spinner from "../../components/Spinner";
@@ -40,9 +40,10 @@ const MyBlogsList: NextPage = () => {
 		user &&
 			!userLoading &&
 			user.email &&
-			fetchData(`/api/articles/getByUser/${user.email}`);
+			fetchData(`/api/articles/getByUser`);
 	}, [user]);
 
+	console.log(data);
 	const Headers = ({ header }: ColumnTableProps) => (
 		<th
 			scope="col"
