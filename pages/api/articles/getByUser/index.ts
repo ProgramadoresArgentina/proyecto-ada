@@ -1,14 +1,15 @@
+import { getSession } from "@auth0/nextjs-auth0";
 import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../../prismaClient/db";
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
 	const { method } = req;
-	const emailUser = req.query.id;
+	const sessionUser = await getSession(req, res);
 
 	if (method === "GET") {
 		try {
 			const getUser = await prisma.user.findUnique({
-				where: { email: emailUser },
+				where: { email: sessionUser.user.email },
 			});
 
 			const getBlogs = await prisma.articles.findMany({
