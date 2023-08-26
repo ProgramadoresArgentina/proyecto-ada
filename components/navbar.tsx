@@ -3,15 +3,16 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { UpdateProfile } from "../components/UpdateProfile/UpdateProfile";
+import useScrollHideShow from "../hooks/useScrollHideShow";
 import Logo from "../public/LogoProgramadoresArgentina.png";
 
 const returnLink = `/api/auth/login?returnTo=${encodeURIComponent("/")}`;
 const navigation = [
 	{ name: "Blog", path: "/blog" },
 	{ name: "Bolsa de Talentos", path: "/talentos" },
-	{ name: "Contacto", path: "/" },
+	{ name: "Contacto", path: "/#contact" },
 ];
 
 function classNames(...classes) {
@@ -21,6 +22,8 @@ function classNames(...classes) {
 export default function Navbar() {
 	const { user } = useUser();
 	const [openDialog, setOpenDialog] = useState(false);
+	const elementRef = useRef<HTMLElement | null>(null);
+	const hide = useScrollHideShow(elementRef);
 
 	const handleDialog = () => {
 		setOpenDialog(!openDialog);
@@ -29,8 +32,11 @@ export default function Navbar() {
 	return (
 		<>
 			<Disclosure
+				ref={elementRef}
 				as="nav"
-				className="bg-transparent fixed top-0 z-50 w-full">
+				className={`bg-transparent fixed top-0 z-50 w-full  ${
+					hide ? "hidden opacity-0" : "show-scroll backdrop-blur-md"
+				}`}>
 				{({ open }) => (
 					<>
 						<div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -68,18 +74,18 @@ export default function Navbar() {
 								<div className="hidden sm:ml-6 sm:block">
 									<div className="flex space-x-4">
 										{navigation.map((item) => (
-											<a
+											<Link
 												key={item.name}
 												href={item.path}
 												className="rounded-md px-3 text-white py-2 text-sm font-[600] hover:text-indigo-800">
 												{item.name}
-											</a>
+											</Link>
 										))}
-										<a
+										<Link
 											href="/generarcv"
 											className="rounded-md px-3 py-2  text-sm hover:text-indigo-800 plain-button">
 											Generar mi CV
-										</a>
+										</Link>
 									</div>
 								</div>
 								<div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -204,7 +210,7 @@ export default function Navbar() {
 										key={item.name}
 										as="a"
 										href={item.path}
-										className="block rounded-md px-3 py-2 text-base font-medium">
+										className="block rounded-md px-3 py-2 text-base font-medium text-white">
 										{item.name}
 									</Disclosure.Button>
 								))}
