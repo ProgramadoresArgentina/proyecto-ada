@@ -1,27 +1,15 @@
-
 import React, { useState, useEffect } from 'react';
-import { motion } from "framer-motion";
 import Marquee from 'react-fast-marquee';
+import Link from 'next/link';
 
-
-const marqueeVariants = {
-  animate: {
-    x: [-600,600],
-    transition: {
-      x: {
-        repeat: Infinity,
-        repeatType: "loop",
-        duration: 12,
-        ease: "linear",
-      },
-    },
-  },
-};
-function ActiveEvents() {
-  
+ const ActiveEvents: React.FC =()=>{
+ 
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  
+  const marqueeStyles:React.CSSProperties = {
+    width:"100%",
+    height:"20%"
+};
 
   useEffect(() => {
     // Fetch data when the component mounts
@@ -29,38 +17,31 @@ function ActiveEvents() {
       .then(response => response.json())
       .then(data => {
         setData(data);
-        setLoading(false);
       })
       .catch(error => {
-        setError(error);
-        setLoading(false);
+        console.log(error)
       });
   }, []);
-
+//format date that comes from database
+const formatDate=(rawDate:Date)=>{
+return(
+  new Date(rawDate).toString().slice(3,-31)
+)
+  }
   return (
-    <div >
      <div  className='w-full flex justify-around'>
-      <Marquee speed={100} gradient={false} autoFill={true}>
-      <div className=''>
-        <span>No te pierdas los proximos eventos!⚡ </span>
-        <span>No te pierdas los proximos eventos ⚡ </span>
-        <span>No te pierdas los proximos eventos ⚡ </span>
-        <span>No te pierdas los proximos eventos ⚡ </span>
-        <span>No te pierdas los proximos eventos ⚡ </span>
-      </div>
+       <Marquee speed={50} gradient={true}
+        gradientColor={[70, 56, 202]} autoFill={true} pauseOnHover={true}
+        style={marqueeStyles}
+        >
+     { data?.map((item:any)=>(
+        <Link href={item.link} key={item.id} className='mx-6 text-white'>
+          {item.title} el día  {formatDate(item.expiredAt)}
+        </Link>
+      ))}
       </Marquee>
-      </div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p>An error occurred: {error.message}</p>
-      ) : (
-        <div>
-          <h1>Title:{data.title}</h1>
-        </div>
-      )}
     </div>
   );
 }
 
-export default ActiveEvents;
+export default ActiveEvents
