@@ -1,6 +1,6 @@
-
 import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../prismaClient/db";
+
 
 
 export default async function events(req: NextApiRequest, res: NextApiResponse) {
@@ -16,9 +16,9 @@ export default async function events(req: NextApiRequest, res: NextApiResponse) 
                             }
                         }
                     })
-                res.json({ getEvents });
+                res.json(getEvents);  
             } catch (e) {
-                res.status(200).json({ message: "ERROR_FINDING_EVENTS" });
+            res.status(200).json({ message: "ERROR_FINDING_EVENTS" });
             }
             break;
     }
