@@ -1,6 +1,7 @@
 import Link from "next/link";
 import scrollImage from '../../public/scroll-down.gif';
 import ActiveEvents from "../ActiveEvents";
+import Image from "next/image";
 
 const links = [
     { name: 'Bolsa de Talentos', href: '/talentos' },
@@ -14,9 +15,8 @@ export default function Hero() {
     return (
         <div className="relative isolate  min-h-screen overflow-hidden pb-40 pt-44 bg-[#1B1F24]"
         style={{'background': 'linear-gradient(180deg, #08081F 0%, rgba(13,17,23,1) 100%'}}>\
-            <div className='bg-[#F7850B] absolute top-20 w-full'>
-                <div className="w-full text-center m-auto py-2">
-                    {/* <p className="text-white font-manrope">Sorteo de beca clickeando <a className="plain-button px-1 py-1 text-sm rounded-sm">AQUÍ</a>. Finaliza el domingo</p> */}
+            <div className='bg-[#312e81] absolute top-20 w-full'>
+                <div className="w-full text-center m-auto">
                     <ActiveEvents/>
                 </div>
             </div>
@@ -25,7 +25,7 @@ export default function Hero() {
                 alt=""
                 className="absolute inset-0 -z-10 h-full w-full object-contain object-right md:object-center top-11"
             /> */}
-            <img
+            <Image
                 src="https://i.ibb.co/bsWBX7L/star-bg-1.png"
                 alt=""
                 className="absolute top-0 -z-10 h-full w-full object-cover object-right md:object-center"
@@ -70,7 +70,7 @@ export default function Hero() {
             </div>
             <div className="absolute w-full bottom-10">
                 <div className="flex justify-center">
-                            <img src="https://i0.wp.com/rambutgelap.com/wp-content/uploads/2022/07/scroll-down-mouse.gif?ssl=1"
+                            <Image src="https://i0.wp.com/rambutgelap.com/wp-content/uploads/2022/07/scroll-down-mouse.gif?ssl=1" alt=""
                             style={{width: 50}} />
                 </div>
             </div>
