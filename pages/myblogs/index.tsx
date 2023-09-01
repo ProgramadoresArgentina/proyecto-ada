@@ -1,7 +1,7 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { NextPage } from "next";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { NotFound } from "../../components/NotFound/NotFound";
 import Spinner from "../../components/Spinner";
@@ -35,15 +35,18 @@ const listColumns = [
 const MyBlogsList: NextPage = () => {
 	const { user, isLoading: userLoading } = useUser();
 	const { data, error, loading, fetchData } = useFetch();
+	const [isDeleted, setIsDelete] = useState(false);
+
+	const dialogRef = useRef(null);
 
 	useEffect(() => {
+		setIsDelete(false);
 		user &&
 			!userLoading &&
-			user.email &&
+			!isDeleted &&
 			fetchData(`/api/articles/getByUser`);
-	}, [user]);
+	}, [user, isDeleted]);
 
-	console.log(data);
 	const Headers = ({ header }: ColumnTableProps) => (
 		<th
 			scope="col"
@@ -96,19 +99,27 @@ const MyBlogsList: NextPage = () => {
 	};
 
 	const handleDelete = (id: number) => {
+		dialogRef.current.showModal();
+		dialogRef.current.id = id;
+	};
+
+	const handleConfirmModal = () => {
+		let id = dialogRef.current.id;
 		fetch(`/api/articles/delete/${id}`, {
 			method: "DELETE",
 			headers: {
 				"Content-Type": "application/json",
 			},
-		}).then((res) => {
-			if (res.status === 200) {
-				launchToast("success", "Blog eliminado correctamente");
-				fetchData(`/api/articles/getByUser/${user.email}`);
-			} else {
-				launchToast("error", "No se pudo eliminar el blog");
-			}
-		});
+		})
+			.then((res) => {
+				if (res.status === 200) {
+					launchToast("success", "Blog eliminado correctamente");
+					setIsDelete(true);
+				} else {
+					launchToast("error", "No se pudo eliminar el blog");
+				}
+			})
+			.finally(() => dialogRef.current.close());
 	};
 
 	if (loading || userLoading) return <Spinner />;
@@ -169,6 +180,30 @@ const MyBlogsList: NextPage = () => {
 					</tbody>
 				</table>
 			</div>
+			<dialog
+				className="w-screen h-screen shadow-2xl backdrop-blur-md bg-white/20 max-w-full max-h-full"
+				ref={dialogRef}
+				open={false}>
+				<div className="m-auto w-full h-full flex flex-col justify-center items-center">
+					<div className="bg-[#0D1116] w-72 p-4 mb-4 rounded-md flex flex-col justify-center items-center gap-5">
+						<p className="text-base leading-6 text-white text-center">
+							¿Estás seguro de eliminar el blog?
+						</p>
+						<div className="w-full flex items-center justify-between gap-1">
+							<button
+								className="bg-[#F78001] hover:bg-red-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+								onClick={() => dialogRef.current.close()}>
+								Cancelar
+							</button>
+							<button
+								onClick={handleConfirmModal}
+								className="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline plain-button">
+								Eliminar
+							</button>
+						</div>
+					</div>
+				</div>
+			</dialog>
 			<ToastContainer />
 		</div>
 	);
