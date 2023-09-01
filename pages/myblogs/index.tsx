@@ -122,9 +122,7 @@ const MyBlogsList: NextPage = () => {
 			.finally(() => dialogRef.current.close());
 	};
 
-	if (loading || userLoading) return <Spinner />;
-
-	if (!user && loading)
+	if (!user && !userLoading)
 		return (
 			<NotFound
 				title="Iniciar Sesión"
@@ -133,6 +131,8 @@ const MyBlogsList: NextPage = () => {
 				buttonName="LogIn"
 			/>
 		);
+
+	if (loading || userLoading) return <Spinner />;
 
 	if (error)
 		return (
