@@ -276,7 +276,7 @@ export const Portfolio: FC<any> = ({ user }) => {
 											Nombre
 										</div>
 										<div className="px-2 lg:px-4 py-2 text-gray-300">
-											Programadores Argentina
+											{getDataFromUser?.username}
 										</div>
 									</div>
 									<div className="flex flex-row justify-start items-center overflow-x-scroll no-scrollbar">
@@ -327,7 +327,7 @@ export const Portfolio: FC<any> = ({ user }) => {
 									</div>
 								)}
 								{/* EDUCATION */}
-								{getDataFromCv.education.length > 0 && (
+								{getDataFromCv?.education.length > 0 && (
 									<div className="mt-4 md:mt-0">
 										<HeaderTitle
 											name={"Education"}

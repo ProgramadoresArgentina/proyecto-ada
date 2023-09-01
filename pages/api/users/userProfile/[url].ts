@@ -43,6 +43,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				const getDataFromUser = await prisma.user.findUnique({
 					where: { id: getUserID.userId },
 					select: {
+						username: true,
 						email: true,
 						createdAt: true,
 						cv: true,
