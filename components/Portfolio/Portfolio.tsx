@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FC } from "react";
 import { projectsMock } from "../../data/dummy-data";
 import { openInNewTab } from "../../helpers/openInNewTab";
@@ -82,9 +83,12 @@ export const Portfolio: FC<any> = ({ user }) => {
 			<div className="flex items-center justify-between pt-6">
 				<div className="flex items-center space-x-3">
 					{hashtags.map((hashtag) => (
-						<div key={hashtag.name} className="text-sm">
+						<Link
+							href={`/blog?hashtag=${hashtag.name}`}
+							key={hashtag.name}
+							className="text-sm">
 							#{hashtag.name}
-						</div>
+						</Link>
 					))}
 				</div>
 				<p className="text-xs">{convertToDate(createdAt)}</p>

@@ -1,8 +1,23 @@
 import { NextPage } from "next";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { useFetch } from "../../hooks/useFetch";
 import BannerBlog from "../../public/banner-blog.png";
 
 const Blog: NextPage = () => {
+	const searchParams = useSearchParams();
+	const allHastagQuery = searchParams.getAll("hashtag");
+	const { data, error, loading, fetchData } = useFetch();
+
+	useEffect(() => {
+		if (allHastagQuery.length > 0) {
+			let body = { hastagag: allHastagQuery.join(",") };
+			fetchData("/api/articles", "POST", body);
+			//TODO recibir articles en data y mostrarlos
+		}
+	}, [searchParams]);
+
 	const articlesMap = Array.from({ length: 16 });
 	return (
 		<div className="w-full min-h-screen blog inline-block">
