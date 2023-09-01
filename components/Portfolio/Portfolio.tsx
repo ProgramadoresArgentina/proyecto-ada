@@ -53,29 +53,37 @@ export const Portfolio: FC<any> = ({ user }) => {
 			</span>
 		</div>
 	);
-	const ArticleCard = ({ id, title, content, hashtags, createdAt }) => (
+	const ArticleCard = ({
+		id,
+		title,
+		content,
+		hashtags,
+		createdAt,
+		image,
+	}) => (
 		<div className="flex max-w-[24rem] flex-col rounded-md bg-gray-800 text-white shadow-md p-4">
-			<Image
-				src="https://i.pravatar.cc/550"
-				width={150}
-				height={100}
+			<img
+				title={title}
+				src={image}
 				alt={title}
 				className="w-full object-cover rounded-lg"
 			/>
 			<h4 className="text-xl font-semibold text-gray-100 mt-4">
 				{title}
 			</h4>
-			<p className="text-l font-normal text-gray-500 mt-4">{content}</p>
+			<p className="h-36 overflow-hidden text-l font-normal text-gray-500 mt-4 line-clamp-4 ">
+				{content}
+			</p>
 			<h3
-				onClick={() => openInNewTab(`/pro/${id}`)}
+				onClick={() => openInNewTab(`/blog/${id}`)}
 				className="text-blue-600 font-lg text-semibold cursor-pointer mt-6">
-				Link
+				Ir al blog
 			</h3>
 			<div className="flex items-center justify-between pt-6">
 				<div className="flex items-center space-x-3">
-					{hashtags.map((hashtag: String) => (
-						<div key={id} className="text-sm">
-							#{hashtag}
+					{hashtags.map((hashtag) => (
+						<div key={hashtag.name} className="text-sm">
+							#{hashtag.name}
 						</div>
 					))}
 				</div>
@@ -83,6 +91,7 @@ export const Portfolio: FC<any> = ({ user }) => {
 			</div>
 		</div>
 	);
+
 	const ProyectCard = ({ title, techs, description, link, source }) => (
 		<div className="w-full">
 			<div className="bg-gray-800 rounded-md p-3">
@@ -303,28 +312,33 @@ export const Portfolio: FC<any> = ({ user }) => {
 							</div>
 						</div>
 						{/* END USER INFO */}
-						<Divider />
 						{/* EXP && EDUCATION */}
-						<div className="bg-[#161B22] p-3 shadow-sm rounded-sm">
+						<div className="bg-[#161B22] p-3 pb-0 shadow-sm rounded-sm">
 							<div className="grid grid-cols-1 md:grid-cols-2">
 								{/* EXP */}
 								{getDataFromCv?.experience.length > 0 && (
-									<div>
-										<HeaderTitle
-											name={"Experiencia"}
-											url={IconExp}
-										/>
-										<ul className="list-inside space-y-2">
-											{getDataFromCv.experience.map(
-												(experience: Experience) => (
-													<ExperienceCard
-														key={experience.id.toString()}
-														{...experience}
-													/>
-												)
-											)}
-										</ul>
-									</div>
+									<>
+										<Divider />
+
+										<div>
+											<HeaderTitle
+												name={"Experiencia"}
+												url={IconExp}
+											/>
+											<ul className="list-inside space-y-2">
+												{getDataFromCv.experience.map(
+													(
+														experience: Experience
+													) => (
+														<ExperienceCard
+															key={experience.id.toString()}
+															{...experience}
+														/>
+													)
+												)}
+											</ul>
+										</div>
+									</>
 								)}
 								{/* EDUCATION */}
 								{getDataFromCv?.education.length > 0 && (
@@ -348,71 +362,81 @@ export const Portfolio: FC<any> = ({ user }) => {
 							</div>
 						</div>
 						{/*END EXP && EDUCATION  */}
-						<Divider />
 						{/* CARTIFICATES */}
 						{getDataFromCv?.certifications.length > 0 && (
-							<div className="bg-[#161B22] p-3 shadow-sm rounded-sm">
-								<div className="grid grid-cols-1">
-									<HeaderTitle
-										name={"Certificaciones"}
-										url={IconCert}
-									/>
-									<ul className="list-inside space-y-2 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-										{getDataFromCv.certifications.map(
-											(certifaction: Certifications) => (
-												<CertificationCard
-													key={certifaction.id.toString()}
-													{...certifaction}
-												/>
-											)
-										)}
-									</ul>
-								</div>
-							</div>
-						)}
-						{/* END CARTIFICATES */}
-						<Divider />
-						{/* LAST ARTICLES */}
-						{getDataFromArticles?.length > 0 && (
-							<div className="bg-[#161B22] p-3 shadow-sm rounded-sm">
-								<div className="grid grid-cols-1">
-									<HeaderTitle
-										name={"Últimos Articulos"}
-										url={IconProy}
-									/>
-									<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-										{getDataFromArticles?.map((article) => (
-											<ArticleCard
-												key={article.id.toString()}
-												{...article}
-											/>
-										))}
+							<>
+								<Divider />
+								<div className="bg-[#161B22] p-3 shadow-sm rounded-sm">
+									<div className="grid grid-cols-1">
+										<HeaderTitle
+											name={"Certificaciones"}
+											url={IconCert}
+										/>
+										<ul className="list-inside space-y-2 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+											{getDataFromCv.certifications.map(
+												(
+													certifaction: Certifications
+												) => (
+													<CertificationCard
+														key={certifaction.id.toString()}
+														{...certifaction}
+													/>
+												)
+											)}
+										</ul>
 									</div>
 								</div>
-							</div>
+							</>
+						)}
+						{/* END CARTIFICATES */}
+						{/* LAST ARTICLES */}
+						{getDataFromArticles?.length > 0 && (
+							<>
+								<Divider />
+								<div className="bg-[#161B22] p-3 shadow-sm rounded-sm">
+									<div className="grid grid-cols-1">
+										<HeaderTitle
+											name={"Últimos Articulos"}
+											url={IconProy}
+										/>
+										<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+											{getDataFromArticles?.map(
+												(article, index) => (
+													<ArticleCard
+														key={article.createdAt}
+														{...article}
+													/>
+												)
+											)}
+										</div>
+									</div>
+								</div>
+							</>
 						)}
 
 						{/* END LAST ARTICLES */}
-						<Divider />
 						{/* HIGHLIGHTED PROYECTS  */}
 						{getProyectsFromUser?.length > 0 && (
-							<div className="bg-[#161B22] p-3 shadow-sm rounded-sm">
-								<div className="grid grid-cols-1">
-									<HeaderTitle
-										name={"Proyectos Destacados"}
-										url={IconProy}
-									/>
-									<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-										{projectsMock.map((project) => (
-											<ProyectCard
-												key={project.id}
-												{...project}
-											/>
-										))}
+							<>
+								<Divider />
+								<div className="bg-[#161B22] p-3 shadow-sm rounded-sm">
+									<div className="grid grid-cols-1">
+										<HeaderTitle
+											name={"Proyectos Destacados"}
+											url={IconProy}
+										/>
+										<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+											{projectsMock.map((project) => (
+												<ProyectCard
+													key={project.id}
+													{...project}
+												/>
+											))}
+										</div>
+										{/* END PROYECTOS DESTACADOS */}
 									</div>
-									{/* END PROYECTOS DESTACADOS */}
 								</div>
-							</div>
+							</>
 						)}
 						{/* END HIGHLIGHTED PROYECTS  */}
 						<Divider />

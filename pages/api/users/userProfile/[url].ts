@@ -55,10 +55,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 					where: { userId: getUserID.userId },
 					take: 5,
 					select: {
+						id: true,
 						title: true,
 						content: true,
 						image: true,
 						hashtags: true,
+						createdAt: true,
 					},
 				});
 
