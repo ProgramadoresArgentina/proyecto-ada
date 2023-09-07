@@ -26,7 +26,7 @@ export default async (req:NextApiRequest, res:NextApiResponse) => {
                 if (getOneUser === null) {
                 throw new Error()
                 }
-            res.json({restult: getOneUser})
+            res.json({result: getOneUser})
 
         }catch(e:any){
             res.status(404).json({message: "USER NOT FOUND"})
