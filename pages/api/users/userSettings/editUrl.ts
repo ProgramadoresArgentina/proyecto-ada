@@ -10,6 +10,7 @@ export default async function editUrl(req: NextApiRequest, res: NextApiResponse)
 	const { method, body } = req;
 	const {user} = await getSession(req, res); // User is logged in 
     const userIdFromDB = await prisma.user.findUnique({ where: { email: user.email }, select: {id: true}  });
+	console.log(user);
 	if (user && method == "PUT") {
 		try {
 			let newUrl = body.data // new url

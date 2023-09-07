@@ -13,8 +13,7 @@ model User {
   email String @unique
   published Boolean @default(true)
   createdAt DateTime @default(now()) 
-  updateAt DateTime  @updatedAt 
-  
+  updateAt DateTime  @updatedAt
   cv Cv?
   userSettings UserSettings? 
   articles Articles[]
@@ -30,10 +29,7 @@ model UserSettings{
   status Estatus @default(null)
   avatar String
   description String
-
-
   url String @unique @default(uuid())
-
   // Relation
   user User @relation(fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
   userId Int @unique
@@ -43,10 +39,8 @@ model Cv {
   id Int @id @default(autoincrement())
   title String
   published Boolean @default(false)
-
   user User @relation(fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
   userId Int @unique
-  
   experience Experience[]
   education Education[]
   certifications Certifications[]
