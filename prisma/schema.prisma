@@ -30,6 +30,7 @@ model UserSettings{
   avatar String
   description String
   url String @unique @default(uuid())
+  position Position @default(null)
   // Relation
   user User @relation(fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
   userId Int @unique
@@ -95,6 +96,20 @@ enum Estatus {
   null
 }
 
+enum Position {
+  FULLSTACK
+  FRONTEND
+  BACKEND
+  TESTER
+  DEVOPS
+  DATA_SCIENCE
+  LEADER
+  VIDEOGAMES
+  CRYPTO
+  CYBERSECURITY
+  UX_UI
+  null
+ }
 // MODELO DE ARTICULOS
 model Articles {
   id Int @id @default(autoincrement())
