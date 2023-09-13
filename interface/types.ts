@@ -1,4 +1,10 @@
-import { Dispatch, ReactNode, SetStateAction } from "react";
+import {
+	ChangeEvent,
+	Dispatch,
+	EventHandler,
+	ReactNode,
+	SetStateAction,
+} from "react";
 
 export interface AvatarsProps {
 	followers: number;
@@ -48,4 +54,46 @@ export interface NotFoundProps {
 	url: string;
 	buttonName: string;
 	showRegister?: boolean;
+}
+
+export interface AccordionRadioButtonProps {
+	title: string;
+	options: Array<OptiosAccordionProps>;
+	radioGroup: string;
+	userProp: string;
+	handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface OptiosAccordionProps {
+	id: number;
+	value: string;
+	name: string;
+}
+
+export interface HeaderDropdownProps {
+	title: string;
+	children?: any;
+}
+
+export interface UpdateProfileProps {
+	openDialog: boolean;
+	handleDialog: EventHandler<any>;
+}
+
+export interface ErrorMsgState {
+	url: string;
+	description: string;
+	position: string;
+}
+
+export interface UserProfileProps {
+	linkedin?: string;
+	github?: string;
+	behance?: string;
+	portfolio?: string;
+	seniority?: string;
+	status?: string;
+	position?: string;
+	url?: string;
+	description?: string;
 }
