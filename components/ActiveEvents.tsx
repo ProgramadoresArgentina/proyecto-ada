@@ -24,9 +24,9 @@ import Link from 'next/link';
   }, []);
 //format date that comes from database
 const formatDate=(rawDate:Date)=>{
-return(
-  new Date(rawDate).toString().slice(3,-31)
-)
+    const newDate = new Date(rawDate);
+    const localDate = newDate.toLocaleDateString();
+    return localDate;
   }
   return (
      <div  className='w-full flex justify-around'>
