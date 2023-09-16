@@ -1,5 +1,6 @@
 import { prisma } from "../../../../prismaClient/db";
 import { NextApiRequest, NextApiResponse } from "next";
+import blogsSort from "../../hashtags/blogsSort";
 
 
 /**
@@ -50,7 +51,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 }
             })
 
-            res.status(200).json({blogId, hashtagsNames, relatedPosts})
+            //sort
+            const orderedBlogs = blogsSort(hashtagsNames, relatedPosts)
+
+            res.status(200).json({blogId, hashtags: hashtagsNames ,relatedBlogs: orderedBlogs})
         }
         catch(e){
             console.log(e)
