@@ -18,11 +18,11 @@ export default function PostAsideSuggestions() {
 
 	useEffect(() => {
 		if (!data) return;
-		if (data.relatedPosts.length < 1) return;
+		if (data?.relatedBlogs?.length < 1) return;
 		const urlsToFetch = [];
 		setLoadingCards(true);
 
-		data?.relatedPosts?.forEach((post: any) =>
+		data?.relatedBlogs?.forEach((post: any) =>
 			urlsToFetch.push(`/api/users/${post.userId}`)
 		);
 
@@ -36,7 +36,7 @@ export default function PostAsideSuggestions() {
 				setSuggestions(
 					responses.map((user, index) => ({
 						userInfo: user,
-						...data.relatedPosts[index],
+						...data.relatedBlogs[index],
 					}))
 				);
 			})
@@ -52,11 +52,10 @@ export default function PostAsideSuggestions() {
 
 		if (loadingCards) return <Spinner />;
 
-		console.log({ suggestions });
-		return suggestions.map(({ id, image, title, userInfo }) => (
+		return suggestions.map(({ id, image, title, userInfo, url }) => (
 			<PostAsideSuggestionsCard
 				key={id}
-				id={id}
+				url={url}
 				image={image}
 				title={title}
 				userInfo={userInfo}

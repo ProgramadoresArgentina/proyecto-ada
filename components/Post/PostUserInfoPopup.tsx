@@ -1,5 +1,4 @@
 export default function PostUserInfoPopup({ name, userSettings, username }) {
-	console.log({ userSettings });
 	return (
 		<div className="bg-white w-80 h-40 absolute top-[-10.75rem] shadow-xl p-4 rounded-2xl flex flex-col gap-2 z-10 border-[1px] border-solid border-[#cacaca]">
 			<div className="w-0 h-0 border-solid border-8 border-transparent border-t-white absolute left-[calc(50%-8px)] bottom-[-14px]" />
@@ -27,7 +26,7 @@ export default function PostUserInfoPopup({ name, userSettings, username }) {
 					</h2>
 					<span
 						title={`@${username}`}
-						className="text-xs tracking-wide font-thin text-[#757575]">{`@${username}`}</span>
+						className="text-xs tracking-wide font-thin text-[#757575]">{`@${userSettings.url}`}</span>
 				</div>
 			</div>
 			<hr />

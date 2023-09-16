@@ -37,6 +37,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 							avatar: true,
 							status: true,
 							description: true,
+							url: true,
 						},
 					});
 
@@ -53,7 +54,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 				const getDataFromArticles = await prisma.articles.findMany({
 					where: { userId: getUserID.userId },
-					take: 5,
+					take: 3,
 					select: {
 						id: true,
 						title: true,
@@ -61,6 +62,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 						image: true,
 						hashtags: true,
 						createdAt: true,
+						url: true,
 					},
 				});
 

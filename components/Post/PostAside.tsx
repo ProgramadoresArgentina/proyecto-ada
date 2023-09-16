@@ -4,7 +4,7 @@ import PostAsideUserInfo from "./PostAsideUserInfo";
 
 export default function PostAside({ post }) {
 	const { username, description, userSettings, linkedIn, facebook, twitter } =
-		post.createdBy.restult;
+		post.createdBy.result;
 
 	return (
 		<aside className="w-full md:max-w-[22rem] p-6">

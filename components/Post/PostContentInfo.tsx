@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export default function PostContentInfo({ content, createdBy, views }) {
-	const { username, updateAt, userSettings } = createdBy.restult;
+	const { username, updateAt, userSettings } = createdBy.result;
 
 	const getReadTime = () => {
 		const wordsPerMinute = 200;
@@ -21,7 +21,7 @@ export default function PostContentInfo({ content, createdBy, views }) {
 		<div>
 			<div className="flex items-center gap-3 w-max">
 				<Link
-					href={`/pro/${username}`}
+					href={`/pro/${userSettings.url}`}
 					title={username}
 					className="w-12 min-w-[3rem] aspect-square rounded-full shadow-[0_4px_4px_#0002] flex items-center justify-center overflow-hidden object-cover">
 					<img
@@ -38,7 +38,7 @@ export default function PostContentInfo({ content, createdBy, views }) {
 				</Link>
 				<div className="flex flex-col">
 					<Link
-						href={`/pro/${username}`}
+						href={`/pro/${userSettings.url}`}
 						title={username}
 						className="text-base tracking-wide leading-6 font-medium text-[#F78001]">
 						{username}

@@ -41,6 +41,7 @@ export interface ArticleTableProps {
 	id: number;
 	title: string;
 	image: string;
+	url: string;
 	createdAt: Date;
 	views: number;
 	likes?: number;

@@ -59,6 +59,7 @@ const MyBlogsList: NextPage = () => {
 		id,
 		image,
 		title,
+		url,
 		createdAt,
 		views,
 	}: ArticleTableProps) => (
@@ -73,12 +74,12 @@ const MyBlogsList: NextPage = () => {
 			<td className="px-6 py-4">{views}</td>
 			<td className="px-6 py-4 flex flex-row">
 				<Link
-					href={`/blog/${id}`}
+					href={`/blog/${url}`}
 					className="font-medium text-blue-500 hover:underline mr-4">
 					Ver
 				</Link>
 				<Link
-					href={`/article/edit/${id}`}
+					href={`/article/edit/${url}`}
 					className="font-medium text-blue-500 hover:underline mx-4">
 					Editar
 				</Link>

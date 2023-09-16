@@ -57,6 +57,7 @@ export const Portfolio: FC<any> = ({ user }) => {
 	const ArticleCard = ({
 		id,
 		title,
+		url,
 		content,
 		hashtags,
 		createdAt,
@@ -75,11 +76,11 @@ export const Portfolio: FC<any> = ({ user }) => {
 			<p className="h-36 overflow-hidden text-l font-normal text-gray-500 mt-4 line-clamp-4 ">
 				{content}
 			</p>
-			<h3
-				onClick={() => openInNewTab(`/blog/${id}`)}
+			<Link
+				href={`/blog/${url}`}
 				className="text-blue-600 font-lg text-semibold cursor-pointer mt-6">
 				Ir al blog
-			</h3>
+			</Link>
 			<div className="flex items-center justify-between pt-6">
 				<div className="flex items-center space-x-3">
 					{hashtags.map((hashtag) => (
