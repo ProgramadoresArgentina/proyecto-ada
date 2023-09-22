@@ -9,6 +9,7 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&family=Manrope&family=Montserrat&display=swap");
 
 @import url("../pages/blog/blog.css");
+@import url("../components/Hero/Hero.css");
 
 @font-face {
 	font-family: "Mona Sans";
@@ -102,6 +103,10 @@
 			opacity: 1;
 		}
 	}
+}
+
+body,html {
+    background-color: #0d1117
 }
 
 textarea#invalid,
@@ -230,8 +235,8 @@ figure figcaption {
 	background: linear-gradient(
 			260deg,
 			#f78001 0%,
-			rgb(247, 128, 1, 0.6) 50%,
-			rgb(247, 128, 1, 0.1) 80%
+			#f3932d 50%,
+			#f9a853 80%
 		),
 		#fff;
 	-webkit-text-fill-color: transparent;

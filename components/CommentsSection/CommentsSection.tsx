@@ -54,19 +54,19 @@ export const CommentsSection: FC<ComentsSectionProps> = ({
 	};
 
 	return (
-        <div className="pb-36 bg-[#0D1117]">
-            <section
-                className="m-auto w-full min-h-[200px] flex justify-start relative
-                            md:min-h-[100px]
-                            lg:h-[300px]"
-                onMouseDown={handleStopMarquee}
-                onMouseUp={handleStartMarquee}
-                onTouchEnd={handleStartMarquee}
-                onTouchStart={handleStopMarquee}>
-                {loading && <LoadingComments />}
-                {renderMarqueeDesktop()}
-                {renderMarqueeMobile()}
-            </section>
+    <div className="pb-36 bg-[#0D1117]">
+        <section
+            className="m-auto w-full min-h-[200px] flex justify-start relative
+                        md:min-h-[100px]
+                        lg:h-[300px]"
+            onMouseDown={handleStopMarquee}
+            onMouseUp={handleStartMarquee}
+            onTouchEnd={handleStartMarquee}
+            onTouchStart={handleStopMarquee}>
+            {loading && <LoadingComments />}
+            {renderMarqueeDesktop()}
+            {renderMarqueeMobile()}
+        </section>
         </div>
 	);
 };

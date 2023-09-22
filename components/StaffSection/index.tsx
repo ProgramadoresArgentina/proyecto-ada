@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { motion } from "framer-motion"
 const people = [
     {
         name: 'Juanse Mastrangelo',
@@ -75,25 +76,35 @@ export default function StaffSection() {
 
     return (
 
-        <div className="bg-[#0d1117] pt-10 pb-36">
+        <div className="pt-10 pb-20 relative">
             <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
-                <div className="max-w-2xl">
-                    <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Conoce a nuestro <span className='degrade-text'>equipo</span></h2>
-                    <p className="mt-6 text-lg leading-8 text-gray-600">
-                        La comunidad no sería posible sin ellos. 
-                    </p>
-                </div>
+                <motion.div
+                transition={{duration: 1}}
+                initial={{ x: -50 }}
+                animate={{ x: 0 }}>
+                    <div className="max-w-2xl">
+                        <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Conoce a nuestro <span className='degrade-text'>equipo</span></h2>
+                        <p className="mt-6 text-lg leading-8 text-gray-600">
+                            La comunidad no sería posible sin ellos. 
+                        </p>
+                    </div>
+                </motion.div>
                 <ul role="list" className="grid gap-x-8 gap-y-5 sm:grid-cols-2 sm:gap-y-5 xl:col-span-2">
                     {displayedPeople.map((person) => (
-                        <li key={person.name} className="bg-[#161B22] p-10 rounded-md shadow-md">
-                            <div className="flex items-center gap-x-6">
-                                <img className="h-16 w-16 rounded-full" src={person.imageUrl} alt="" />
-                                <div>
-                                    <a target="_blank" href={person.url} rel="noreferrer" className="text-base font-semibold leading-7 tracking-tight text-white hover:underline">{person.name}</a>
-                                    <p className="text-sm font-semibold leading-6 text-[#F78001]">{person.role}</p>
+                    <motion.div
+                    transition={{duration: 2}}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}>
+                            <li key={person.name} className="bg-[#161B22] p-10 rounded-md shadow-md">
+                                <div className="flex items-center gap-x-6">
+                                    <img className="h-16 w-16 rounded-full" src={person.imageUrl} alt="" />
+                                    <div>
+                                        <a target="_blank" href={person.url} rel="noreferrer" className="text-base font-semibold leading-7 tracking-tight text-white hover:underline">{person.name}</a>
+                                        <p className="text-sm font-semibold leading-6 text-[#F78001]">{person.role}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                        </motion.div>
                     ))}
                     {
                         !showAll &&
