@@ -92,10 +92,11 @@ export default function StaffSection() {
                 <ul role="list" className="grid gap-x-8 gap-y-5 sm:grid-cols-2 sm:gap-y-5 xl:col-span-2">
                     {displayedPeople.map((person) => (
                     <motion.div
+                    key={person.name}
                     transition={{duration: 2}}
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}>
-                            <li key={person.name} className="bg-[#161B22] p-10 rounded-md shadow-md">
+                            <li className="bg-[#161B22] p-10 rounded-md shadow-md">
                                 <div className="flex items-center gap-x-6">
                                     <img className="h-16 w-16 rounded-full" src={person.imageUrl} alt="" />
                                     <div>

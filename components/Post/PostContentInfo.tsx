@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export default function PostContentInfo({ content, createdBy, views }) {
-	const { username, updateAt, userSettings } = createdBy.restult;
+	const { username, updateAt, userSettings } = createdBy.result;
 
 	const getReadTime = () => {
 		const wordsPerMinute = 200;

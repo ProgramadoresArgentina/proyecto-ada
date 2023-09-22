@@ -11,7 +11,7 @@ export default function SearchHashtagsForm({ hashtagsPreview, handleAddHashtag, 
       {...formProps}
     >
       <input
-        className='px-4 py-2 text-lg rounded-sm outline-none'
+        className='px-4 py-2 text-lg rounded-sm outline-none text-[#000]'
         ref={inputRef}
         {...inputProps}
       />

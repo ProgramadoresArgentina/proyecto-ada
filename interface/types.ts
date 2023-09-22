@@ -46,6 +46,7 @@ export interface ArticleTableProps {
 	likes?: number;
 	comments?: number;
 	bookmarks?: number;
+	url?: string;
 }
 
 export interface NotFoundProps {

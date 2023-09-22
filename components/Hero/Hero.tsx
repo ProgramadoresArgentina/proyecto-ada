@@ -80,8 +80,7 @@ export default function Hero() {
                 </div>
                 <div className="hero-buttons">
                     <div className="mt-20 mx-auto grid max-w-5xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-2">
-                        <ul role="list" className="grid gap-x-8 gap-y-5 sm:grid-cols-2 sm:gap-y-5 xl:col-span-2">
-                            
+                        <div role="list" className="grid gap-x-8 gap-y-5 sm:grid-cols-2 sm:gap-y-5 xl:col-span-2">
                             <motion.div
                                 style={{width: "100%"}}
                                 transition={{duration: 2}}
@@ -117,7 +116,7 @@ export default function Hero() {
                                     </div>
                                 </li>
                             </motion.div>
-                        </ul>
+                        </div>
                     </div>
                 </div>
             </div>

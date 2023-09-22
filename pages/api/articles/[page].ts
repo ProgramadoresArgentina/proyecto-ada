@@ -17,6 +17,7 @@ export default async (req: NextApiRequest, res: NextApiResponse)=> {
     const {hashtags} = req.body
 
     if (method === "GET") {
+<<<<<<< Updated upstream
         try{    
             if (hashtags) {
                 //caso con query de hashtags
@@ -60,6 +61,27 @@ export default async (req: NextApiRequest, res: NextApiResponse)=> {
                 res.status(200).json({result: allBlogs, itemsPerPage, page});
             }
 
+=======
+        try{
+            
+
+            const [allBlogs, count] = await prisma.$transaction([
+                prisma.articles.findMany({
+                    skip: (pageNumber -1) * itemsPerPage,
+                    take: itemsPerPage,
+                    orderBy: [
+                        {id: 'desc'}
+                    ],
+                    include : {
+                        user : true,
+                        hashtags : true, 
+                    },
+                }),
+                prisma.articles.count()
+              ]);
+
+            res.status(200).json({result: allBlogs, itemsPerPage: itemsPerPage, page: page, total: count});
+>>>>>>> Stashed changes
         } 
         catch (err){res.status(404).json({message:"ERROR_FINDING_BLOGS", err})};
     } else {

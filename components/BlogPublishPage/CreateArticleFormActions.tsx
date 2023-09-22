@@ -22,17 +22,22 @@ export default function CreateArticleFormActions({
 }) {
   return (
     <div className='px-6 pt-4 flex flex-col gap-3 group'>
-      <div className={`flex w-full gap-2 opacity-0 group-hover:opacity-100 ${showSearchHashtagsForm && 'opacity-100'}`} >
+        {coverImagePreview && (
+        <picture className='w-full transition-all aspect-[16/6] mb-6 mt-2 overflow-hidden rounded-xl h-[150px]'>
+            <Image src={coverImagePreview} width={2000} height={2000} alt='header' className='w-full h-full object-cover' />
+        </picture>
+        )}
+      <div className={`flex w-full gap-2 group-hover:opacity-100 ${showSearchHashtagsForm && 'opacity-100'}`} >
         {coverImagePreview ?
           <button
-            className='flex items-center justify-center gap-2 px-2.5 py-0.5 font-semibold cursor-pointer text-[#565e69] tracking-tight rounded-md transition-colors hover:text-indigo-500 hover:bg-indigo-100 active:bg-indigo-300'
+            className='flex items-center justify-center gap-2 px-2.5 py-0.5 font-semibold cursor-pointer text-[#FFF] tracking-tight rounded-md transition-colors hover:text-indigo-500 hover:bg-indigo-100 active:bg-indigo-300'
             onClick={() => handleCoverImgChange(null)}
             type='button'
           >
             <XmarkIcon width="1rem" /> Eliminar imagen de encabezado
           </button>
           : <button
-            className='flex items-center justify-center gap-2 px-2.5 py-0.5 font-semibold cursor-pointer text-[#565e69] tracking-tight rounded-md transition-colors hover:text-indigo-500 hover:bg-indigo-100 active:bg-indigo-300'
+            className='flex items-center justify-center gap-2 px-2.5 py-0.5 font-semibold cursor-pointer text-[#FFF] tracking-tight rounded-md transition-colors hover:text-indigo-500 hover:bg-indigo-100 active:bg-indigo-300'
             onClick={handleShowUploadCoverImgModal}
             type='button'
           >
@@ -41,7 +46,7 @@ export default function CreateArticleFormActions({
         }
         <div className='relative'>
           <button
-            className='flex items-center justify-center gap-2 px-2.5 py-0.5 font-semibold cursor-pointer text-[#565e69] tracking-tight rounded-md transition-colors hover:text-indigo-500 hover:bg-indigo-100 active:bg-indigo-300'
+            className='flex items-center justify-center gap-2 px-2.5 py-0.5 font-semibold cursor-pointer text-[#FFF] tracking-tight rounded-md transition-colors hover:text-indigo-500 hover:bg-indigo-100 active:bg-indigo-300'
             onClick={handleShowSearchHashtagsForm}
             type='button'
           >
@@ -56,11 +61,6 @@ export default function CreateArticleFormActions({
           )}
         </div>
       </div>
-      {coverImagePreview && (
-        <picture className='w-full transition-all aspect-[16/6] mb-6 mt-2 overflow-hidden rounded-xl'>
-          <Image src={coverImagePreview} width={2000} height={2000} alt='header' className='w-full h-full object-cover' />
-        </picture>
-      )}
       {hashtagsPreview.length > 0 && (
         <HashtagsList hashtags={hashtagsPreview} handleRemoveHashtag={handleRemoveHashtag} />
       )}

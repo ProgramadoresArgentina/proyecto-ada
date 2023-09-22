@@ -1,10 +1,31 @@
+import { useQuill } from "react-quilljs";
 import { PostUSerType } from "../../interface/postTypes";
 import PostContentFooter from "./PostContentFooter";
 import PostContentHeader from "./PostContentHeader";
 import PostContentUserInfo from "./PostContentInfo";
+import hljs from "highlight.js";
+import { useEffect } from 'react'
+import { formatsOptions } from "../../constants/quilljs.config";
 
 export default function PostContent({ post }: PostUSerType) {
 	const { content, createdBy, hashtags, image, title, user, views } = post;
+    const { quill, quillRef } = useQuill({
+      readOnly: true,
+      modules: {
+        toolbar: false,
+        syntax: {
+          highlight: (text: string) => hljs.highlightAuto(text).value,
+        },
+      },
+      formats: formatsOptions,
+    })
+
+    useEffect(() => {
+        console.log(content);
+      if (quill && content) {
+        quill.setContents(JSON.parse(content))
+      }
+    }, [quill, content])
 
 	return (
 		<article className="w-full max-w-[45rem] min-h-screen flex flex-col gap-6">
@@ -20,7 +41,7 @@ export default function PostContent({ post }: PostUSerType) {
 						{title}
 					</h1>
 					<div className="break-words leading-8 whitespace-pre-line text-lg pt-3 text-gray-100">
-						{content}
+                        <div ref={quillRef}></div>
 					</div>
 					<PostContentFooter hashtags={hashtags} />
 				</div>

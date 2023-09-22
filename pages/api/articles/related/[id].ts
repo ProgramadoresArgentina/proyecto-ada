@@ -10,14 +10,15 @@ El endpoint recibe el numero Id del blog del cual se quieren obtener los articul
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 
-    const blogId = Number(req.query.id) || 1; 
+    const blogUrl = String(req.query.id); 
     const {method} = req
     
     if(method === "GET"){
         try{
+            if (!blogUrl) res.status(200).json({blogUrl, hashtagsNames: [], relatedPosts: []})
             const {hashtags} = await prisma.articles.findUnique({
                 where:{
-                    id: blogId,
+                    url: blogUrl,
                 },
                 include:{
                     hashtags: {
@@ -34,7 +35,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 take: 5,
                 where: {
                     NOT: [{
-                        id: blogId,
+                        url: blogUrl,
                     }
                     ],
                     hashtags: {
@@ -51,10 +52,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 }
             })
 
+<<<<<<< Updated upstream
             //sort
             const orderedBlogs = blogsSort(hashtagsNames, relatedPosts)
 
             res.status(200).json({blogId, hashtags: hashtagsNames ,relatedBlogs: orderedBlogs})
+=======
+            res.status(200).json({blogUrl, hashtagsNames, relatedPosts})
+>>>>>>> Stashed changes
         }
         catch(e){
             console.log(e)
