@@ -27,6 +27,7 @@ model UserSettings{
   lastName String?
   role Role @default(USER)
   status Estatus @default(null)
+  seniority Seniority @default(null)
   avatar String
   description String
   url String @unique @default(uuid())
@@ -93,6 +94,14 @@ enum Estatus {
 	CONTRATANDO
 	BUSCANDO
   null
+}
+
+enum Seniority{
+  null
+  TRAINEE
+  JUNIOR
+  SEMISENIOR
+  SENIOR
 }
 
 // MODELO DE ARTICULOS

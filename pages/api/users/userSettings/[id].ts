@@ -55,7 +55,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		case "PUT":
 			try {
 				const { id } = query;
-				const { firstName, lastName, avatar, description } = body;
+				const { firstName, lastName, avatar, description, seniority } = body;
 				const updateOneUserSettings = await prisma.userSettings.update({
 					where: { id: Number(id) },
 					data: {
@@ -63,6 +63,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 						lastName,
 						avatar,
 						description,
+						seniority
 					},
 				});
 				res.json({ updateOneUserSettings });
