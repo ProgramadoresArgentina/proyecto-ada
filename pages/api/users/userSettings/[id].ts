@@ -47,7 +47,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				});
 				res.json(createUser);
 			} catch (e: any) {
-				console.log(e.message);
 				res.status(200)./*headersSent().*/ json("ERROR_CREATING_USER");
 			}
 			break;
