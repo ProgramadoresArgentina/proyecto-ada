@@ -10,8 +10,7 @@ import { withPageAuthRequired } from '@auth0/nextjs-auth0/client'
 import { launchToast } from '../../../helpers/launchToast'
 
 
-export default function EditPage(routeInfo) {
-    const { url } = routeInfo;
+export default function EditPage(url) {
     const [isLoading, setLoading] = useState(false);
     const INITIAL_STATE = {
         "contentPreview": {

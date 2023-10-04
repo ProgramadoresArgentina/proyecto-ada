@@ -52,7 +52,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 }
             })
 
-<<<<<<< Updated upstream
             //sort
             const orderedBlogs = blogsSort(hashtagsNames, relatedPosts)
 
