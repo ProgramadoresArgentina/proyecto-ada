@@ -144,3 +144,10 @@ model Achievements {
   icon String
   users User[]
 }
+
+model TopHashtags {
+  id Int @id @default(autoincrement())
+  idHashtag Int
+  name String
+  views Int
+}
