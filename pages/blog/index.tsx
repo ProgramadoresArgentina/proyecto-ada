@@ -1,24 +1,44 @@
 import { NextPage } from "next";
-import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
-import BannerBlog from "../../public/banner-blog.png";
 import { PlusIcon, BackwardIcon, ForwardIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion"
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Blog: NextPage = () => {
 	const searchParams = useSearchParams();
 	const allHastagQuery = searchParams.getAll("hashtag");
 	const { data, error, loading, fetchData } = useFetch();
+	const [page, setPage] = useState(1);
+	const [total, setTotal] = useState(1);
+	const [perPage, setPerPage] = useState(20);
+    const router = useRouter()
 
 	useEffect(() => {
-		if (allHastagQuery.length > 0) {
-			let body = { hastagag: allHastagQuery.join(",") };
+		/* if (allHastagQuery.length > 0) {
+			let body = { hashtag: allHastagQuery.join(",") };
 			fetchData("/api/articles", "POST", body);
+            setTotal(data.total);
 			//TODO recibir articles en data y mostrarlos
 		}
-	}, [searchParams]);
+        fetchData(`/api/articles/${page}`, "GET"); */
+	}, []);
+
+	useEffect(() => {
+        let body = {}
+        if (page === 1 && allHastagQuery.length > 0) body = { hashtag: allHastagQuery.join(",") };
+        fetchData(`/api/articles/${page}`, "GET");
+	}, [page]);
+
+	useEffect(() => {
+        if (data) {
+            setPerPage(data.itemsPerPage)
+            setTotal(data.total);
+        }
+	}, [data]);
+
 
 	const articlesMap = Array.from({ length: 12 });
 	return (
@@ -39,12 +59,15 @@ const Blog: NextPage = () => {
 					</h2>
 					<span>Articulos compartidos por la comunidad</span>
                     <div className="mt-12">
-                        <button className="animated-button">
+                        <Link className="animated-button" href="/blog/publish">
                             <span>
                                 <i className="icon mr-2"><PlusIcon className="h-6 text-white" /> </i>
                                 Crear un nuevo artículo
-                                </span>
-                        </button>
+                            </span>
+                        </Link>
+                        <Link href="/myblogs" className="text-sm flex justify-center mt-5 hover:underline">
+                            <span>Mis Blogs</span>
+                        </Link>
                     </div>
 				</div>
 			</div>
@@ -82,35 +105,35 @@ const Blog: NextPage = () => {
 
 				<div className="blogs-list">
 					<ul className="blogs">
-						{articlesMap.map((_, i) => (
+						{data && data.result.map((article, i) => (
                             <motion.div
+                            key={i}
                             style={{width: "100%"}}
                             transition={{duration: 1}}
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}>
-                                <li key={i}>
-                                    <div className="article-header">
-                                        <img
-                                            src={`https://source.unsplash.com/random/200x200?sig=${i}`}
+                                <li>
+                                    <div className="article-header w-1/4">
+                                        <img className="object-cover rounded-sm"
+                                            src={article.image}
                                         />
                                         {/* <div className="badge">Design</div> */}
                                     </div>
                                     <div className="articles-content">
-                                        <h6>
-                                            Lorem ipsum dolor sit amet consectetur.
+                                        <h6 onClick={() => router.push(`/blog/${article.url}`)}>
+                                            {article.title}
                                         </h6>
                                         <div className="articles-hashtags">
-                                            <a>PHP</a>
-                                            <a>Java</a>
-                                            <a>Python</a>
-                                            <a>Testing</a>
+                                            {
+                                                article.hashtags.map((h, hi) => <a key={hi}>{h.name}</a>)
+                                            }
                                         </div>
-                                        <span className="time">10 MINUTE READ</span>
+                                        {/* <span className="time">10 MINUTE READ</span> */}
                                         <div className="article-author">
                                             <div className="article-author-image bg-background-blog-world"></div>
                                             <div className="article-author-information">
                                                 <p className="author-title">
-                                                    By <b>Daniel Lima</b>
+                                                    By <b>{article.user.username}</b>
                                                 </p>
                                                 <span>UX UI Designer</span>
                                             </div>
@@ -125,31 +148,22 @@ const Blog: NextPage = () => {
                     
                     <nav className="mb-20 text-end">
                         <ul className="inline-flex -space-x-px text-sm">
-                            <li>
-                                <a href="#" className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                    <BackwardIcon className="h-5" />
-                                </a>
-                                </li>
-                                <li>
-                                <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                                </li>
-                                <li>
-                                <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-                                </li>
-                                <li>
-                                <a href="#" aria-current="page" className="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-                                </li>
-                                <li>
-                                <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-                                </li>
-                                <li>
-                                <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-                                </li>
-                                <li>
-                                <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                    <ForwardIcon className="h-5" />
-                                </a>
-                            </li>
+                            {/* <a href="#" className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                <BackwardIcon className="h-5" />
+                            </a> */}
+                            {
+                                Array.from({length: total/20}, (a, index) => {
+                                    const pageNr = index+1;
+                                    console.log(pageNr, page);
+                                    return (
+                                        <li>
+                                            <a href="#" onClick={() => setPage(pageNr)}
+                                            className={`${page === pageNr ? 'bg-gray-700 text-white' : 'bg-gray-800 text-gray-500'} flex items-center justify-center px-3 h-8 leading-tight border border-gray-700 hover:bg-gray-700 hover:text-white
+                                            ${pageNr === 1 && 'rounded-l-lg'} ${pageNr === 7 && 'rounded-r-lg'}`}>{pageNr}</a>
+                                        </li>
+                                    )
+                                })
+                            }
                         </ul>
                     </nav>
 

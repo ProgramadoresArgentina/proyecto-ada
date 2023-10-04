@@ -8,7 +8,7 @@ export default function PostAsideSuggestionsCard({
 	title,
 	userInfo,
 }) {
-	const { username, userSettings } = userInfo.restult;
+	const { username, userSettings } = userInfo.result;
 
 	const [showPopup, setShowPopup] = useState(false);
 

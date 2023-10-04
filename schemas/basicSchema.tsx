@@ -9,9 +9,8 @@ export const basicSchema = yup.object().shape({
 
     basic: yup.array().of(
         yup.object().shape({
-            //   name: Yup.string().required("Name required"),
             name: yup.string().required("requerido"),
-            position: yup.string().required("requerido"),
+            position: yup.string(),
             descripcion: yup.string()
         })
     ),

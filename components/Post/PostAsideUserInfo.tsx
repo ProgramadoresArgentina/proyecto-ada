@@ -27,19 +27,17 @@ export default function PostAsideUserInfo({
 				</Link>
 				<div className="flex flex-col text-[#F78001]">
 					<Link
-						href={`/pro/${username}`}
+						href={`/pro/${userSettings.url}`}
 						title={name}
 						className="text-xl tracking-wide leading-6 font-medium">
 						{name}
 					</Link>
-					{userSettings && username && (
-						<Link
-							href={`/pro/${username}`}
-							title={`@${username}`}
-							className="text-xs tracking-wide font-thin text-[#757575] hover:text-[#F78001]">
-							{`@${username}`}
-						</Link>
-					)}
+                    <Link
+                        href={`/pro/${userSettings.url}`}
+                        title={`@${username}`}
+                        className="text-xs tracking-wide font-thin text-[#757575] hover:text-[#F78001]">
+                        {`@${username}`}
+                    </Link>
 				</div>
 			</div>
 			<p className="text-sm tracking-wide font-thin text-gray-300">

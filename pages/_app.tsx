@@ -9,6 +9,7 @@ import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { Tooltip } from "react-tooltip";
 import { Analytics } from '@vercel/analytics/react';
 import Script from "next/script";
+import { ToastContainer } from "react-toastify";
 
 const MyApp: NextPage = ({ Component, pageProps }: AppProps) => {
 	return (
@@ -34,6 +35,7 @@ const MyApp: NextPage = ({ Component, pageProps }: AppProps) => {
                 gtag('config', 'G-90V0GHL08C');
             `}
             </Script>
+            <ToastContainer />
 		</UserProvider>
 	);
 };

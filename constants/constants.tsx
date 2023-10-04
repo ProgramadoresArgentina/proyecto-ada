@@ -296,3 +296,6 @@ export const listPositions = [
 		value: "web developer",
 	},
 ];
+export const CREATE_ARTICLE_ERROR_TYPES = {
+    TITLE_REQUIRED: 1,
+  }

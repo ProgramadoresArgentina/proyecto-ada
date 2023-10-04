@@ -10,6 +10,7 @@
     "deploy": "next build && pm2 start npm --name 'ada' -- start"
   },
   "dependencies": {
+    "@algolia/autocomplete-core": "^1.11.0",
     "@auth0/nextjs-auth0": "^2.2.2",
     "@emailjs/browser": "^3.10.0",
     "@headlessui/react": "^1.7.14",
@@ -19,6 +20,7 @@
     "file-saver": "^2.0.5",
     "formik": "^2.2.9",
     "framer-motion": "^10.16.1",
+    "highlight.js": "^11.8.0",
     "next": "13.0.7",
     "pdf-creator-node": "^2.3.5",
     "react": "18.2.0",
@@ -28,6 +30,7 @@
     "react-fast-marquee": "^1.6.0",
     "react-icons": "^4.10.1",
     "react-marquee-slider": "^1.1.5",
+    "react-quilljs": "^1.3.3",
     "react-toastify": "^9.1.3",
     "react-tooltip": "^5.18.1",
     "react-type-animation": "^3.0.1",

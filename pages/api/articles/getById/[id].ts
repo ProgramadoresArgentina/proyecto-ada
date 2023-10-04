@@ -4,13 +4,13 @@ import { prisma } from "../../../../prismaClient/db";
 export default async function(req: NextApiRequest, res: NextApiResponse) {
     
     const {method} = req
-    const blogId = Number(req.query.id)
+    const blogUrl = String(req.query.id) // url
     
     if(method === "GET"){
         try {
 
             await prisma.articles.update({
-                where:{id: blogId},
+                where:{url: blogUrl},
                 data:{
                     views: {
                         increment: 1
@@ -19,7 +19,7 @@ export default async function(req: NextApiRequest, res: NextApiResponse) {
             })
 
             const getBlog = await prisma.articles.findUnique({
-                where:{id: blogId},
+                where:{url: blogUrl},
                 include:{
                     hashtags: true,
                     user: {

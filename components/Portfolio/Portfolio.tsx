@@ -61,6 +61,7 @@ export const Portfolio: FC<any> = ({ user }) => {
 		hashtags,
 		createdAt,
 		image,
+        url
 	}) => (
 		<div className="flex max-w-[24rem] flex-col rounded-md bg-gray-800 text-white shadow-md p-4">
 			<img
@@ -76,7 +77,7 @@ export const Portfolio: FC<any> = ({ user }) => {
 				{content}
 			</p>
 			<h3
-				onClick={() => openInNewTab(`/blog/${id}`)}
+				onClick={() => openInNewTab(`/blog/${url}`)}
 				className="text-blue-600 font-lg text-semibold cursor-pointer mt-6">
 				Ir al blog
 			</h3>

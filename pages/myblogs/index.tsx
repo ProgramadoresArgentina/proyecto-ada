@@ -61,6 +61,7 @@ const MyBlogsList: NextPage = () => {
 		title,
 		createdAt,
 		views,
+        url
 	}: ArticleTableProps) => (
 		<tr className="border-b bg-gray-900 border-gray-700">
 			<th
@@ -73,7 +74,7 @@ const MyBlogsList: NextPage = () => {
 			<td className="px-6 py-4">{views}</td>
 			<td className="px-6 py-4 flex flex-row">
 				<Link
-					href={`/blog/${id}`}
+					href={`/blog/${url}`}
 					className="font-medium text-blue-500 hover:underline mr-4">
 					Ver
 				</Link>
@@ -92,10 +93,17 @@ const MyBlogsList: NextPage = () => {
 	);
 
 	const getTime = (updateAt: Date) => {
-		const newDate = new Date(updateAt);
-		const localTime = newDate.toLocaleTimeString();
-		const localDate = newDate.toLocaleDateString();
-		return ` ${localTime} - ${localDate}`;
+        const newDate = new Date(updateAt);
+        const localDate = newDate.toLocaleDateString('es-ES', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true
+        });
+    
+        return localDate;
 	};
 
 	const handleDelete = (id: number) => {
@@ -161,7 +169,7 @@ const MyBlogsList: NextPage = () => {
 		<div className="min-h-screen bg-[#0D1116] pt-32 font-ibm flex justify-center ">
 			<div className="overflow-x-auto shadow-md max-w-[1000px] flex flex-col ">
 				<Link
-					href={"/article/create"}
+					href={"/blog/publish"}
 					className="rounded-md px-3 py-2  text-sm hover:text-indigo-800 plain-button my-3 self-end">
 					+ Crear Blog
 				</Link>
@@ -185,19 +193,27 @@ const MyBlogsList: NextPage = () => {
 				ref={dialogRef}
 				open={false}>
 				<div className="m-auto w-full h-full flex flex-col justify-center items-center">
-					<div className="bg-[#0D1116] w-72 p-4 mb-4 rounded-md flex flex-col justify-center items-center gap-5">
-						<p className="text-base leading-6 text-white text-center">
-							¿Estás seguro de eliminar el blog?
-						</p>
-						<div className="w-full flex items-center justify-between gap-1">
+					<div className="bg-[#0D1116] mb-4 p-5 flex flex-col gap-5
+                    border-t-4 border-[#FFC800] w-1/3">
+						<div className="flex items-center gap-4 flex-row">
+                            <img src="https://cdn-icons-png.flaticon.com/256/6324/6324052.png"
+                            className="w-[50px]" />
+                            <div className="text-white">
+                                <h5 className="text-lg">Eliminar Artículo</h5>
+                                <p className="text-base leading-6">
+                                    Estás seguro de eliminar el blog?
+                                </p>
+                            </div>
+                            </div>
+						<div className="w-full flex items-center justify-end gap-5 border-t border-[#333] pt-5">
 							<button
-								className="bg-[#F78001] hover:bg-red-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+								className=" border-red-400 hover:text-white text-slate-400 font-bold rounded focus:outline-none focus:shadow-outline"
 								onClick={() => dialogRef.current.close()}>
 								Cancelar
 							</button>
 							<button
 								onClick={handleConfirmModal}
-								className="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline plain-button">
+								className="bg-[#f0d05d] hover:bg-[#FFC800] text-[#0D1116] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ">
 								Eliminar
 							</button>
 						</div>

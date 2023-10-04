@@ -160,10 +160,6 @@
     width: 100%;
     @apply font-monaSans;   
 }
-.blog .blogs-list ul.blogs li:hover {
-    cursor: pointer;
-    background-color: #28303c;
-}
 .blog .article-header {
     position: relative;
     height: 150px;
@@ -196,6 +192,12 @@
     letter-spacing: .8px;
     @apply font-roboto;
 }
+
+.blog .articles-content h6:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .blog .articles-content .time {
     padding: 4px 15px 22px 15px;
     font-size: 8px;
@@ -208,7 +210,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 17px;
     gap: 8px;
     align-items: center;

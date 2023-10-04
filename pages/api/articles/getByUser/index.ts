@@ -14,6 +14,9 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 
 			const getBlogs = await prisma.articles.findMany({
 				where: { userId: getUser.id },
+                orderBy: [
+                    {id: 'desc'}
+                ],
 			});
 
 			res.status(200).json(getBlogs);

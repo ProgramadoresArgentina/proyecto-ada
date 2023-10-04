@@ -18,7 +18,7 @@ export default function PostAsideSuggestions() {
 
 	useEffect(() => {
 		if (!data) return;
-		if (data.relatedPosts.length < 1) return;
+		if (!data.relatedPosts || data.relatedPosts.length < 1) return;
 		const urlsToFetch = [];
 		setLoadingCards(true);
 
