@@ -208,7 +208,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                     id={getIn(errors, `basic.${index}.name`) && 'invalid'}
                                                                 />
                                                             </div>
-                                                            <div className="w-full md:w-1/2 px-3 mb-0">
+                                                            <div className="w-full md:w-1/2 px-3 mb-0 hidden">
                                                                 <label className=' flex whitespace-nowrap text-white'>
                                                                     Posición actual/buscada  *
                                                                     {
@@ -223,7 +223,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                     id={getIn(errors, `basic.${index}.position`) && 'invalid'}
                                                                 />
                                                             </div>
-                                                            <div className="w-full md:w-1/2 px-3 mb-0">
+                                                            <div className="w-full md:w-1/2 px-3 mb-0 hidden">
                                                                 <label className="text-white">
                                                                     Sitio web/Portfolio
                                                                 </label>
@@ -235,7 +235,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                     id={getIn(errors, `basic.${index}.portfolio`) && 'invalid'}
                                                                 />
                                                             </div>
-                                                            <div className="w-full md:w-1/2 px-3 mb-0">
+                                                            <div className="w-full md:w-1/2 px-3 mb-0 hidden">
                                                                 <label className="text-white">
                                                                     Linkedin user
                                                                 </label>
@@ -247,7 +247,7 @@ const FormLayout: React.FC<{}> = () => {
                                                                     id={getIn(errors, `basic.${index}.linkedIn`) && getIn(touched, `basic.${index}.linkedIn`) && 'invalid'}
                                                                 />
                                                             </div>
-                                                            <div className="w-full md:w-1/2 px-3 mb-0">
+                                                            <div className="w-full md:w-1/2 px-3 mb-0 hidden">
                                                                 <label className="text-white">
                                                                     Github user
                                                                 </label>

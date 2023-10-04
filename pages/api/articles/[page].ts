@@ -17,7 +17,6 @@ export default async (req: NextApiRequest, res: NextApiResponse)=> {
     const {hashtags} = req.body
 
     if (method === "GET") {
-<<<<<<< Updated upstream
         try{    
             if (hashtags) {
                 //caso con query de hashtags
@@ -25,63 +24,54 @@ export default async (req: NextApiRequest, res: NextApiResponse)=> {
                 const tagsSplit = hashtags.split(",")        //separamos por coma
                 const tagsArray = tagsSplit.map(tag => tag.trim())//borramos espacios
 
-
-                const allBlogs = await prisma.articles.findMany({   
-                    where:{
-                        hashtags: {
-                            some: {     
-                                name:{
-                                    in: tagsArray
-                                    //"buscar todos los hashtags donde todos o algunos coincidan con los de esta lista o array"
+                
+                const [allBlogs, count] = await prisma.$transaction([
+                    prisma.articles.findMany({
+                            where:{
+                            hashtags: {
+                                some: {     
+                                    name:{
+                                        in: tagsArray
+                                    }
                                 }
-                            }
+                            },
                         },
-                    },
-                    include: {
-                        hashtags: true
-                    },
-                    skip: (pageNumber -1) * itemsPerPage,
-                    take: itemsPerPage
-                }
-                );
+                        skip: (pageNumber -1) * itemsPerPage,
+                        take: itemsPerPage,
+                        orderBy: [
+                            {id: 'desc'}
+                        ],
+                        include : {
+                            user : true,
+                            hashtags : true, 
+                        },
+                    }),
+                    prisma.articles.count()
+                ]);
     
                 //sort:
                 const orderedBlogs = blogsSort(hashtags, allBlogs);
 
-                res.status(200).json({result: orderedBlogs, itemsPerPage: itemsPerPage, page: page, filteredBy: tagsArray});
+                res.status(200).json({result: orderedBlogs, itemsPerPage: itemsPerPage, page: page, filteredBy: tagsArray, total: count});
             } else {
                 //caso sin query de hashtags
-                const allBlogs = await prisma.articles.findMany({
-                    include: {hashtags: true},
-                    skip: (pageNumber -1) * itemsPerPage,
-                    take: itemsPerPage
-                }
-                );
+                const [allBlogs, count] = await prisma.$transaction([
+                    prisma.articles.findMany({
+                        skip: (pageNumber -1) * itemsPerPage,
+                        take: itemsPerPage,
+                        orderBy: [
+                            {id: 'desc'}
+                        ],
+                        include : {
+                            user : true,
+                            hashtags : true, 
+                        },
+                    }),
+                    prisma.articles.count()
+                  ]);
     
-                res.status(200).json({result: allBlogs, itemsPerPage, page});
+                res.status(200).json({result: allBlogs, itemsPerPage, page, total: count});
             }
-
-=======
-        try{
-            
-
-            const [allBlogs, count] = await prisma.$transaction([
-                prisma.articles.findMany({
-                    skip: (pageNumber -1) * itemsPerPage,
-                    take: itemsPerPage,
-                    orderBy: [
-                        {id: 'desc'}
-                    ],
-                    include : {
-                        user : true,
-                        hashtags : true, 
-                    },
-                }),
-                prisma.articles.count()
-              ]);
-
-            res.status(200).json({result: allBlogs, itemsPerPage: itemsPerPage, page: page, total: count});
->>>>>>> Stashed changes
         } 
         catch (err){res.status(404).json({message:"ERROR_FINDING_BLOGS", err})};
     } else {

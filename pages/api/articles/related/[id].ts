@@ -52,14 +52,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 }
             })
 
-<<<<<<< Updated upstream
             //sort
             const orderedBlogs = blogsSort(hashtagsNames, relatedPosts)
 
-            res.status(200).json({blogId, hashtags: hashtagsNames ,relatedBlogs: orderedBlogs})
-=======
-            res.status(200).json({blogUrl, hashtagsNames, relatedPosts})
->>>>>>> Stashed changes
+            res.status(200).json({blogUrl, hashtags: hashtagsNames ,relatedBlogs: orderedBlogs})
         }
         catch(e){
             console.log(e)

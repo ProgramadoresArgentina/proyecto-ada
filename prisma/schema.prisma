@@ -25,6 +25,11 @@ model UserSettings{
   id Int @id @default(autoincrement())
   firstName String?
   lastName String?
+  linkedin String?
+  github String?
+  behance String?
+  minidescription String?
+  description String?
   role Role @default(USER)
   status Estatus @default(null)
   avatar String

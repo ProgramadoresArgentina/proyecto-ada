@@ -120,7 +120,7 @@ const Blog: NextPage = () => {
                                         {/* <div className="badge">Design</div> */}
                                     </div>
                                     <div className="articles-content">
-                                        <h6 onClick={() => router.push(`/blog/${data.article.url}`)}>
+                                        <h6 onClick={() => router.push(`/blog/${article.url}`)}>
                                             {article.title}
                                         </h6>
                                         <div className="articles-hashtags">

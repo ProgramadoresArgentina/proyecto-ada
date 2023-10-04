@@ -61,6 +61,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 						image: true,
 						hashtags: true,
 						createdAt: true,
+						url: true,
 					},
 				});
 

@@ -47,13 +47,12 @@ export default function CreateArticleForm(state) {
     }
 
     const buttonDisabled = () => {
-        console.log(state);
         if (loading) return true;
         if (state) {
             if (!state.titleValue || state.titleValue.trim() === null) return true; // title empty
             if (!state.contentPreview || (state.postData.quillRef && state.postData.quillRef.current &&
-                (state.postData.quillRef.current.outerText === ''
-                || state.postData.quillRef.current.outerText === "\n"))) return true; // content empty
+                (state.postData.quillRef.current.outerText == ''
+                || state.postData.quillRef.current.outerText == "\n"))) return true; // content empty
         };
         return false;
     }
