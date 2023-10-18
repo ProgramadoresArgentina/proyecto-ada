@@ -10,8 +10,30 @@ import { Tooltip } from "react-tooltip";
 import { Analytics } from '@vercel/analytics/react';
 import Script from "next/script";
 import { ToastContainer } from "react-toastify";
+import { useEffect } from "react";
+import { wrapper } from "../store/store";
+import { useStore } from "react-redux";
+import { setAuthState } from "../store/auth.reducer";
 
 const MyApp: NextPage = ({ Component, pageProps }: AppProps) => {
+    const store: any = useStore();
+
+    const getUserInfo = () => {
+        fetch('/api/auth/session')
+          .then(response => response.json())
+          .then(data => {
+            store.dispatch(setAuthState(data)); 
+            console.log(data);
+        })
+          .catch(error => {
+            console.log(error)
+        });
+    }
+
+    useEffect(() => {
+        getUserInfo();
+    }, []);
+
 	return (
 		<UserProvider>
 			<Head>
@@ -40,4 +62,4 @@ const MyApp: NextPage = ({ Component, pageProps }: AppProps) => {
 	);
 };
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);

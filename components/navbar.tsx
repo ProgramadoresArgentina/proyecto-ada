@@ -11,7 +11,7 @@ import Logo from "../public/LogoProgramadoresArgentina.png";
 const returnLink = `/api/auth/login?returnTo=${encodeURIComponent("/")}`;
 const navigation = [
 	{ name: "Blog", path: "/blog" },
-	{ name: "Bolsa de Talentos", path: "/talentos" },
+	// { name: "Bolsa de Talentos", path: "/talentos" },
 	{ name: "Contacto", path: "/#contact" },
 ];
 

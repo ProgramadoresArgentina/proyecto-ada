@@ -8,7 +8,9 @@ import {
 import { prisma } from "../../../prismaClient/db";
 
 const getLoginState = (req, loginOptions) => {
-	return {};
+	return {
+        testValue:  true
+    };
 };
 
 export default handleAuth({

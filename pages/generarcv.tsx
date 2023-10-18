@@ -1,5 +1,7 @@
 import ellipsis from '../public/form/Ellipse 48.png';
 import FormLayout from '../components/FormComponents/FormLayout';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0/client'
+import { wrapper } from '../store/store';
 
 const generarcv: React.FC = () => {
     const dots = Array.from({ length: 80 }, (_, index) => ellipsis);
@@ -51,4 +53,9 @@ const generarcv: React.FC = () => {
     )
 }
 
-export default generarcv
+
+export default withPageAuthRequired(wrapper.withRedux(generarcv), {
+    returnTo: '/generarcv'
+});
+
+
