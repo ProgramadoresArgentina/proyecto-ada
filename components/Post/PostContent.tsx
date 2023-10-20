@@ -21,9 +21,8 @@ export default function PostContent({ post }: PostUSerType) {
     })
 
     useEffect(() => {
-        console.log(content);
       if (quill && content) {
-        quill.setContents(JSON.parse(content))
+        quill.setContents(content)
       }
     }, [quill, content])
 

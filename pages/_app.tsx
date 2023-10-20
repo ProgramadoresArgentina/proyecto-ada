@@ -7,7 +7,6 @@ import Navbar from "../components/navbar";
 import "../styles/globals.css";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { Tooltip } from "react-tooltip";
-import { Analytics } from '@vercel/analytics/react';
 import Script from "next/script";
 import { ToastContainer } from "react-toastify";
 import { useEffect } from "react";
@@ -23,7 +22,6 @@ const MyApp: NextPage = ({ Component, pageProps }: AppProps) => {
           .then(response => response.json())
           .then(data => {
             store.dispatch(setAuthState(data)); 
-            console.log(data);
         })
           .catch(error => {
             console.log(error)
@@ -45,7 +43,6 @@ const MyApp: NextPage = ({ Component, pageProps }: AppProps) => {
 			<ButtonUp />
 			<Footer />
             <Tooltip id="tooltip" />
-            <Analytics />
 
             <Script src="https://www.googletagmanager.com/gtag/js?id=G-90V0GHL08C" />
             <Script id="gtm-script" strategy="afterInteractive">

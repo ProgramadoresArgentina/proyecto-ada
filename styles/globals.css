@@ -80,7 +80,8 @@
 
 	.plain-button:disabled {
 		background-image: none;
-		@apply bg-gray-400;
+		background-color: rgba(156, 163, 175, 1) !important;
+        cursor: not-allowed;
 	}
 
 	.show-scroll {
@@ -117,6 +118,10 @@ input#invalid {
 
 input:disabled {
 	opacity: 0.2;
+}
+
+.dropdown-invalid > div {
+    border: 1px solid rgb(252, 165, 165) !important;
 }
 
 .figure {

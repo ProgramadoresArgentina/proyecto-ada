@@ -10,7 +10,8 @@ import { withPageAuthRequired } from '@auth0/nextjs-auth0/client'
 import { launchToast } from '../../../helpers/launchToast'
 
 
-export default function EditPage(url) {
+export default function EditPage(routeInfo) {
+    const { url } = routeInfo;
     const [isLoading, setLoading] = useState(false);
     const INITIAL_STATE = {
         "contentPreview": {
@@ -41,10 +42,11 @@ export default function EditPage(url) {
         .then(response => response.json())
         .then(data => {
             const setData = {
+                "id": data.id,
                 "contentPreview": JSON.parse(data.content),
                 "coverImagePreview": data.image,
                 "error": {},
-                "hashtagsPreview": data.hashtags,
+                "hashtagsPreview": data.hashtags?.map(item => item.name),
                 "postData": {
                     "content": null,
                     "coverImage": null,

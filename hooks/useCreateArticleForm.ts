@@ -26,9 +26,9 @@ const INITIAL_STATE = {
   titleValue: '',
 }
 
-export const useCreateArticleForm = () => {
+export const useCreateArticleForm = (customValue?) => {
   const textareaRef = useRef()
-  const [state, setState] = useLocalStorage('state', INITIAL_STATE)
+  const [state, setState] = useLocalStorage(customValue || INITIAL_STATE)
 
   const { quill, quillRef } = useQuill({
     modules: {
@@ -130,5 +130,11 @@ export const useCreateArticleForm = () => {
     setState(prev => ({ ...prev, postData }))
   }, [quill, state.coverImagePreview, state.titleValue, state.hashtagsPreview, setState])
 
-  return { ...state, quillRef, textareaRef, handleCoverImgChange, handleGetHashtags, handleSubmit, handleTitleValueChange, handleAddHashtag, handleRemoveHashtag, handleShowUploadCoverImgModal, handleClearError, handleShowSearchHashtagsForm }
+
+ function setContent (content: string) {
+    quill.setContents(state.contentPreview)
+  }
+
+  
+  return { ...state, quillRef, textareaRef, handleCoverImgChange, handleGetHashtags, handleSubmit, handleTitleValueChange, handleAddHashtag, handleRemoveHashtag, handleShowUploadCoverImgModal, handleClearError, handleShowSearchHashtagsForm, setState }
 }

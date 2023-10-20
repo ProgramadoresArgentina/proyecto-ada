@@ -79,7 +79,7 @@ const MyBlogsList: NextPage = () => {
 					Ver
 				</Link>
 				<Link
-					href={`/article/edit/${id}`}
+					href={`/blog/edit/${url}`}
 					className="font-medium text-blue-500 hover:underline mx-4">
 					Editar
 				</Link>

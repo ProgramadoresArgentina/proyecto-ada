@@ -13,7 +13,6 @@ export default async function session(req: NextApiRequest, res: NextApiResponse)
                 res.status(204); return;
             }
             try {
-                console.log(session.user);
                 const userDB = await prisma.user.findUnique({
                     where: { email: session.user.email },
                     include: {

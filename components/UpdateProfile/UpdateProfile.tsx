@@ -111,7 +111,6 @@ export const UpdateProfile = ({
 			position: positions.join(" - "),
 		};
 		console.table(body);
-		console.log(body.position);
 
 		// fetchData("/api/users/userSettings/editUrl", "PUT", body);
 	};

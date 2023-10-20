@@ -52,7 +52,6 @@ export default function PostAsideSuggestions() {
 
 		if (loadingCards) return <Spinner />;
 
-		console.log({ suggestions });
 		return suggestions.map(({ id, image, title, userInfo }) => (
 			<PostAsideSuggestionsCard
 				key={id}

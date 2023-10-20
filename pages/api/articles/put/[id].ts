@@ -11,7 +11,7 @@ export default withApiAuthRequired(async function(req:NextApiRequest, res:NextAp
     const sessionUser = await getSession(req, res);
 
 
-    if (method == "GET"){
+    if (method == "POST"){
 
         try{
             const article = await prisma.articles.findUnique({
