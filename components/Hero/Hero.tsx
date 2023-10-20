@@ -17,7 +17,7 @@ const links = [
 export default function Hero() {
     
     return (
-        <div className="relative isolate  min-h-screen overflow-hidden pb-40 pt-32 bg-[#1B1F24]"
+        <div className="relative isolate  min-h-screen overflow-hidden pb-40 pt-16 md:pt-32 bg-[#1B1F24]"
         style={{'background': 'linear-gradient(180deg, #08081F 0%, rgba(13,17,23,1) 100%'}}>\
             <div className='bg-[transparent] absolute top-20 w-full'>
                 <div className="w-full text-center m-auto">
@@ -74,7 +74,7 @@ export default function Hero() {
                     </dl>
                 </div>
                 <div className="max-w-5xl m-auto mt-5">
-                    <h2 className="text-[4rem] font-bold tracking-tight text-white"><span className="degrade-text-orange">Comunidad</span> Programadores Argentina</h2>
+                    <h2 className="text-[3rem] md:text-[4rem] font-bold tracking-tight text-white"><span className="degrade-text-orange">Comunidad</span> Programadores Argentina</h2>
                     <p className="mt-6 text-lg leading-8 text-gray-300">ESPACIO PARA PROGRAMADORES Y PERSONAS DEL MUNDO IT⚡️    
                     </p>
                 </div>

@@ -57,7 +57,6 @@ function Publish() {
   const state = useCreateArticleForm() // Esto se haria dentro del componente, por ahora se hace aqui para compartir el estado con el preview
   const { content, title, coverImage, hashtags } = state.postData
   useEffect(() => {
-    console.log(state);
   }, [])
 
   return (

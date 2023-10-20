@@ -59,7 +59,6 @@ export const UpdateProfile = ({ openDialog, handleDialog }) => {
 			? setPlaceholder(dataUrl.title)
 			// : fetchUrl("/api/users/userSettings/");
             : '';
-		console.log(dataUrl);
 	}, [dataUrl]);
 
 	return (

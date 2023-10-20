@@ -154,7 +154,6 @@ const Blog: NextPage = () => {
                             {
                                 Array.from({length: total/20}, (a, index) => {
                                     const pageNr = index+1;
-                                    console.log(pageNr, page);
                                     return (
                                         <li>
                                             <a href="#" onClick={() => setPage(pageNr)}

@@ -1,11 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../../prismaClient/db";
+import { getSession } from "@auth0/nextjs-auth0";
 
 export default async function(req: NextApiRequest, res: NextApiResponse) {
     
     const {method} = req
     const blogUrl = String(req.query.id) // url
-    
+	const sessionUser = await getSession(req, res);
+
     if(method === "GET"){
         try {
 
@@ -19,7 +21,10 @@ export default async function(req: NextApiRequest, res: NextApiResponse) {
             })
 
             const getBlog = await prisma.articles.findUnique({
-                where:{url: blogUrl},
+                where:{
+                    url: blogUrl,
+                    userId: sessionUser.user.id
+                },
                 include:{
                     hashtags: true,
                     user: {

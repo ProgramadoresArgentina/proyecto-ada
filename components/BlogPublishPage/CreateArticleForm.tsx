@@ -22,7 +22,8 @@ export default function CreateArticleForm(state) {
             image: state.coverImagePreview,
             hashtags: state.hashtagsPreview
         }
-        fetch('/api/articles/post', {
+        const endpoint = state.id ? `/api/articles/put/${state.id}` : '/api/articles/post';
+        fetch(endpoint, {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -30,13 +31,15 @@ export default function CreateArticleForm(state) {
             },
             body: JSON.stringify(body)
         })
-            .then(response => response.json())
+            .then(response => {
+                if (response.status !== 200) throw Error();
+                return response.json()
+            })
             .then(data => {
-                window.localStorage.removeItem('state');
+                window.localStorage.removeItem('new');
                 setLoading(false);
-                launchToast("success", "Blog creado correctamente");
+                launchToast("success", state.id ? "Blog actualizado" : "Blog creado correctamente");
                 router.push(`/blog/${data.article.url}`)
-                
                 // setData(data);
             })
             .catch(error => {
@@ -63,7 +66,7 @@ export default function CreateArticleForm(state) {
             <div className='ql-editor-container flex flex-col text-base min-h-[65vh] pb-2 rounded shadow-[0_15px_30px_#0001] bg-[#10151C]' >
                 <CreateArticleFormToolbar />
                 <CreateArticleFormActions {...state} />
-                <div ref={state.quillRef} onChange={e => console.log(e)}></div>
+                <div ref={state.quillRef}></div>
             </div>
             <div className="flex items-center justify-end">
                 <button className='rounded-md text-lg px-5 py-2 hover:text-indigo-800 plain-button flex items-center gap-4'

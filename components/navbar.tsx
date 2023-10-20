@@ -11,7 +11,7 @@ import Logo from "../public/LogoProgramadoresArgentina.png";
 const returnLink = `/api/auth/login?returnTo=${encodeURIComponent("/")}`;
 const navigation = [
 	{ name: "Blog", path: "/blog" },
-	{ name: "Bolsa de Talentos", path: "/talentos" },
+	// { name: "Bolsa de Talentos", path: "/talentos" },
 	{ name: "Contacto", path: "/#contact" },
 ];
 
@@ -109,7 +109,7 @@ export default function Navbar() {
 															: "Iniciar sesión"
 													}
 												/>
-												<span className="text-white">
+												<span className="text-white hidden md:block">
 													{user
 														? user.name
 														: "Ingresar"}
@@ -143,7 +143,7 @@ export default function Navbar() {
 																</Link>
 															)}
 														</Menu.Item>
-														<Menu.Item>
+														{/* <Menu.Item>
 															{({ active }) => (
 																<div
 																	onClick={
@@ -159,7 +159,7 @@ export default function Navbar() {
 																	información
 																</div>
 															)}
-														</Menu.Item>
+														</Menu.Item> */}
 														<Menu.Item>
 															{({ active }) => (
 																<Link

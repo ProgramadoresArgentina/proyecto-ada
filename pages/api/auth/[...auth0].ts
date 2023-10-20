@@ -8,7 +8,9 @@ import {
 import { prisma } from "../../../prismaClient/db";
 
 const getLoginState = (req, loginOptions) => {
-	return {};
+	return {
+        testValue:  true
+    };
 };
 
 export default handleAuth({
@@ -37,26 +39,31 @@ async function createUser(user: Claims) {
 		where: { email: user.email },
 	});
 	if (!userExists) {
-		const userRow = await prisma.user.create({
-			data: {
-				email: user.email,
-				username: user.name,
-			},
-		});
-
-		const userSettingsRow = await prisma.userSettings.create({
-			data: {
-				avatar: user.picture || user.avatar,
-				description: "Soy nuevo en la comunidad!",
-				firstName: "",
-				lastName: "",
-				user: {
-					connect: {
-						id: userRow.id,
-					},
-				},
-			},
-		});
+        try {
+            const userRow = await prisma.user.create({
+                data: {
+                    email: user.email,
+                    username: user.name,
+                },
+            });
+    
+            await prisma.userSettings.create({
+                data: {
+                    avatar: user.picture || user.avatar,
+                    description: "Soy nuevo en la comunidad!",
+                    firstName: null,
+                    lastName: null,
+                    position: [],
+                    user: {
+                        connect: {
+                            id: userRow.id,
+                        },
+                    },
+                },
+            });
+        } catch (error) {
+            console.log(error);
+        }
 	}
 }
 

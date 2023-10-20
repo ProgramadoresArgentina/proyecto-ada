@@ -37,6 +37,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 							avatar: true,
 							status: true,
 							description: true,
+                            linkedin: true,
+                            github: true,
+                            behance: true,
+                            position: true,
+                            url: true,
+                            experienceLevel: true,
+                            minidescription: true,
 						},
 					});
 

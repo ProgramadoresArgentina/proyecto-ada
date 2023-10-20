@@ -19,6 +19,8 @@ import Linkedin from "../../public/portfolio/linkedin.svg";
 import BadgeMember from "../../public/portfolio/member.svg";
 import IconProy from "../../public/portfolio/proyects.svg";
 import IconSocials from "../../public/portfolio/socials.svg";
+import { launchToast } from "../../helpers/launchToast";
+import { saveAs } from 'file-saver';
 
 export const Portfolio: FC<any> = ({ user }) => {
 	const {
@@ -28,6 +30,27 @@ export const Portfolio: FC<any> = ({ user }) => {
 		getDataFromUserSettings,
 		getProyectsFromUser = null,
 	} = user;
+
+    function capitalizeArray(arr) {
+        return arr.map(function(element) {
+            return element.charAt(0).toUpperCase() + element.slice(1).toLowerCase();
+        });
+    }
+
+    const downloadResume = () => {
+        fetch('api/create-pdf')
+            .then(response => {
+                if (response.status !== 200) throw Error();
+                return response.blob()
+            })
+            .then(blob => {
+                launchToast("error", "Descargado");
+                saveAs(blob, "hello world.pdf");
+            })
+            .catch(error => {
+                launchToast("error", "No has creado tu primer cv aún");
+            });
+    }
 
 	const HeaderTitle = ({ url, name }) => (
 		<div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
@@ -217,9 +240,10 @@ export const Portfolio: FC<any> = ({ user }) => {
 								<li className="flex items-center md:flex-col lg:flex-row md:items-start py-3">
 									<span className="text-white">CV</span>
 									<span className="ml-auto md:ml-0 md:items-start lg:ml-auto">
-										<span className="plain-button py-1 px-2 rounded text-gray-300 text-sm">
+										<button className="plain-button py-1 px-2 rounded text-gray-300 text-sm"
+                                        onClick={() => downloadResume()}>
 											Descargar
-										</span>
+										</button>
 									</span>
 								</li>
 								<li className="flex items-center md:flex-col lg:flex-row md:items-start py-3">
@@ -310,7 +334,9 @@ export const Portfolio: FC<any> = ({ user }) => {
 											Posición
 										</div>
 										<div className="px-2 lg:px-4 py-2 text-gray-300">
-											Desarrollador de Software Junior
+											{
+                                                capitalizeArray(getDataFromUserSettings.position).join(', ')
+                                            }
 										</div>
 									</div>
 								</div>

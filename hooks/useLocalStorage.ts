@@ -1,6 +1,12 @@
+import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 
-export const useLocalStorage = (key: string, ininialValue: any) => {
+export const useLocalStorage = (ininialValue: any) => {
+    const route = useRouter();
+    const overwriteLocalStorage = route.pathname === '/blog/publish';
+    const key = overwriteLocalStorage ? 'new' : 'edit';
+
+
   const [storageValue, setStorageValue] = useState(() => {
     try {
       const item = JSON.parse(window.localStorage.getItem(key))
@@ -12,7 +18,7 @@ export const useLocalStorage = (key: string, ininialValue: any) => {
 
   const setValue = (value) => {
     try {
-      setStorageValue(value)
+        setStorageValue(value)
     } catch (error) {
       console.log(error)
     }

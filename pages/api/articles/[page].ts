@@ -72,6 +72,7 @@ export default async (req: NextApiRequest, res: NextApiResponse)=> {
     
                 res.status(200).json({result: allBlogs, itemsPerPage, page, total: count});
             }
+
         } 
         catch (err){res.status(404).json({message:"ERROR_FINDING_BLOGS", err})};
     } else {

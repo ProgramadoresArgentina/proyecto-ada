@@ -31,11 +31,11 @@ model UserSettings{
   minidescription String?
   description String?
   role Role @default(USER)
-  status Estatus @default(null)
+  status Status @default(BUSCANDO)
+  experienceLevel ExperienceLevel @default(TRAINEE)
   avatar String
-  description String
   url String @unique @default(uuid())
-  position Position @default(null)
+  position Position[]
   // Relation
   user User @relation(fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
   userId Int @unique
@@ -95,10 +95,17 @@ enum Role {
   ADMIN
 }
 
-enum Estatus {
+enum ExperienceLevel {
+  TRAINEE
+  JUNIOR
+  SEMI_SENIOR
+  SENIOR
+}
+
+enum Status {
 	CONTRATANDO
 	BUSCANDO
-  null
+    MIEMBRO
 }
 
 enum Position {
@@ -113,8 +120,8 @@ enum Position {
   CRYPTO
   CYBERSECURITY
   UX_UI
-  null
- }
+  ADMIN_SYSTEM
+}
 // MODELO DE ARTICULOS
 model Articles {
   id Int @id @default(autoincrement())
