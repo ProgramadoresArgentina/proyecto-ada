@@ -30,48 +30,6 @@ export default async (req:NextApiRequest, res:NextApiResponse)=>{
         }
         break;
         
-        case "POST":
-            try{
-                const {id} = query
-                const {title, startYear, endYear, description } =  body
-                const createExperience = await prisma.experience.create({
-                  data: {
-                        title,
-                        startYear, //"2012-04-23T18:28:43.511Z" 
-                        endYear, //"2012-04-23T18:28:43.511Z"
-                        description,
-                        experienceId: Number(id) 
-                    },select:{
-                        experience: true,
-                        title: true
-                    }
-                  }
-                );
-                res.json(createExperience);
-            }catch(e:any){
-                console.log(e.message);
-                res.status(200).json("ERROR_CREATING_EXPERIENCE");
-            }
-            break;
-
-        case "PUT":
-            try{
-                const {id} = query
-                const {title, startYear, endYear, description } =  body
-                const updateOneExperience = await prisma.experience.update({
-                    where: { id : Number(id)},
-                    data: {
-                            title,
-                            startYear,
-                            endYear,
-                            description
-                        }
-                    })
-                res.json({ updateOneExperience })
-            }catch(e){
-                res.status(200).json({message : "ERROR TRYING TO UPDATE EXPERIENCE USER"});
-            }
-            break;
 
         case "DELETE":
             try{

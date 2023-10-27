@@ -82,7 +82,7 @@ export default function Navbar() {
 											</Link>
 										))}
 										<Link
-											href="/generarcv"
+											href="/generador-cv"
 											className="rounded-md px-3 py-2  text-sm hover:text-indigo-800 plain-button">
 											Generar mi CV
 										</Link>
@@ -163,7 +163,7 @@ export default function Navbar() {
 														<Menu.Item>
 															{({ active }) => (
 																<Link
-																	href="/myblogs"
+																	href="/blogs"
 																	className={classNames(
 																		active
 																			? "bg-gray-100"
@@ -230,7 +230,7 @@ export default function Navbar() {
 								))}
 								<Disclosure.Button
 									as="a"
-									href="/generarcv"
+									href="/generador-cv"
 									className="block rounded-md px-3 py-2 text-base font-medium plain-button">
 									Generar mi CV
 								</Disclosure.Button>

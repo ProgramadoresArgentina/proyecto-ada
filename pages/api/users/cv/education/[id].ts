@@ -28,54 +28,6 @@ export default async (req:NextApiRequest, res:NextApiResponse)=>{
             res.status(200).json({message: `EDUCATION_WITH_CV_NUMBER: ${query.id} NOT_FOUND`});
         }
         break;
-        
-        case "POST":
-            try{
-                const {id} = query
-                const {title, startYear, endYear, description } =  body
-                const createEducation = await prisma.education.create({
-                  data: {
-                        title,
-                        startYear, //"2012-04-23T18:28:43.511Z" 
-                        endYear, //"2012-04-23T18:28:43.511Z"
-                        description,
-                        educationId : Number(id),
-                    },
-                    select:{
-                        education:true,  // Este es el numero de ID del CV
-                        title: true,
-                    }
-                  }
-                );
-                res.json(createEducation);
-            }catch(e:any){
-                console.log(e.message);
-                res.status(200).json("ERROR_CREATING_EDUCATION");
-            }
-            break;
-
-        case "PUT":
-            try{
-                const {id} = query
-                const {title, startYear, endYear, description } =  body
-                const updateEducation = await prisma.education.update({
-                    where: { id : Number(id)},
-                    data: {
-                            title,
-                            startYear,
-                            endYear,
-                            description
-                        },
-                        select:{
-                            education: true,
-                            educationId: true,
-                        }
-                    })
-                res.json({ updateEducation })
-            }catch(e){
-                res.status(200).json({message : "ERROR TRYING TO UPDATE EDUCATION USER"});
-            }
-            break;
 
         case "DELETE":
             try{

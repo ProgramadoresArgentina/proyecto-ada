@@ -21,6 +21,9 @@ import IconProy from "../../public/portfolio/proyects.svg";
 import IconSocials from "../../public/portfolio/socials.svg";
 import { launchToast } from "../../helpers/launchToast";
 import { saveAs } from 'file-saver';
+import { useQuill } from "react-quilljs";
+import hljs from "highlight.js";
+import { formatsOptions } from "../../constants/quilljs.config";
 
 export const Portfolio: FC<any> = ({ user }) => {
 	const {
@@ -85,25 +88,37 @@ export const Portfolio: FC<any> = ({ user }) => {
 		createdAt,
 		image,
         url
-	}) => (
-		<div className="flex max-w-[24rem] flex-col rounded-md bg-gray-800 text-white shadow-md p-4">
+	}) => {
+        const { quill, quillRef } = useQuill({
+            readOnly: true,
+            modules: {
+              toolbar: false,
+              syntax: {
+                highlight: (text: string) => hljs.highlightAuto(text).value,
+              },
+            },
+            formats: formatsOptions,
+        })
+        if (quill) quill.setContents(JSON.parse(content))
+         
+        return (
+            <div className="flex max-w-[24rem] flex-col rounded-md bg-gray-800 text-white shadow-md p-4">
 			<img
 				title={title}
 				src={image}
 				alt={title}
-				className="w-full object-cover rounded-lg"
+				className="w-full object-cover rounded-lg h-44"
 			/>
-			<h4 className="text-xl font-semibold text-gray-100 mt-4">
+			<h4 className="text-xl font-semibold text-gray-100 mt-4 truncate">
 				{title}
 			</h4>
-			<p className="h-36 overflow-hidden text-l font-normal text-gray-500 mt-4 line-clamp-4 ">
-				{content}
+			<p className="overflow-hidden text-l font-normal text-gray-500 mt-4 line-clamp-4 h-24">
+                <div ref={quillRef}></div>
 			</p>
-			<h3
-				onClick={() => openInNewTab(`/blog/${url}`)}
+			<Link href={`/blog/${url}`}
 				className="text-blue-600 font-lg text-semibold cursor-pointer mt-6">
 				Ir al blog
-			</h3>
+			</Link>
 			<div className="flex items-center justify-between pt-6">
 				<div className="flex items-center space-x-3">
 					{hashtags.map((hashtag) => (
@@ -118,7 +133,8 @@ export const Portfolio: FC<any> = ({ user }) => {
 				<p className="text-xs">{convertToDate(createdAt)}</p>
 			</div>
 		</div>
-	);
+        )
+    };
 
 	const ProyectCard = ({ title, techs, description, link, source }) => (
 		<div className="w-full">
