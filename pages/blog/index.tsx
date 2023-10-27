@@ -28,8 +28,12 @@ const Blog: NextPage = () => {
 
 	useEffect(() => {
         let body = {}
-        if (page === 1 && allHastagQuery.length > 0) body = { hashtag: allHastagQuery.join(",") };
-        fetchData(`/api/articles/${page}`, "GET");
+        if (page === 1 && allHastagQuery.length > 0) {
+            body = { hashtag: allHastagQuery.join(",") };
+            fetchData(`/api/articles/${page}`, "POST", body);
+        } else {
+            fetchData(`/api/articles/${page}`, "GET");
+        }
 	}, [page]);
 
 	useEffect(() => {
@@ -65,7 +69,7 @@ const Blog: NextPage = () => {
                                 Crear un nuevo artículo
                             </span>
                         </Link>
-                        <Link href="/myblogs" className="text-sm flex justify-center mt-5 hover:underline">
+                        <Link href="/blogs" className="text-sm flex justify-center mt-5 hover:underline">
                             <span>Mis Blogs</span>
                         </Link>
                     </div>
@@ -155,7 +159,7 @@ const Blog: NextPage = () => {
                                 Array.from({length: total/20}, (a, index) => {
                                     const pageNr = index+1;
                                     return (
-                                        <li>
+                                        <li key={index}>
                                             <a href="#" onClick={() => setPage(pageNr)}
                                             className={`${page === pageNr ? 'bg-gray-700 text-white' : 'bg-gray-800 text-gray-500'} flex items-center justify-center px-3 h-8 leading-tight border border-gray-700 hover:bg-gray-700 hover:text-white
                                             ${pageNr === 1 && 'rounded-l-lg'} ${pageNr === 7 && 'rounded-r-lg'}`}>{pageNr}</a>

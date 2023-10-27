@@ -3,53 +3,19 @@ import { basicSchema } from '../../schemas/basicSchema';
 import AddBtn from './AddBtn';
 import RemoveBtn from './RemoveBtn';
 import { saveAs } from 'file-saver';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { launchToast } from '../../helpers/launchToast';
 
-const FormLayout: React.FC<{}> = () => {
+const FormLayout = (params) => {
+    const [user, setUser] = useState(null);
     const [stepNo, setStepNo] = useState(1);
     const [loading, setLoading] = useState(false);
     const steps = ['Personal', 'Educación', 'Certificados', 'Experiencia', 'Idiomas', 'Descargar']
 
-    interface MyFormValues {
+    const initialValues = {
         basic: [{
-            name: string;
-            position: string;
-            linkedIn: string;
-            portfolio: string;
-            github: string;
-            description: string;
-        }],
-        experiences: [{
-            title: string;
-            company: string;
-            dateSince: string;
-            dateTo: string;
-            place: string;
-            description: string;
-            currently: boolean;
-        }],
-        education: [{
-            degree: string;
-            university: string;
-            dateSince: string;
-            dateTo: string;
-            currently: boolean;
-            place: string;
-            description: string;
-        }],
-        certificates: [{
-            degree: string;
-            university: string;
-            linkId: any;
-        }],
-        languages: [{
-            name: string;
-            level: string;
-        }]
-    }
-    const initialValues: MyFormValues = {
-        basic: [{
-            name: "",
+            firstname: "",
+            lastname: "",
             position: "",
             portfolio: "",
             linkedIn: "",
@@ -85,9 +51,75 @@ const FormLayout: React.FC<{}> = () => {
         }]
     }
 
+    useEffect(() => {
+        if (params.id && params.id !== 0) {
+            loadResumeForm(params.id);
+        } 
+    }, []);
+
+    function loadResumeForm(resumeId: number) {
+        setLoading(true);
+        fetch(`/api/resume/${resumeId}`)
+            .then(response => {
+                if (response.status !== 200) throw Error();
+                return response.json()
+            })
+          .then(data => {
+            const userData = {
+                basic: [{
+                    firstname: data.userSettings.firstName || '',
+                    lastname: data.userSettings.lastname || '',
+                    position: data.userSettings.position,
+                    behance: data.userSettings.behance || '',
+                    github: data.userSettings.github || '',
+                    linkedIn: data.userSettings.linkedin || '',
+                    description: data.userSettings.description || ''
+                }],
+                education: [{
+                    degree: "",
+                    university: "",
+                    dateSince: "",
+                    dateTo: "",
+                    currently: false,
+                    place: "",
+                    description: ""
+                }],
+                certificates: [{
+                    degree: "",
+                    university: "",
+                    linkId: ""
+                }],
+                experiences: [{
+                    title: "",
+                    company: "",
+                    dateSince: "",
+                    dateTo: "",
+                    currently: false,
+                    place: "",
+                    description: "",
+                }],
+                languages: [{
+                    name: "",
+                    level: ""
+                }]
+            }
+            setUser(userData);
+            setLoading(false);
+        })
+          .catch(error => {
+            launchToast("error","Error al cargar, intentelo nuevamente.");
+        });
+    }
+
     const onSubmit = (values) => {
         setLoading(true);
-        fetch('api/create-pdf',{
+        const body = {
+            title: 'Title',
+            certifications: values.certifications,
+            education: values.education,
+            experience: values.experience,
+        }
+        fetch(`/api/resume/${params.id}`,{
             method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -98,7 +130,7 @@ const FormLayout: React.FC<{}> = () => {
         .then(response => response.blob())
         .then(blob => {
             setLoading(false);
-            saveAs(blob, `${values.basic[0].name}-${Date.now()}.pdf`);
+            // saveAs(blob, `${values.basic[0].name}-${Date.now()}.pdf`);
             // actions.resetForm();
         })
         .catch(error => {
@@ -129,6 +161,15 @@ const FormLayout: React.FC<{}> = () => {
             top: 0,
             behavior: 'smooth',
         });
+    }
+
+    if (loading) {
+        return (
+        <div className="flex items-center justify-center gap-5">
+            <div className="w-5 h-5 aspect-square rounded-full border-4 border-solid border-l-indigo-500 border-t-indigo-500 animate-spin"></div>
+            <span className='text-white'>Cargando tu CV..</span>
+        </div>
+        )
     }
 
 
@@ -195,17 +236,32 @@ const FormLayout: React.FC<{}> = () => {
                                                         <div key={index} className="flex flex-wrap -mx-3 mb-6 gap-y-2">
                                                             <div className="w-full md:w-1/2 px-3 mb-0">
                                                                 <label className="text-white">
-                                                                    Nombre Completo * 
+                                                                    Nombre * 
                                                                     {
-                                                                        getIn(errors, `basic.${index}.name`) && <span className='text-red-300 text-sm ml-2'>({getIn(errors, `basic.${index}.name`)})</span>
+                                                                        getIn(errors, `basic.${index}.firstname`) && <span className='text-red-300 text-sm ml-2'>({getIn(errors, `basic.${index}.firstname`)})</span>
                                                                     }
                                                                 </label>
                                                                 <Field
                                                                     className="mt-2 appearance-none block w-full text-white border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none  bg-[#2D3138]"
-                                                                    name={`basic.${index}.name`}
+                                                                    name={`basic.${index}.firstname`}
                                                                     placeholder="Programadores Argentina"
                                                                     type="text"
-                                                                    id={getIn(errors, `basic.${index}.name`) && 'invalid'}
+                                                                    id={getIn(errors, `basic.${index}.firstname`) && 'invalid'}
+                                                                />
+                                                            </div>
+                                                            <div className="w-full md:w-1/2 px-3 mb-0">
+                                                                <label className="text-white">
+                                                                    Apellido * 
+                                                                    {
+                                                                        getIn(errors, `basic.${index}.lastname`) && <span className='text-red-300 text-sm ml-2'>({getIn(errors, `basic.${index}.lastname`)})</span>
+                                                                    }
+                                                                </label>
+                                                                <Field
+                                                                    className="mt-2 appearance-none block w-full text-white border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none  bg-[#2D3138]"
+                                                                    name={`basic.${index}.lastname`}
+                                                                    placeholder="Programadores Argentina"
+                                                                    type="text"
+                                                                    id={getIn(errors, `basic.${index}.lastname`) && 'invalid'}
                                                                 />
                                                             </div>
                                                             <div className="w-full md:w-1/2 px-3 mb-0 hidden">

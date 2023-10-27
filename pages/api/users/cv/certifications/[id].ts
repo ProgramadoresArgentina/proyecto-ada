@@ -29,53 +29,6 @@ export default async (req:NextApiRequest, res:NextApiResponse)=>{
             res.status(200).json({message: `CERTIFICATES_WITH_CV_NUMBER: ${query.id} NOT_FOUND`})
         }
         break;
-        
-        case "POST":
-            try{
-                const {id} = query
-                const {title, startYear, endYear, description } =  body
-                const createCertificate = await prisma.certifications.create({
-                  data: {
-                        title,
-                        startYear, //"2012-04-23T18:28:43.511Z" 
-                        endYear, //"2012-04-23T18:28:43.511Z"
-                        description,
-                        certificationsId : Number(id),
-                    },select:{
-                        certifications:true,  // Este es el numero de ID del CV
-                        title: true,
-                    }
-                  }
-                );
-                res.json(createCertificate);
-            }catch(e:any){
-                console.log(e.message);
-                res.status(200).json("ERROR_CREATING_CERTIFICATE");
-            }
-            break;
-
-        case "PUT":
-            try{
-                const {id} = query
-                const {title, startYear, endYear, description } =  body
-                const updateCertificate = await prisma.certifications.update({
-                    where: { id : Number(id)},
-                    data: {
-                            title,
-                            startYear,
-                            endYear,
-                            description
-                        }, 
-                        select:{
-                            certifications: true,
-                            certificationsId: true,
-                        }
-                    })
-                res.json({ updateCertificate })
-            }catch(e){
-                res.status(200).json({message : "ERROR_TRYING_TO_UPDATE_USER_CERTIFICATE"});
-            }
-            break;
 
         case "DELETE":
             try{

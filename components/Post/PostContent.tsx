@@ -8,7 +8,8 @@ import { useEffect } from 'react'
 import { formatsOptions } from "../../constants/quilljs.config";
 
 export default function PostContent({ post }: PostUSerType) {
-	const { content, createdBy, hashtags, image, title, user, views } = post;
+	const { createdBy, hashtags, image, title, user, views } = post;
+	let { content } = post;
     const { quill, quillRef } = useQuill({
       readOnly: true,
       modules: {
@@ -22,6 +23,7 @@ export default function PostContent({ post }: PostUSerType) {
 
     useEffect(() => {
       if (quill && content) {
+        if (typeof content === 'string') content = JSON.parse(content);
         quill.setContents(content)
       }
     }, [quill, content])

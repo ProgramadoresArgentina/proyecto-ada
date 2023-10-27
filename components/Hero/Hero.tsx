@@ -18,7 +18,7 @@ export default function Hero() {
     
     return (
         <div className="relative isolate  min-h-screen overflow-hidden pb-40 pt-16 md:pt-32 bg-[#1B1F24]"
-        style={{'background': 'linear-gradient(180deg, #08081F 0%, rgba(13,17,23,1) 100%'}}>\
+        style={{'background': 'linear-gradient(180deg, #08081F 0%, rgba(13,17,23,1) 100%'}}>
             <div className='bg-[transparent] absolute top-20 w-full'>
                 <div className="w-full text-center m-auto">
                     <ActiveEvents/>

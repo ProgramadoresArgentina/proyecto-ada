@@ -75,8 +75,6 @@ async function getUser(session: Session): Promise<{}> {
                 }
             }
         }
-    }, (error) => {
-        if (error) res.status(500).send(err)
     });
     return userDB;
 }

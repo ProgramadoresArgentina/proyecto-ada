@@ -31,7 +31,7 @@ const UserPorfolio: NextPage = () => {
 				content={
 					"No encontramos al usuario en nuestra base de datos o el perfil no ha completado su CV. Si eres nuevo , te invitamos a registrarte y completar tu CV. Si ya formas parte de Programadores Argentina, verifica que lo hayas generado correctamente."
 				}
-				url={"/generarcv"}
+				url={"/generador-cv"}
 				buttonName={"Completar CV"}
 			/>
 		);

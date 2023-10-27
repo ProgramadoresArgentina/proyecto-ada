@@ -54,9 +54,11 @@ model Cv {
 
 model Experience {
   id           Int      @id @default(autoincrement())
-  title        String
-  startYear    DateTime
-  endYear      DateTime
+  company        String
+  dateSince    DateTime
+  dateTo      DateTime
+  currently     Boolean
+  place        String
   description  Json?
   experienceId Int
   experience   Cv       @relation(fields: [experienceId], references: [id], onDelete: Cascade, onUpdate: Restrict)
@@ -64,9 +66,11 @@ model Experience {
 
 model Education {
   id          Int      @id @default(autoincrement())
-  title       String
-  startYear   DateTime
-  endYear     DateTime
+  degree       String
+  university       String
+  dateSince   DateTime
+  dateTo     DateTime
+  currently     Boolean
   description Json?
   educationId Int
   education   Cv       @relation(fields: [educationId], references: [id], onDelete: Cascade, onUpdate: Restrict)
@@ -74,10 +78,8 @@ model Education {
 
 model Certifications {
   id               Int      @id @default(autoincrement())
-  title            String?
-  description      Json?
-  startYear        DateTime
-  endYear          DateTime
+  degree           String
+  university       String
   certificationsId Int
   certifications   Cv       @relation(fields: [certificationsId], references: [id], onDelete: Cascade, onUpdate: Restrict)
 }

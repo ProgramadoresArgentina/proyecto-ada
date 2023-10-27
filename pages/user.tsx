@@ -241,7 +241,7 @@ const User: NextPage = () => {
                                     className="w-[130px] text-gray-100 py-2 px-2 text-right cursor-pointer">
                                     {link}
                                 </label>
-                                <input
+                                <Field
                                     id={value}
                                     type="text"
                                     name={value}

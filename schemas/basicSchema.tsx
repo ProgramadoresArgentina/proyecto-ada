@@ -9,7 +9,8 @@ export const basicSchema = yup.object().shape({
 
     basic: yup.array().of(
         yup.object().shape({
-            name: yup.string().required("requerido"),
+            firstname: yup.string().required("requerido"),
+            lastname: yup.string().required("requerido"),
             position: yup.string(),
             descripcion: yup.string()
         })

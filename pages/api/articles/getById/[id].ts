@@ -23,7 +23,6 @@ export default async function(req: NextApiRequest, res: NextApiResponse) {
             const getBlog = await prisma.articles.findUnique({
                 where:{
                     url: blogUrl,
-                    userId: sessionUser.user.id
                 },
                 include:{
                     hashtags: true,
