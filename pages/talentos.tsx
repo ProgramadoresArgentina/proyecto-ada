@@ -9,7 +9,6 @@ const  talents=() =>{
         </h1>
     <TalentsMarquee/>    
     </div>
-    
   )
 }
 export default talents
