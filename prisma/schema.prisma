@@ -22,58 +22,58 @@ model User {
 
 // MODELO PERFIL
 model UserSettings{
-  id Int @id @default(autoincrement())
-  firstName String?
-  lastName String?
-  linkedin String?
-  github String?
-  behance String?
-  minidescription String?
-  description String?
-  role Role @default(USER)
-  status Status @default(BUSCANDO)
-  experienceLevel ExperienceLevel @default(TRAINEE)
-  avatar String
-  url String @unique @default(uuid())
-  position Position[]
+  id               Int @id @default(autoincrement())
+  firstName        String?
+  lastName         String?
+  linkedin         String?
+  github           String?
+  behance          String?
+  minidescription  String?
+  description      String?
+  role             Role @default(USER)
+  status           Status @default(BUSCANDO)
+  experienceLevel  ExperienceLevel @default(TRAINEE)
+  avatar           String
+  url              String @unique @default(uuid())
+  position         Position[]
   // Relation
-  user User @relation(fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
-  userId Int @unique
+  user             User @relation(fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
+  userId           Int @unique
 }
 
 model Cv {
-  id Int @id @default(autoincrement())
-  title String
-  published Boolean @default(false)
-  user User @relation(fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
-  userId Int @unique
-  experience Experience[]
-  education Education[]
-  certifications Certifications[]
+  id              Int @id @default(autoincrement())
+  title           String
+  published       Boolean @default(false)
+  user User       @relation(fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
+  userId          Int @unique
+  experience      Experience[]
+  education       Education[]
+  certifications  Certifications[]
 }
 
 model Experience {
-  id           Int      @id @default(autoincrement())
-  company        String
-  dateSince    DateTime
-  dateTo      DateTime
+  id            Int      @id @default(autoincrement())
+  company       String
+  dateSince     DateTime
+  dateTo        DateTime
   currently     Boolean
-  place        String
-  description  Json?
-  experienceId Int
+  place         String
+  description   Json?
+  experienceId  Int
   experience   Cv       @relation(fields: [experienceId], references: [id], onDelete: Cascade, onUpdate: Restrict)
 }
 
 model Education {
-  id          Int      @id @default(autoincrement())
-  degree       String
-  university       String
-  dateSince   DateTime
-  dateTo     DateTime
+  id            Int      @id @default(autoincrement())
+  degree        String
+  university    String
+  dateSince     DateTime
+  dateTo        DateTime
   currently     Boolean
-  description Json?
-  educationId Int
-  education   Cv       @relation(fields: [educationId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  description   Json?
+  educationId   Int
+  education     Cv      @relation(fields: [educationId], references: [id], onDelete: Cascade, onUpdate: Restrict)
 }
 
 model Certifications {
@@ -82,6 +82,19 @@ model Certifications {
   university       String
   certificationsId Int
   certifications   Cv       @relation(fields: [certificationsId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+}
+
+model Languages{
+  id     Int @id @default(autoincrement())
+  name   String
+  level  LanguageLevel
+}
+
+enum LanguageLevel{
+    A1_A2
+    B1_B2
+    C1_C2 
+    NATIVE
 }
 
 model Events {
@@ -107,7 +120,7 @@ enum ExperienceLevel {
 enum Status {
 	CONTRATANDO
 	BUSCANDO
-    MIEMBRO
+  MIEMBRO
 }
 
 enum Position {
