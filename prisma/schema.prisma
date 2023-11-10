@@ -14,7 +14,7 @@ model User {
   published Boolean @default(true)
   createdAt DateTime @default(now()) 
   updateAt DateTime  @updatedAt
-  cv Cv?
+  cv Cv[]
   userSettings UserSettings? 
   articles Articles[]
   achievements Achievements[]
@@ -46,19 +46,20 @@ model Cv {
   title           String
   published       Boolean @default(false)
   user User       @relation(fields: [userId], references: [id], onUpdate: Restrict, onDelete: Cascade)
-  userId          Int @unique
+  userId          Int
   experience      Experience[]
   education       Education[]
   certifications  Certifications[]
+  languages       Languages[]
 }
 
 model Experience {
   id            Int      @id @default(autoincrement())
+  title         String
   company       String
   dateSince     DateTime
-  dateTo        DateTime
+  dateTo        DateTime?
   currently     Boolean
-  place         String
   description   Json?
   experienceId  Int
   experience   Cv       @relation(fields: [experienceId], references: [id], onDelete: Cascade, onUpdate: Restrict)
@@ -69,7 +70,7 @@ model Education {
   degree        String
   university    String
   dateSince     DateTime
-  dateTo        DateTime
+  dateTo        DateTime?
   currently     Boolean
   description   Json?
   educationId   Int
@@ -80,6 +81,7 @@ model Certifications {
   id               Int      @id @default(autoincrement())
   degree           String
   university       String
+  linkId       String
   certificationsId Int
   certifications   Cv       @relation(fields: [certificationsId], references: [id], onDelete: Cascade, onUpdate: Restrict)
 }
@@ -88,6 +90,8 @@ model Languages{
   id     Int @id @default(autoincrement())
   name   String
   level  LanguageLevel
+  languagesId Int
+  languages   Cv       @relation(fields: [languagesId], references: [id], onDelete: Cascade, onUpdate: Restrict)
 }
 
 enum LanguageLevel{

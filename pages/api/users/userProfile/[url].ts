@@ -19,7 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 					},
 				});
 
-				const getDataFromCv = await prisma.cv.findUnique({
+				const getDataFromCv = await prisma.cv.findFirst({
 					where: { userId: getUserID.userId },
 					select: {
 						experience: true,

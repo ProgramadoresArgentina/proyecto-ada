@@ -5,56 +5,57 @@ import RemoveBtn from './RemoveBtn';
 import { saveAs } from 'file-saver';
 import { useEffect, useState } from 'react';
 import { launchToast } from '../../helpers/launchToast';
+var initialValuesMock = {
+    title: "Nuevo curriculum",
+    basic: [{
+        firstname: "",
+        lastname: "",
+        position: "",
+        portfolio: "",
+        linkedIn: "",
+        github: "",
+        description: ""
+    }],
+    education: [{
+        degree: "",
+        university: "",
+        dateSince: "",
+        dateTo: "",
+        currently: false,
+        description: ""
+    }],
+    certificates: [{
+        degree: "",
+        university: "",
+        linkId: ""
+    }],
+    experiences: [{
+        title: "",
+        company: "",
+        dateSince: "",
+        dateTo: "",
+        currently: false,
+        description: "",
+    }],
+    languages: [{
+        name: "",
+        level: ""
+    }]
+}
 
 const FormLayout = (params) => {
-    const [user, setUser] = useState(null);
+    const [initialValues, setInitialValues] = useState(initialValuesMock);
     const [stepNo, setStepNo] = useState(1);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const steps = ['Personal', 'Educación', 'Certificados', 'Experiencia', 'Idiomas', 'Descargar']
 
-    const initialValues = {
-        basic: [{
-            firstname: "",
-            lastname: "",
-            position: "",
-            portfolio: "",
-            linkedIn: "",
-            github: "",
-            description: ""
-        }],
-        education: [{
-            degree: "",
-            university: "",
-            dateSince: "",
-            dateTo: "",
-            currently: false,
-            place: "",
-            description: ""
-        }],
-        certificates: [{
-            degree: "",
-            university: "",
-            linkId: ""
-        }],
-        experiences: [{
-            title: "",
-            company: "",
-            dateSince: "",
-            dateTo: "",
-            currently: false,
-            place: "",
-            description: "",
-        }],
-        languages: [{
-            name: "",
-            level: ""
-        }]
-    }
 
     useEffect(() => {
         if (params.id && params.id !== 0) {
             loadResumeForm(params.id);
-        } 
+        } else {
+            setLoading(false);
+        }
     }, []);
 
     function loadResumeForm(resumeId: number) {
@@ -64,46 +65,25 @@ const FormLayout = (params) => {
                 if (response.status !== 200) throw Error();
                 return response.json()
             })
-          .then(data => {
-            const userData = {
+          .then(cvData => {
+            const formatValue = {
+                title: cvData.title,
                 basic: [{
-                    firstname: data.userSettings.firstName || '',
-                    lastname: data.userSettings.lastname || '',
-                    position: data.userSettings.position,
-                    behance: data.userSettings.behance || '',
-                    github: data.userSettings.github || '',
-                    linkedIn: data.userSettings.linkedin || '',
-                    description: data.userSettings.description || ''
-                }],
-                education: [{
-                    degree: "",
-                    university: "",
-                    dateSince: "",
-                    dateTo: "",
-                    currently: false,
-                    place: "",
+                    firstname: "",
+                    lastname: "",
+                    position: "",
+                    portfolio: "",
+                    linkedIn: "",
+                    github: "",
                     description: ""
                 }],
-                certificates: [{
-                    degree: "",
-                    university: "",
-                    linkId: ""
-                }],
-                experiences: [{
-                    title: "",
-                    company: "",
-                    dateSince: "",
-                    dateTo: "",
-                    currently: false,
-                    place: "",
-                    description: "",
-                }],
-                languages: [{
-                    name: "",
-                    level: ""
-                }]
+                education: cvData.education.map(e => {e.dateSince = formatDateFromDatabase(e.dateSince);e.dateTo = formatDateFromDatabase(e.dateTo);return e;}) ,
+                certificates: cvData.certifications,
+                experiences: cvData.experience.map(e => {e.dateSince = formatDateFromDatabase(e.dateSince);e.dateTo = formatDateFromDatabase(e.dateTo);return e;}) ,
+                languages: cvData.languages
             }
-            setUser(userData);
+            console.log(formatValue);
+            setInitialValues(formatValue);
             setLoading(false);
         })
           .catch(error => {
@@ -111,13 +91,23 @@ const FormLayout = (params) => {
         });
     }
 
+    function formatDateFromDatabase(dateString: string): string {
+        if (!dateString) return "";
+        const dateObject = new Date(dateString);
+        const year = dateObject.getFullYear();
+        const month = String(dateObject.getMonth() + 1).padStart(2, '0'); // Los meses van de 0 a 11
+        const day = String(dateObject.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
     const onSubmit = (values) => {
         setLoading(true);
         const body = {
-            title: 'Title',
-            certifications: values.certifications,
-            education: values.education,
-            experience: values.experience,
+            title: values.title,
+            certifications: values.certificates || [],
+            education: values.education || [],
+            experience: values.experiences || [],
+            languages: values.languages || [],
         }
         fetch(`/api/resume/${params.id}`,{
             method: 'POST',
@@ -125,11 +115,30 @@ const FormLayout = (params) => {
               'Accept': 'application/json',
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify(values)
+            body: JSON.stringify(body)
         })
+        .then(response => {
+            if (response.status !== 200) throw Error();
+            return response.json()
+        })
+        .then(res => {
+            setLoading(false);
+            console.log(res);
+            // saveAs(blob, `${values.basic[0].name}-${Date.now()}.pdf`);
+            // actions.resetForm();
+        })
+        .catch(error => {
+            launchToast("error","Error al intentar crear el curriculum, intentelo nuevamente.");
+            setLoading(false);
+        });
+    }
+
+    const downloadCv = (cvId: number) => {
+        fetch(`/api/resume/download/${cvId}`)
         .then(response => response.blob())
         .then(blob => {
             setLoading(false);
+            launchToast("success", "Procesando y descargando CV");
             // saveAs(blob, `${values.basic[0].name}-${Date.now()}.pdf`);
             // actions.resetForm();
         })
@@ -234,6 +243,21 @@ const FormLayout = (params) => {
                                                 {values.basic.length > 0 &&
                                                     values.basic.map((basic, index) => (
                                                         <div key={index} className="flex flex-wrap -mx-3 mb-6 gap-y-2">
+                                                            <div className="w-full px-3 mb-0">
+                                                                <label className="text-white">
+                                                                    Nombre de curriculum * 
+                                                                    {
+                                                                        getIn(errors, `title`) && <span className='text-red-300 text-sm ml-2'>({getIn(errors, `title`)})</span>
+                                                                    }
+                                                                </label>
+                                                                <Field
+                                                                    className="mt-2 appearance-none block w-full text-white border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none  bg-[#2D3138]"
+                                                                    name={`title`}
+                                                                    placeholder="Curriculum en español"
+                                                                    type="text"
+                                                                    id={getIn(errors, `title`) && 'invalid'}
+                                                                />
+                                                            </div>
                                                             <div className="w-full md:w-1/2 px-3 mb-0">
                                                                 <label className="text-white">
                                                                     Nombre * 
@@ -347,7 +371,7 @@ const FormLayout = (params) => {
                                                         values.education.map((education, index) => (
                                                             <div key={index} className={`${values.education.length > 1 && 'border-b mb-5 border-zinc-600'}`}>
                                                                 {
-                                                                    values.education.length > 1 &&
+                                                                    values.education.length >= 1 &&
                                                                     <div className="flex flex-wrap justify-end">
                                                                         <RemoveBtn
                                                                             onClick={() => remove(index)}
@@ -472,7 +496,7 @@ const FormLayout = (params) => {
                                                         values.certificates.map((certificates, index) => (
                                                             <div key={index} className={`${values.certificates.length > 1 && 'border-b mb-5 border-zinc-600'}`}>
                                                                 {
-                                                                    values.certificates.length > 1 &&
+                                                                    values.certificates.length >= 1 &&
                                                                     <div className="flex flex-wrap justify-end">
                                                                         <RemoveBtn
                                                                             onClick={() => remove(index)}
@@ -554,7 +578,7 @@ const FormLayout = (params) => {
                                                         values.experiences.map((experiences, index) => (
                                                             <div key={index} className={`${values.experiences.length > 1 && 'border-b border-zinc-600 mb-5'}`}>
                                                                 {
-                                                                    values.experiences.length > 1 &&
+                                                                    values.experiences.length >= 1 &&
                                                                     <div className="flex flex-wrap justify-end">
                                                                         <RemoveBtn
                                                                             onClick={() => remove(index)}
@@ -730,10 +754,10 @@ const FormLayout = (params) => {
                                                                             id={getIn(errors, `languages.${index}.level`) && 'invalid'}
                                                                         >
                                                                             <option value="" disabled>Seleccionar</option>
-                                                                            <option value="A1-A2">A1-A2</option>
-                                                                            <option value="B1-B2">B1-B2</option>
-                                                                            <option value="C1-C2">C1-C2</option>
-                                                                            <option value="Nativo">Nativo</option>
+                                                                            <option value="A1_A2">A1-A2</option>
+                                                                            <option value="B1_B2">B1-B2</option>
+                                                                            <option value="C1_C2">C1-C2</option>
+                                                                            <option value="NATIVE">Nativo</option>
                                                                         </Field>
                                                                     </div>
                                                                 </div>

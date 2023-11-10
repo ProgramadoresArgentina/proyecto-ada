@@ -130,7 +130,7 @@ export default function Navbar() {
 														<Menu.Item>
 															{({ active }) => (
 																<Link
-																	href="/user"
+																	href="/mi-perfil"
 																	className={classNames(
 																		active
 																			? "bg-gray-100"

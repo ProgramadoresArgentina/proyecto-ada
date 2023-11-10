@@ -9,7 +9,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         case "GET":
             try{
                 const {id} = query
-                const getOneCv = await prisma.cv.findUnique({
+                const getOneCv = await prisma.cv.findFirst({
                     where: { userId : Number(id), }, 
                     include: {
                         user: true,
@@ -51,7 +51,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                                 // user:{connect: {id: Number(id)}}
                         },
                         where: {
-                            userId : Number(id), 
+                            id : Number(id),  /// cambiado
                         },  
                         include:{
                                 certifications:true,
@@ -73,7 +73,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                     // return
                 }
                 const deleteCv = await prisma.cv.delete({
-                    where: { userId : Number(id), }
+                    where: { id : Number(id), } /// Cambiado
                 }) 
                 res.json(deleteCv)
                 break; 

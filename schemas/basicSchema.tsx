@@ -6,7 +6,7 @@ import * as yup from "yup";
 export const basicSchema = yup.object().shape({
     // email: yup.string().email("Please enter a valid email").required("Required"),
     // age: yup.number().positive().integer().required("Required")
-
+    title: yup.string().min(5, 'min 5 caracteres').required("requerido"),
     basic: yup.array().of(
         yup.object().shape({
             firstname: yup.string().required("requerido"),
