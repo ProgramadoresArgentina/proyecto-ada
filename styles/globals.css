@@ -459,3 +459,28 @@ font-size: .875rem;
 overflow-x: auto !important;
 white-space: pre !important;
 }
+
+@-webkit-keyframes shine-alt2 {
+    0% {
+      opacity: 0;
+      transform: translateX(-100px) skewX(-15deg);
+      transition-property: opacity, transform;
+    }
+    11.5044247788%, 100% {
+      opacity: 1;
+      transform: translateX(300px) skewX(-15deg);
+      transition-property: opacity, transform;
+    }
+  }
+  @keyframes shine-alt2 {
+    0% {
+      opacity: 0;
+      transform: translateX(-100px) skewX(-15deg);
+      transition-property: opacity, transform;
+    }
+    11.5044247788%, 100% {
+      opacity: 1;
+      transform: translateX(300px) skewX(-15deg);
+      transition-property: opacity, transform;
+    }
+}
