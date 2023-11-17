@@ -137,7 +137,7 @@ const User: NextPage = () => {
                         <div>
                             <label htmlFor="first-name" className="text-sm font-semibold leading-6 text-white
                             flex">
-                                First name
+                                Nombre
                                 {errors.firstName ? <span className="lowercase ml-2 text-red-300">({getIn(errors, "firstName")})</span> : null}
                             </label>
                             <div className="mt-2.5">
@@ -148,7 +148,7 @@ const User: NextPage = () => {
                         </div>
                         <div>
                             <label htmlFor="last-name" className="block text-sm font-semibold leading-6 text-white">
-                                Last name
+                                Apellido
                                 {errors.lastName ? <span className="lowercase ml-2 text-red-300">({getIn(errors, "lastName")})</span> : null}
                             </label>
                             <div className="mt-2.5">

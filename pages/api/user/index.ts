@@ -37,19 +37,20 @@ async function onUpdateUser(session: Session, body: any): Promise<{}> {
         where: { email: session.user.email },
         select: {id: true}
     });
+    const { firstName, lastName, linkedin, github, behance, position, status, url,experienceLevel, minidescription } = body
     await prisma.userSettings.update({
         where:{userId: Number(id)},
-        data: {
-            firstName: body.firstName,
-            lastName: body.lastName,
-            linkedin: body.linkedin,
-            github: body.github,
-            behance: body.behance,
-            position: body.position,
-            status: body.status,
-            url: body.url,
-            experienceLevel: body.experienceLevel,
-            minidescription: body.minidescription,
+        data:{
+            firstName,
+            lastName,
+            linkedin,
+            github,
+            experienceLevel,
+            minidescription,
+            url,
+            status,
+            behance,
+            position
         }
     });
     return {message: "USER_UPDATED"};
@@ -78,5 +79,3 @@ async function getUser(session: Session): Promise<{}> {
     });
     return userDB;
 }
-
-
