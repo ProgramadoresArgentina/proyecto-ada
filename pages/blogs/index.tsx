@@ -171,7 +171,7 @@ const MyBlogsList: NextPage = () => {
 				<Link
 					href={"/blog/publish"}
 					className="rounded-md px-3 py-2  text-sm hover:text-indigo-800 plain-button my-3 self-end">
-					+ Crear Blog
+					+ Crear Artículo
 				</Link>
 				<table className="w-full text-sm text-left text-gray-500 ">
 					<thead className="text-xs uppercase bg-gray-700 text-gray-400 ">

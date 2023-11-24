@@ -42,7 +42,17 @@ export default async (req: NextApiRequest, res: NextApiResponse)=> {
                             {id: 'desc'}
                         ],
                         include : {
-                            user : true,
+                            user : {
+                                include: {
+                                    userSettings: {
+                                        select: {
+                                            avatar: true,
+                                            position: true,
+                                            url: true
+                                        }
+                                    }
+                                }
+                            },
                             hashtags : true, 
                         },
                     }),
@@ -63,7 +73,17 @@ export default async (req: NextApiRequest, res: NextApiResponse)=> {
                             {id: 'desc'}
                         ],
                         include : {
-                            user : true,
+                            user : {
+                                include: {
+                                    userSettings: {
+                                        select: {
+                                            avatar: true,
+                                            position: true,
+                                            url: true
+                                        }
+                                    }
+                                }
+                            },
                             hashtags : true, 
                         },
                     }),

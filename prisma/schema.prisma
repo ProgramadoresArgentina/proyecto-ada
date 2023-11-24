@@ -124,7 +124,7 @@ enum ExperienceLevel {
 enum Status {
 	CONTRATANDO
 	BUSCANDO
-  MIEMBRO
+    MIEMBRO
 }
 
 enum Position {

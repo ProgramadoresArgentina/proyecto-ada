@@ -132,7 +132,7 @@ const User: NextPage = () => {
                     <Link href={`/pro/${user.url}`} className="text-blue-400 hover:underline">Ir a mi perfil público</Link>
                     <button type="button" onClick={() => downloadResume()} className="text-blue-400 hover:underline">Descargar cv</button>
                 </div>
-                <div className="grid grid-cols-2 gap-x-8 gap-y-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-6">
                     <div className="grid grid-cols-1 gap-x-8 gap-y-6">
                         <div>
                             <label htmlFor="first-name" className="text-sm font-semibold leading-6 text-white

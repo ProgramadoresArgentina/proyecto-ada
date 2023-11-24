@@ -7,6 +7,7 @@ import { UsePostsStateType } from "../../interface/postTypes";
 
 import { NotFound } from "../../components/NotFound/NotFound";
 import Spinner from "../../components/Spinner";
+import RickyLoader from "../../components/ricky-loader";
 
 const Post: NextPage = () => {
 	const { post, isLoading, onError }: UsePostsStateType = usePosts();
@@ -14,7 +15,7 @@ const Post: NextPage = () => {
 	if (isLoading)
 		return (
 			<div className="full-screen-center-container bg-[#0D1116]">
-				<Spinner />
+				<RickyLoader />
 			</div>
 		);
 
@@ -26,7 +27,7 @@ const Post: NextPage = () => {
 					"No existe registro del blog en nuestra base de datos. Si formas parte de Programadores Argentina, te invitamos a crear un blog que refleje tus mayores intereses."
 				}
 				url={"/publish"}
-				buttonName={"Crear Blog"}
+				buttonName={"Crear Artículo"}
 			/>
 		);
 

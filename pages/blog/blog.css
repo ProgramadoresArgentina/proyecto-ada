@@ -6,56 +6,17 @@
     position: relative;
     height: 35rem;
     width: 100%;
-    background: rgb(0,0,0);
     @apply font-monaSans;
+
+    background-color: rgba(0,0,0,.85);
+    background-blend-mode: multiply;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 20%;
 }
 
-.blog .animated-button {
-    margin: 0 auto;
-    text-align: center;
-    position: relative;
-    box-sizing: border-box;
-    color: red;
-    display: block;
-    z-index: 2;
-    overflow: hidden;
-    padding: 3px;
-    cursor: pointer;
-    padding: 10px 0px;
-}
-.blog .animated-button:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: linear-gradient(115deg,#F88000,#5643cc,#aaa);
-    background-size: 50% 100%;
-    width: 200%;
-    height: 100%;
-}
-
-.blog .animated-button span {
-    position: relative;
-    z-index: 2;
-    padding: 0.875rem 40px;
-    font-size: 1.1rem;
-    align-items: center;
-    background: #000;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    height: 100%;
-}
-.blog .animated-button:hover:before { 
-    animation: SidebarCreate-module_rainbowSlide-feOE0 .75s linear infinite
-}
-
-@keyframes SidebarCreate-module_rainbowSlide-feOE0 {
-    to {
-        transform: translateX(-50%)
-    }
+.blog .shine-button:hover {
+    scale: 1.01;
 }
 
 .blog .blog-header .blog-header-img {
@@ -85,7 +46,6 @@
 .blog .blog-header .content h2 {
     text-align: center;
     font-size: 2.4rem;
-    max-width: 40%;
     text-transform: uppercase;
     margin-top: 20px;
 }
@@ -97,9 +57,6 @@
     border-radius: 200px;
     font-size: .7rem;
     text-transform: uppercase;
-}
-.blog .blog-content {
-    margin: 0px 100px;
 }
 
 .blog .blog-content .categories {
@@ -146,7 +103,6 @@
     display: grid;
     margin-top: 50px;
     padding: 0px;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 40px;
     margin-bottom: 20px;
 }
@@ -156,7 +112,6 @@
     box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.10); 
     margin: 0px auto;
     display: flex;
-    flex-direction: row;
     width: 100%;
     @apply font-monaSans;   
 }

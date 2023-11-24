@@ -43,7 +43,7 @@ module.exports = {
       backgroundImage: {
         "background-vector": "url('/carousel/background-vector.svg')",
         "background-blog-world": "url('/blog/world.png')",
-        "background-blog-header": "url('/blog-header.jpg')",
+        "background-blog-header": "url('/blog-header-people.jpg')",
       },
       keyframes: {
         showAlertPopup: {
@@ -69,6 +69,7 @@ module.exports = {
       },
     },
     screens: {
+      base: "0px",
       sm: "640px",
       md: "768px",
       lg: "1024px",

@@ -42,7 +42,7 @@ export default function Hero() {
 
             
             <div className="mx-auto text-center px-6 lg:px-8">
-                <div className="mx-auto max-w-2xl mt-2">
+                <div className="mx-auto max-w-2xl mt-16 lg:mt-10">
                     <dl className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
                         <div className="flex flex-col-reverse">
                             <dt className="text-base leading-7 text-[#9773ff]">Miembros en <Link className="hover:text-[#673FD7]" href="https://www.linkedin.com/company/programadores-argentina">LinkedIn</Link></dt>
@@ -74,7 +74,7 @@ export default function Hero() {
                     </dl>
                 </div>
                 <div className="max-w-5xl m-auto mt-5">
-                    <h2 className="text-[3rem] md:text-[4rem] font-bold tracking-tight text-white"><span className="degrade-text-orange">Comunidad</span> Programadores Argentina</h2>
+                    <h2 className="text-[2rem] md:text-[4rem] font-bold tracking-tight text-white"><span className="degrade-text-orange">Comunidad</span> Programadores Argentina</h2>
                     <p className="mt-6 text-lg leading-8 text-gray-300">ESPACIO PARA PROGRAMADORES Y PERSONAS DEL MUNDO IT⚡️    
                     </p>
                 </div>
