@@ -49,6 +49,13 @@ const Blog: NextPage = () => {
 		}
 	}, [data]);
 
+	const getNewPageBlog = (value: number) => {
+		if (page === 1 && value < 0) return;
+		console.log(data.total);
+		// if (value === 1 && data.total < 20) return;
+		setPage(page + value);
+	};
+
 	const articlesMap = Array.from({ length: 12 });
 	return (
 		<div className="w-full min-h-screen blog inline-block">
@@ -95,23 +102,7 @@ const Blog: NextPage = () => {
 							))}
 						<li id="active">#Explorar</li>
 					</ul>
-					<div className="arrow-right text-white">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							strokeWidth={1.5}
-							stroke="currentColor"
-							className="w-6 h-6">
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								d="M8.25 4.5l7.5 7.5-7.5 7.5"
-							/>
-						</svg>
-					</div>
 				</div>
-
 				<div className="blogs-list">
 					<ul className="blogs">
 						{data &&
@@ -168,12 +159,27 @@ const Blog: NextPage = () => {
 								</motion.div>
 							))}
 					</ul>
-
-					<nav className="mb-20 text-end">
+					<div className="w-full flex justify-center items-center gap-10">
+						<button
+							onClick={() => getNewPageBlog(-1)}
+							className="plain-button"
+							disabled={page === 1}>
+							«
+						</button>
+						<button
+							onClick={() => getNewPageBlog(1)}
+							className="plain-button"
+							disabled={data?.total < 20}>
+							»
+						</button>
+					</div>
+					{/* <nav className="mb-20 text-end">
 						<ul className="inline-flex -space-x-px text-sm">
-							{/* <a href="#" className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                <BackwardIcon className="h-5" />
-                            </a> */}
+							<a
+								href="#"
+								className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+								<BackwardIcon className="h-5" />
+							</a>
 							{Array.from({ length: total / 20 }, (a, index) => {
 								const pageNr = index + 1;
 								return (
@@ -195,7 +201,7 @@ const Blog: NextPage = () => {
 								);
 							})}
 						</ul>
-					</nav>
+					</nav> */}
 				</div>
 			</div>
 		</div>
