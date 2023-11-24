@@ -78,7 +78,7 @@ export default function Hero() {
                     <p className="mt-6 text-lg leading-8 text-gray-300">ESPACIO PARA PROGRAMADORES Y PERSONAS DEL MUNDO IT⚡️    
                     </p>
                 </div>
-                <div className="hero-buttons">
+                <div className="hero-buttons hidden">
                     <div className="mt-20 mx-auto grid max-w-5xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-2">
                         <div role="list" className="grid gap-x-8 gap-y-5 sm:grid-cols-2 sm:gap-y-5 xl:col-span-2">
                             <motion.div
