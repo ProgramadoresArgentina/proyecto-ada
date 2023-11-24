@@ -61,15 +61,16 @@ export const Portfolio: FC<any> = ({ user }) => {
 			<span className="tracking-wide text-[#F78001]">{name}</span>
 		</div>
 	);
-	const SocialDisplay = ({ url }) => (
+	const SocialDisplay = ({ url, redirectTo }) => (
 		<div className="text-center my-2">
-			<button className="bg-gray-700 p-2 font-semibold text-white inline-flex items-center space-x-2 rounded">
+			<Link className="bg-gray-700 p-2 font-semibold text-white inline-flex items-center space-x-2 rounded"
+            href={redirectTo} target="_blank">
 				<Image
 					alt="Programadores Argentina"
 					className="w-5 h-5 fill-current"
 					src={url}
 				/>
-			</button>
+			</Link>
 		</div>
 	);
 	const BadgesDisplay = ({ url, name }) => (
@@ -263,18 +264,18 @@ export const Portfolio: FC<any> = ({ user }) => {
 									</span>
 								</li>
 								<li className="flex items-center md:flex-col lg:flex-row md:items-start py-3">
-									<span className="text-white">Status</span>
+									<span className="text-white">Estado</span>
 									<span className="ml-auto md:ml-0 md:items-start lg:ml-auto">
 										<span className="py-1 px-2 rounded text-gray-300 text-sm">
 											{getDataFromUserSettings.status ===
-											"null"
+											"BUSCANDO"
 												? "En búsqueda"
 												: getDataFromUserSettings.status}
 										</span>
 									</span>
 								</li>
 								<li className="flex items-center md:flex-col md:items-start  lg:flex-row py-3">
-									<span className="text-white">Miembro</span>
+									<span className="text-white">Miembro desde </span>
 									<span className="ml-auto md:ml-0 lg:ml-auto text-gray-300">
 										{convertToDate(
 											getDataFromUser.createdAt
@@ -283,23 +284,23 @@ export const Portfolio: FC<any> = ({ user }) => {
 								</li>
 								<li className="flex items-center md:flex-col md:items-start  lg:flex-row py-3">
 									<span className="text-white">Logros</span>
-									<div className="grid grid-cols-4 ml-auto md:ml-0 lg:ml-auto text-gray-300">
-										<BadgesDisplay
+									<div className="grid grid-cols-1 ml-auto md:ml-0 lg:ml-auto text-gray-300">
+										{/* <BadgesDisplay
 											url={BadgeBlogs}
 											name={"5+ Blogs"}
 										/>
 										<BadgesDisplay
 											url={BadgeCv}
 											name={"CV Completo"}
-										/>
+										/> */}
 										<BadgesDisplay
 											url={BadgeMember}
 											name={"Miembro de PA"}
 										/>
-										<BadgesDisplay
+										{/* <BadgesDisplay
 											url={BadgeProfile}
 											name={"Perfil Completo"}
-										/>
+										/> */}
 									</div>
 								</li>
 							</ul>
@@ -310,9 +311,15 @@ export const Portfolio: FC<any> = ({ user }) => {
 						<div className="bg-[#161B22] p-3 hover:shadow">
 							<HeaderTitle url={IconSocials} name={"Redes"} />
 							<div className="grid grid-cols-3">
-								<SocialDisplay url={Linkedin} />
-								<SocialDisplay url={GitHub} />
-								<SocialDisplay url={LinkPortfolio} />
+                                {
+                                    getDataFromUserSettings.linkedin && getDataFromUserSettings.linkedin !== '' &&
+                                    <SocialDisplay url={Linkedin} redirectTo={`https://www.linkedin.com/in/${getDataFromUserSettings.linkedin}`} />
+                                }
+                                {
+                                    getDataFromUserSettings.github && getDataFromUserSettings.github !== '' &&
+                                    <SocialDisplay url={GitHub} redirectTo={`https://github.com/${getDataFromUserSettings.github}`} />
+                                }
+								{/* <SocialDisplay url={FaBehance} redirectTo={getDataFromUserSettings.behance} /> */}
 							</div>
 						</div>
 					</div>
@@ -333,7 +340,7 @@ export const Portfolio: FC<any> = ({ user }) => {
 											{getDataFromUser?.username}
 										</div>
 									</div>
-									<div className="flex flex-row justify-start items-center overflow-x-scroll no-scrollbar">
+									{/* <div className="flex flex-row justify-start items-center overflow-x-scroll no-scrollbar">
 										<div className="min-w-[60px] md:px-1 py-2 font-semibold text-gray-300">
 											Email
 										</div>
@@ -344,7 +351,7 @@ export const Portfolio: FC<any> = ({ user }) => {
 												{getDataFromUser.email}
 											</a>
 										</div>
-									</div>
+									</div> */}
 									<div className="flex flex-row justify-start items-center">
 										<div className="min-w-[60px] py-2 font-semibold text-gray-300 ">
 											Posición

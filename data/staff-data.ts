@@ -1,38 +1,31 @@
 export const staff = [
   {
     github: 'JuanseMastrangelo',
-    id: 1,
+    id: 0,
     imgUrl: '/staff/Avatar-JuanseMastrangelo.png',
     name: 'Juanse Mastrangelo',
-    position: 'Fundador y Desarrollador',
+    position: 'Fundador, administrador en Instagram y Linkedin',
   },
   {
-    github: 'neriheredia',
-    id: 2,
-    imgUrl: '/staff/Avatar-NeriHeredia.jpg',
-    name: 'Neri Heredia',
-    position: 'Fundador y Desarrollador',
+    github: 'UlisesPignatelli',
+    id: 1,
+    imgUrl: '/staff/Avatar-Ulises.jpg',
+    name: 'Ulises Pignatelli',
+    position: 'Fundador, admin en linkedin y grupos de whatsapp',
   },
   {
     github: 'DevMartinese',
     id: 3,
     imgUrl: '/staff/Avatar-GonzaloMartinese.jpg',
     name: 'Gonzalo Martinese',
-    position: 'Fundador y Desarrollador',
+    position: 'Fundador',
   },
   {
-    github: 'peperinadev',
-    id: 4,
-    imgUrl: '/staff/Avatar-PeperinaDev.jpg',
-    name: 'Peperina Dev',
-    position: 'Fundador y Desarrollador',
-  },
-  {
-    github: 'sampxcs',
-    id: 5,
-    imgUrl: '/staff/Avatar-IanRosales.jpg',
-    name: 'Ian Rosales',
-    position: 'Desarrollador',
+    github: 'neriheredia',
+    id: 2,
+    imgUrl: '/staff/Avatar-NeriHeredia.jpg',
+    name: 'Neri Heredia',
+    position: 'Colaborador',
   },
   {
     github: 'Carolina-Riddick',
@@ -41,13 +34,13 @@ export const staff = [
     name: 'Carolina Riddick',
     position: 'Desarrolladora',
   },
-  {
+  /* {
     github: 'ElamCano',
     id: 7,
     imgUrl: '/staff/Avatar-ElamCano.jpg',
     name: 'Elam Cano',
     position: 'Desarrollador',
-  },
+  }, */
   {
     github: 'Nicolius888',
     id: 8,
@@ -77,10 +70,17 @@ export const staff = [
     position: 'QA Tester',
   },
   {
+    github: 'sampxcs',
+    id: 5,
+    imgUrl: '/staff/Avatar-IanRosales.jpg',
+    name: 'Ian Rosales',
+    position: 'Desarrollador',
+  },
+  /* {
     github: '',
     id: 12,
     imgUrl: '/staff/Avatar-AlexisAguero.jpg',
     name: 'Alexis Aguero',
     position: 'QA Tester',
-  },
+  }, */
 ]

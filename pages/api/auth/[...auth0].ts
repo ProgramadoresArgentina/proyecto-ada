@@ -32,6 +32,7 @@ async function createUser(user: Claims) {
 	const userExists = await prisma.user.findUnique({
 		where: { email: user.email },
 	});
+    console.log(userExists);
 	if (!userExists) {
         try {
             const userRow = await prisma.user.create({

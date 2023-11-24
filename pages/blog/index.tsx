@@ -10,6 +10,8 @@ import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
+import { EyeIcon } from "@heroicons/react/20/solid";
+import RickyLoader from "../../components/ricky-loader";
 
 const Blog: NextPage = () => {
 	const searchParams = useSearchParams();
@@ -52,39 +54,26 @@ const Blog: NextPage = () => {
 	const articlesMap = Array.from({ length: 12 });
 	return (
 		<div className="w-full min-h-screen blog inline-block">
-			<div className="blog-header">
-				<motion.div
-					style={{ width: "100%" }}
-					transition={{ duration: 0.5 }}
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}>
-					<div className="blog-header-img bg-background-blog-header left"></div>
-					<div className="blog-header-img bg-background-blog-header right"></div>
-				</motion.div>
-				<div className="content">
+			<div className="blog-header bg-background-blog-header">
+				<div className="content pt-20 lg:pt-0">
 					<span className="badge">Artículos</span>
-					<h2>
+					<h2 className="text-[.75rem] max-w-full lg:max-w-[40%]">
 						&quot; Toda línea de código tiene su historia &quot;
 					</h2>
 					<span>Articulos compartidos por la comunidad</span>
-					<div className="mt-12">
-						<Link className="animated-button" href="/blog/publish">
-							<span>
-								<i className="icon mr-2">
-									<PlusIcon className="h-6 text-white" />{" "}
-								</i>
-								Crear un nuevo artículo
-							</span>
-						</Link>
-						<Link
-							href="/blogs"
-							className="text-sm flex justify-center mt-5 hover:underline">
-							<span>Mis Blogs</span>
-						</Link>
-					</div>
+                    <div className="mt-5">
+                        <Link className="shine-button" href="/blog/publish">
+                            <i className="icon mr-2"><PlusIcon className="h-6 text-white" /> </i>
+                            Crear un nuevo artículo
+                        </Link>
+                        <Link href="/blogs" className="text-sm flex justify-center mt-5 hover:underline">
+                            <span>Mis Blogs</span>
+                        </Link>
+                    </div>
 				</div>
 			</div>
-			<div className="blog-content">
+			<div className="blog-content mx-10 lg:mx-24 my-10">
+
 				<div className="categories">
 					<ul>
 						{allHastagQuery.length > 0 &&
@@ -112,91 +101,91 @@ const Blog: NextPage = () => {
 					</div>
 				</div>
 
-				<div className="blogs-list">
-					<ul className="blogs">
-						{data &&
-							data.result.map((article, i) => (
-								<motion.div
-									key={i}
-									style={{ width: "100%" }}
-									transition={{ duration: 1 }}
-									initial={{ opacity: 0 }}
-									whileInView={{ opacity: 1 }}>
-									<li>
-										<div className="article-header w-1/4">
-											<img
-												className="object-cover rounded-sm"
-												src={article.image}
-											/>
-											{/* <div className="badge">Design</div> */}
-										</div>
-										<div className="articles-content">
-											<h6
-												onClick={() =>
-													router.push(
-														`/blog/${article.url}`
-													)
-												}>
-												{article.title}
-											</h6>
-											<div className="articles-hashtags">
-												{article.hashtags.map(
-													(h, hi) => (
-														<a key={hi}>{h.name}</a>
-													)
-												)}
-											</div>
-											{/* <span className="time">10 MINUTE READ</span> */}
-											<div className="article-author">
-												<div className="article-author-image bg-background-blog-world"></div>
-												<div className="article-author-information">
-													<p className="author-title">
-														By{" "}
-														<b>
-															{
-																article.user
-																	.username
-															}
-														</b>
-													</p>
-													<span>UX UI Designer</span>
-												</div>
-												{/* <ArrowBox  link={'/ai'} color={'white'} /> */}
-											</div>
-										</div>
-									</li>
-								</motion.div>
-							))}
-					</ul>
+                {
+                    loading ?
+                    <RickyLoader />
+                    :
+                    <div className="blogs-list">
+                        <ul className="blogs grid-cols-1 lg:grid-cols-2">
+                            {data && data.result.map((article, i) => (
+                                <motion.div
+                                key={i}
+                                style={{width: "100%"}}
+                                transition={{duration: 1}}
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}>
+                                    <li className="flex-col lg:flex-row">
+                                        <div className="article-header w-full lg:w-1/4">
+                                            <img className="object-cover rounded-sm"
+                                                src={article.image}
+                                            />
+                                            {/* <div className="badge">Design</div> */}
+                                        </div>
+                                        <div className="articles-content">
+                                            <h6 onClick={() => router.push(`/blog/${article.url}`)}>
+                                                {article.title}
+                                            </h6>
+                                            <div className="articles-hashtags">
+                                                {
+                                                    article.hashtags.map((h, hi) => <a key={hi}>{h.name}</a>)
+                                                }
+                                            </div>
+                                            {/* <span className="time">10 MINUTE READ</span> */}
+                                            <div className="article-author">
+                                                <div className="article-author-image"
+                                                style={{'backgroundImage': `url(${article.user.userSettings ? article.user.userSettings.avatar : ""})`}}></div>
+                                                <div className="article-author-information">
+                                                    <p className="author-title">
+                                                        Creado por 
+                                                        {
+                                                            article.user.userSettings ?
+                                                            <Link className="font-bold" href={`/pro/${article.user.userSettings.url}`}> {article.user.username}</Link>
+                                                            :
+                                                            <b> {article.user.username}</b>
+                                                        }
+                                                    </p>
+                                                    <div className="flex text-sm gap-3">
+                                                        {
+                                                            article.user.userSettings &&
+                                                            (
+                                                            <>
+                                                                <span>{article.user.userSettings.position}</span>
+                                                                <span>|</span>
+                                                            </>
+                                                            )
+                                                        }
+                                                        <span className="flex gap-2"><EyeIcon className="w-3" /> {article.views} vistas</span>
+                                                    </div>
+                                                </div>
+                                                {/* <ArrowBox  link={'/ai'} color={'white'} /> */}
+                                            </div>
+                                        </div>
+                                    </li>
+                                </motion.div>
+                            ))}
+                        </ul>
 
-					<nav className="mb-20 text-end">
-						<ul className="inline-flex -space-x-px text-sm">
-							{/* <a href="#" className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                <BackwardIcon className="h-5" />
-                            </a> */}
-							{Array.from({ length: total / 20 }, (a, index) => {
-								const pageNr = index + 1;
-								return (
-									<li key={index}>
-										<a
-											href="#"
-											onClick={() => setPage(pageNr)}
-											className={`${
-												page === pageNr
-													? "bg-gray-700 text-white"
-													: "bg-gray-800 text-gray-500"
-											} flex items-center justify-center px-3 h-8 leading-tight border border-gray-700 hover:bg-gray-700 hover:text-white
-                                            ${pageNr === 1 && "rounded-l-lg"} ${
-												pageNr === 7 && "rounded-r-lg"
-											}`}>
-											{pageNr}
-										</a>
-									</li>
-								);
-							})}
-						</ul>
-					</nav>
+                        <nav className="mb-20 text-end">
+                            <ul className="inline-flex -space-x-px text-sm">
+                                {/* <a href="#" className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                    <BackwardIcon className="h-5" />
+                                </a> */}
+                                {
+                                    Array.from({length: total/20}, (a, index) => {
+                                        const pageNr = index+1;
+                                        return (
+                                            <li key={index}>
+                                                <a href="#" onClick={() => setPage(pageNr)}
+                                                className={`${page === pageNr ? 'bg-gray-700 text-white' : 'bg-gray-800 text-gray-500'} flex items-center justify-center px-3 h-8 leading-tight border border-gray-700 hover:bg-gray-700 hover:text-white
+                                                ${pageNr === 1 && 'rounded-l-lg'} ${pageNr === 7 && 'rounded-r-lg'}`}>{pageNr}</a>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+                        </nav>
 				</div>
+                }
 			</div>
 		</div>
 	);

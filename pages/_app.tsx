@@ -37,6 +37,9 @@ const MyApp: NextPage = ({ Component, pageProps }: AppProps) => {
 			<Head>
 				<link rel="shortcut icon" href="/static/favicon.ico" />
 				<title>Programadores Argentina - Comunidad</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                <meta name="robots" content="index, follow" />
+                <meta name="description" content="About page" />
 			</Head>
 			<Navbar />
 			<Component {...pageProps} />

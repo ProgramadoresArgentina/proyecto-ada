@@ -15,6 +15,10 @@ const nextConfig = {
 		TEMPLATE_ID_EMAILJS: process.env.EMAIL_TEMPLATE_ID,
 		USER_ID_EMAILJS: process.env.EMAIL_USER_ID,
 	},
+    i18n: {
+        locales: ["es"],
+        defaultLocale: "es",
+    },
 };
 
 module.exports = nextConfig;
