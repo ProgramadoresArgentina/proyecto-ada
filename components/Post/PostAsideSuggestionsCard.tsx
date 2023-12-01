@@ -7,6 +7,7 @@ export default function PostAsideSuggestionsCard({
 	image,
 	title,
 	userInfo,
+    url
 }) {
 	const { username, userSettings } = userInfo.result;
 
@@ -15,7 +16,7 @@ export default function PostAsideSuggestionsCard({
 	return (
 		<div className="flex gap-3 ">
 			<div className="w-16 h-16 min-w-[4rem] min-h-[4rem] rounded-md overflow-hidden">
-				<Link title={title} href={`/blog/${id}`}>
+				<Link title={title} href={`/blog/${url}`}>
 					<img
 						src={image}
 						alt="Programadores Argentina"
@@ -59,7 +60,7 @@ export default function PostAsideSuggestionsCard({
 					</Link>
 				</div>
 				<p className="text-sm font-semibold tracking-tighter">
-					<Link href={`/blog/${id}`}>{title}</Link>
+					<Link href={`/blog/${url}`}>{title}</Link>
 				</p>
 			</div>
 		</div>

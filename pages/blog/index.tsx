@@ -15,34 +15,24 @@ import RickyLoader from "../../components/ricky-loader";
 
 const Blog: NextPage = () => {
 	const searchParams = useSearchParams();
-	const allHastagQuery = searchParams.getAll("hashtag");
+    const [allHashtagQuery, setAllHashtagQuery] = useState([]);
 	const { data, error, loading, fetchData } = useFetch();
 	const [page, setPage] = useState(1);
 	const [total, setTotal] = useState(1);
-	const [perPage, setPerPage] = useState(20);
+	const [perPage, setPerPage] = useState(6);
 	const router = useRouter();
 
 	useEffect(() => {
-		/* if (allHastagQuery.length > 0) {
-			let body = { hashtag: allHastagQuery.join(",") };
-			fetchData("/api/articles", "POST", body);
-            setTotal(data.total);
-			//TODO recibir articles en data y mostrarlos
-		}
-        fetchData(`/api/articles/${page}`, "GET"); */
-	}, []);
-
-	useEffect(() => {
 		let body = {};
-		if (page === 1 && allHastagQuery.length > 0) {
-			body = { hashtag: allHastagQuery.join(",") };
+        const hashtags = searchParams.getAll("hashtag");
+        setAllHashtagQuery(hashtags);
+		if (page === 1 && hashtags.length > 0) {
+			body = { hashtag: hashtags.join(",") };
 			fetchData(`/api/articles/${page}`, "POST", body);
 		} else {
-			fetchData(`/api/articles/${page}`, "GET");
-		}
-	}, [page]);
-
-	console.log(allHastagQuery);
+            onSetPage(1)
+        }
+	}, [searchParams]);
 
 	useEffect(() => {
 		if (data) {
@@ -50,6 +40,21 @@ const Blog: NextPage = () => {
 			setTotal(data.total);
 		}
 	}, [data]);
+
+    const onSetPage = (pageNr: number) => {
+        setPage(pageNr);
+        fetchData(`/api/articles/${pageNr}`, "GET");
+    }
+
+    const resetFilters = () => {
+        onSetPage(1);
+        setAllHashtagQuery([]);
+    }
+
+    const getNewPageBlog = (value: number) => {
+		if (page === 1 && value < 0) return;
+        onSetPage(page + value);
+	};
 
 	const articlesMap = Array.from({ length: 12 });
 	return (
@@ -76,13 +81,14 @@ const Blog: NextPage = () => {
 
 				<div className="categories">
 					<ul>
-						{allHastagQuery.length > 0 &&
-							allHastagQuery?.map((hashtag, index) => (
+						{allHashtagQuery.length > 0 &&
+							allHashtagQuery?.map((hashtag, index) => (
 								<li key={index} id="active">
 									#{hashtag}
 								</li>
 							))}
-						<li id="active">#Explorar</li>
+						<li id={allHashtagQuery && allHashtagQuery.length > 0 ? "" : "active"}
+                        onClick={() => resetFilters()}>#Explorar</li>
 					</ul>
 					<div className="arrow-right text-white">
 						<svg
@@ -106,8 +112,8 @@ const Blog: NextPage = () => {
                     <RickyLoader />
                     :
                     <div className="blogs-list">
-                        <ul className="blogs grid-cols-1 lg:grid-cols-2">
-                            {data && data.result.map((article, i) => (
+                        <ul className="blogs grid-cols-1 lg:grid-cols-2c">
+                            {data && data.result && data.result.map((article, i) => (
                                 <motion.div
                                 key={i}
                                 style={{width: "100%"}}
@@ -127,7 +133,7 @@ const Blog: NextPage = () => {
                                             </h6>
                                             <div className="articles-hashtags">
                                                 {
-                                                    article.hashtags.map((h, hi) => <a key={hi}>{h.name}</a>)
+                                                    article.hashtags.slice(0, 5).map((h, hi) => <a key={hi}>{h.name}</a>)
                                                 }
                                             </div>
                                             {/* <span className="time">10 MINUTE READ</span> */}
@@ -165,17 +171,32 @@ const Blog: NextPage = () => {
                             ))}
                         </ul>
 
-                        <nav className="mb-20 text-end">
+                        <div className="w-full flex justify-center items-center gap-10">
+                            <button
+                                onClick={() => getNewPageBlog(-1)}
+                                className="plain-button"
+                                disabled={page === 1}>
+                                «
+                            </button>
+                            <button
+                                onClick={() => getNewPageBlog(1)}
+                                className="plain-button"
+                                disabled={data?.result?.length < 6}>
+                                »
+                            </button>
+                        </div>
+
+                        {/* <nav className="mb-20 text-end">
                             <ul className="inline-flex -space-x-px text-sm">
-                                {/* <a href="#" className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                <a href="#" className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                     <BackwardIcon className="h-5" />
-                                </a> */}
+                                </a>
                                 {
                                     Array.from({length: total/20}, (a, index) => {
                                         const pageNr = index+1;
                                         return (
                                             <li key={index}>
-                                                <a href="#" onClick={() => setPage(pageNr)}
+                                                <a href="#" onClick={() => onSetPage(pageNr)}
                                                 className={`${page === pageNr ? 'bg-gray-700 text-white' : 'bg-gray-800 text-gray-500'} flex items-center justify-center px-3 h-8 leading-tight border border-gray-700 hover:bg-gray-700 hover:text-white
                                                 ${pageNr === 1 && 'rounded-l-lg'} ${pageNr === 7 && 'rounded-r-lg'}`}>{pageNr}</a>
                                             </li>
@@ -183,7 +204,7 @@ const Blog: NextPage = () => {
                                     })
                                 }
                             </ul>
-                        </nav>
+                        </nav> */}
 				</div>
                 }
 			</div>

@@ -45,6 +45,20 @@ export const PositionOptions = [
     },
 ];
 
+export enum positions {
+    "FULLSTACK" = "Desarrollador Fullstack",
+    "FRONTEND" = "Desarrollador Front-end",
+    "BACKEND" = "Desarrollador Back-end",
+    "DATA_SCIENCE" = "Analista de Datos",
+    "LEADER" = "Lider de equipo",
+    "VIDEOGAMES" = "Desarrollador de videojuegos",
+    "CRYPTO" = "Desarrollador en crypto",
+    "UX_UI" = "Diseñador de Experiencia de Usuario (UX)",
+    "CYBERSECURITY" = "Ingeniero de Seguridad Informática",
+    "DEVOPS" = "Ingeniero DevOps",
+    "ADMIN_SYSTEM" = "Administrador de Bases de Datos",
+}
+
 
 export const ExperienceOptions = [
     {

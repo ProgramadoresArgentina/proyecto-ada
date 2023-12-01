@@ -8,6 +8,7 @@ import Spinner from "../../components/Spinner";
 import { launchToast } from "../../helpers/launchToast";
 import { useFetch } from "../../hooks/useFetch";
 import { ArticleTableProps, ColumnTableProps } from "../../interface/types";
+import Head from "next/head";
 
 const listColumns = [
 	{
@@ -167,6 +168,11 @@ const MyBlogsList: NextPage = () => {
 
 	return (
 		<div className="min-h-screen bg-[#0D1116] pt-32 font-ibm flex justify-center ">
+            <Head>
+				<title>Programadores Argentina - Artículos</title>
+                <meta name="description" content="Sitio web de la comunidad programadores argentina. Escribí y lee artículos de programadores,
+                diseñadores, reclutadores y personas it de argentina." />
+            </Head>
 			<div className="overflow-x-auto shadow-md max-w-[1000px] flex flex-col ">
 				<Link
 					href={"/blog/publish"}

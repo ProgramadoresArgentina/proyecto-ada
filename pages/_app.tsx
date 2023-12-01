@@ -39,7 +39,9 @@ const MyApp: NextPage = ({ Component, pageProps }: AppProps) => {
 				<title>Programadores Argentina - Comunidad</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <meta name="robots" content="index, follow" />
-                <meta name="description" content="About page" />
+                <meta name="description" content="Sitio web de la comunidad programadores argentina. Trabajando en un generador
+                de cv gratis, encontrá y buscá trabajo con nuestra bolsa de talentos. Escribí y lee artículos de persona it de
+                argentina" />
 			</Head>
 			<Navbar />
 			<Component {...pageProps} />

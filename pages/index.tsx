@@ -13,7 +13,7 @@ const Home: NextPage = () => {
                 <Hero />
                 <OurMission />
                 <StaffSection />
-                <CommentsSection commentsList={commentsList}></CommentsSection>
+                {/* <CommentsSection commentsList={commentsList}></CommentsSection> */}
                 <ContactSection />
             </div>
         </div>

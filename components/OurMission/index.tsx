@@ -74,10 +74,10 @@ export const OurMission = () => {
                     </div>
                 </div>
                 <div className="grid grid-cols-2 gap-5 flex-[2]">
-                    <Image className="object-cover w-full h-56 col-span-2 rounded shadow-lg" src="/pictures/pic-3.jpg" alt="Nerdearla Programadores Argentina Staff"
-                    style={{objectPosition: '0px 36%'}} width={100} height={100} />
-                    <Image className="object-cover w-full h-56 col-span-2 rounded shadow-lg" src="/pictures/pic-2.jpg" alt="Staff de programadores argentina en nerdearla"
-                    style={{objectPosition: '0px 26%'}} width={100} height={100} />
+                    <img className="object-cover w-full h-56 col-span-2 rounded shadow-lg" src="/pictures/pic-3.jpg" alt="Nerdearla Programadores Argentina Staff"
+                    style={{objectPosition: '0px 36%'}} />
+                    <img className="object-cover w-full h-56 col-span-2 rounded shadow-lg" src="/pictures/pic-2.jpg" alt="Staff de programadores argentina en nerdearla"
+                    style={{objectPosition: '0px 26%'}} />
                 </div>
             </div>
         </div>

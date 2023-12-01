@@ -60,7 +60,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 				const getDataFromArticles = await prisma.articles.findMany({
 					where: { userId: getUserID.userId },
-					take: 5,
+					take: 6,
+                    orderBy: {
+                      id: 'desc',
+                    },
 					select: {
 						id: true,
 						title: true,

@@ -7,7 +7,7 @@ export default function PostAside({ post }) {
 		post.createdBy.result;
 
 	return (
-		<aside className="w-full md:max-w-[22rem] p-6">
+		<aside className="w-full md:max-w-[22rem] p-6 relative md:sticky top-11">
 			<PostAsideActions
 				linkedIn={linkedIn}
 				facebook={facebook}

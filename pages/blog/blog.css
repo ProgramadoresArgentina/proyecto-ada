@@ -113,6 +113,7 @@
     margin: 0px auto;
     display: flex;
     width: 100%;
+    height: 100%;
     @apply font-monaSans;   
 }
 .blog .article-header {

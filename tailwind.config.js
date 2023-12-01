@@ -67,6 +67,9 @@ module.exports = {
         fadeIn: "fadeIn .2s cubic-bezier(0.2, 0, 0.2, 1) forwards",
         fadeOut: "fadeOut .2s cubic-bezier(0.2, 0, 0.2, 1) forwards",
       },
+      gridTemplateColumns: {
+          '2c': "repeat(2, 1fr)"
+      }
     },
     screens: {
       base: "0px",
@@ -97,7 +100,7 @@ module.exports = {
         },
         "input:invalid": {
           "border-color": "red",
-        },
+        }
       });
     }),
   ],

@@ -15,7 +15,7 @@
 	font-family: "Mona Sans";
 	font-style: normal;
 	font-weight: 300;
-	src: url("http://localhost:3000/static/fonts/mona-sans.woff2")
+	src: url("/static/fonts/mona-sans.woff2")
 		format("truetype");
 }
 
@@ -356,6 +356,7 @@ figure figcaption {
 	display: grid;
 	place-items: center;
 	cursor: pointer;
+    z-index: 10000;
 }
 
 .scroll-up-button span {
@@ -451,13 +452,41 @@ font-size: 1.125rem !important;
 .ql-toolbar.ql-snow {
 padding: 0.875rem 1rem !important;
 }
-
+.ql-snow .ql-editor ul {
+    list-style: disc !important;
+    padding: 0px 1.1875rem !important;
+}
+.ql-editor .ql-font-monospace {
+    font-family: monospace;
+}
+.ql-editor .ql-size-large {
+    font-size: 1.75rem !important;
+    font-weight: bold !important;
+}
+.ql-snow .ql-editor a {
+    color: violet !important;
+}
+.ql-snow .ql-editor a:hover {
+    text-decoration: underline !important;
+}
 .ql-snow .ql-editor pre.ql-syntax {
-background: #0d1117 !important;
-color: #c9d1d9 !important;
-font-size: .875rem;
-overflow-x: auto !important;
-white-space: pre !important;
+    background: dark;
+    padding: 20px !important;
+    color: #c9d1d9 !important;
+    font-size: .875rem;
+    overflow-x: auto !important;
+    white-space: pre !important;
+    border: 1px solid white;
+    position: relative;
+    margin: 1.25rem 0px;
+}
+.ql-snow .ql-editor pre.ql-syntax::after {
+    content: "code";
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: white;
+    z-index: 2;
 }
 
 @-webkit-keyframes shine-alt2 {

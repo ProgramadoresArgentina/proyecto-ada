@@ -24,6 +24,8 @@ import { saveAs } from 'file-saver';
 import { useQuill } from "react-quilljs";
 import hljs from "highlight.js";
 import { formatsOptions } from "../../constants/quilljs.config";
+import { positions } from "../../constants/userDropdowns";
+// import BlotFormatter from "quill-blot-formatter";
 
 export const Portfolio: FC<any> = ({ user }) => {
 	const {
@@ -33,6 +35,12 @@ export const Portfolio: FC<any> = ({ user }) => {
 		getDataFromUserSettings,
 		getProyectsFromUser = null,
 	} = user;
+
+    function mergeEnumPosition(arr: String[]) {
+        return arr.map((e: string): string => {
+            return positions[e];
+        })
+    }
 
     function capitalizeArray(arr) {
         return arr.map(function(element) {
@@ -90,9 +98,10 @@ export const Portfolio: FC<any> = ({ user }) => {
 		image,
         url
 	}) => {
-        const { quill, quillRef } = useQuill({
+        const { quill, quillRef, Quill } = useQuill({
             readOnly: true,
             modules: {
+                // blotFormatter: {},
               toolbar: false,
               syntax: {
                 highlight: (text: string) => hljs.highlightAuto(text).value,
@@ -100,6 +109,9 @@ export const Portfolio: FC<any> = ({ user }) => {
             },
             formats: formatsOptions,
         })
+        /* if (Quill && !quill) {
+            Quill.register('modules/blotFormatter', BlotFormatter);
+        } */
         if (quill) quill.setContents(JSON.parse(content))
          
         return (
@@ -122,7 +134,7 @@ export const Portfolio: FC<any> = ({ user }) => {
 			</Link>
 			<div className="flex items-center justify-between pt-6">
 				<div className="flex items-center space-x-3">
-					{hashtags.map((hashtag) => (
+					{hashtags.slice(0, 3).map((hashtag) => (
 						<Link
 							href={`/blog?hashtag=${hashtag.name}`}
 							key={hashtag.name}
@@ -225,7 +237,7 @@ export const Portfolio: FC<any> = ({ user }) => {
 
 	return (
 		<div className="bg-[#0D1116] min-h-screen pt-16 font-ibm">
-			<div className="container mx-auto xl:p-5 mt-5">
+			<div className="container mx-auto xl:p-5 mt-5 max-w-full">
 				<div className="md:flex no-wrap md:-mx-0">
 					{/* LEFT CARD */}
 					<div className="w-full md:w-3/12 md:mx-2">
@@ -358,7 +370,7 @@ export const Portfolio: FC<any> = ({ user }) => {
 										</div>
 										<div className="px-2 lg:px-4 py-2 text-gray-300">
 											{
-                                                capitalizeArray(getDataFromUserSettings.position).join(', ')
+                                                capitalizeArray(mergeEnumPosition(getDataFromUserSettings.position)).join(', ')
                                             }
 										</div>
 									</div>

@@ -45,16 +45,16 @@ export default function Hero() {
                 <div className="mx-auto max-w-2xl mt-16 lg:mt-10">
                     <dl className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
                         <div className="flex flex-col-reverse">
-                            <dt className="text-base leading-7 text-[#9773ff]">Miembros en <Link className="hover:text-[#673FD7]" href="https://www.linkedin.com/company/programadores-argentina">LinkedIn</Link></dt>
+                            <dt className="text-base leading-7 text-[#9773ff]">Miembros en <Link target="_blank" className="hover:text-[#673FD7]" href="https://www.linkedin.com/company/programadores-argentina"><u>LinkedIn</u></Link></dt>
                             <dd className="text-2xl font-bold leading-9 tracking-tight text-white">
                                 <CountUp 
                                 start={0}
-                                end={29000}
+                                end={34304}
                                 duration={2.7} />
                             </dd>
                         </div>
                         <div className="flex flex-col-reverse">
-                            <dt className="text-base leading-7 text-[#9773ff]">Miembros en <Link className="hover:text-[#673FD7]" href="https://www.instagram.com/programadores_argentina/">Instagram</Link></dt>
+                            <dt className="text-base leading-7 text-[#9773ff]">Miembros en <Link target="_blank" className="hover:text-[#673FD7]" href="https://www.instagram.com/programadores_argentina/"><u>Instagram</u></Link></dt>
                             <dd className="text-2xl font-bold leading-9 tracking-tight text-white">
                                 <CountUp 
                                 start={0}
@@ -63,7 +63,7 @@ export default function Hero() {
                             </dd>
                         </div>
                         <div className="flex flex-col-reverse">
-                            <dt className="text-base leading-7 text-[#9773ff]">Miembros en <Link className="hover:text-[#673FD7]" href="https://linktr.ee/ProgramadoresArgentina">Grupos</Link></dt>
+                            <dt className="text-base leading-7 text-[#9773ff]">Miembros en <Link target="_blank" className="hover:text-[#673FD7]" href="https://linktr.ee/ProgramadoresArgentina"><u>Grupos</u></Link></dt>
                             <dd className="text-2xl font-bold leading-9 tracking-tight text-white">
                                 <CountUp 
                                     start={0}

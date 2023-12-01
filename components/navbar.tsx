@@ -13,6 +13,7 @@ const navigation = [
 	{ name: "Artículos", path: "/blog" },
 	// { name: "Bolsa de Talentos", path: "/talentos" },
 	{ name: "Contacto", path: "/#contact" },
+	{ name: "FAQ", path: "/faq" },
 ];
 
 function classNames(...classes) {

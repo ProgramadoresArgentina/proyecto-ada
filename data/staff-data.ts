@@ -66,7 +66,7 @@ export const staff = [
     github: 'ManuelBadellCartasso',
     id: 11,
     imgUrl: '/staff/Avatar-ManuelBadell.jpg',
-    name: 'Manuel Badell',
+    name: 'Manuel Badell Cartasso',
     position: 'QA Tester',
   },
   {
