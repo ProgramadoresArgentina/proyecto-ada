@@ -19,7 +19,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/ProgramadoresArgentina/proyecto-ada">
-    <img src="https://i.ibb.co/GR24xPk/Logo-PA.png" alt="Programadores Argentina Logo" height="180">
+    <img src="https://i.ibb.co/GR24xPk/Logo-PA.png" alt="Programadores Argentina Logo" width="180">
   </a>
 
   <h3 align="center">Proyecto ADA</h3>
