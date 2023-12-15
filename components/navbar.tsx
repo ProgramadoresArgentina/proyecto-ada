@@ -11,7 +11,7 @@ import Logo from "../public/LogoProgramadoresArgentina.png";
 const returnLink = `/api/auth/login?returnTo=${encodeURIComponent("/mi-perfil")}`;
 const navigation = [
 	{ name: "Artículos", path: "/blog" },
-	// { name: "Bolsa de Talentos", path: "/talentos" },
+	{ name: "Bolsa de Talentos", path: "/talentos" },
 	{ name: "Contacto", path: "/#contact" },
 	{ name: "FAQ", path: "/faq" },
 ];
@@ -82,11 +82,11 @@ export default function Navbar() {
 												{item.name}
 											</Link>
 										))}
-										{/* <Link
+										<Link
 											href="/generador-cv"
 											className="rounded-md px-3 py-2  text-sm hover:text-indigo-800 plain-button">
 											Generar mi CV
-										</Link> */}
+										</Link>
 									</div>
 								</div>
 								<div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -227,12 +227,12 @@ export default function Navbar() {
 										{item.name}
 									</Disclosure.Button>
 								))}
-								{/* <Disclosure.Button
+								<Disclosure.Button
 									as="a"
 									href="/generador-cv"
 									className="block rounded-md px-3 py-2 text-base font-medium plain-button">
 									Generar mi CV
-								</Disclosure.Button> */}
+								</Disclosure.Button>
 							</div>
 						</Disclosure.Panel>
 					</>

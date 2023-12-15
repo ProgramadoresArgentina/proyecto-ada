@@ -5,9 +5,12 @@ import { FaMedal } from 'react-icons/fa';
 
 const TalentsMarquee = () => {
   return (
-    <div className="bg-gradient-to-r from-zinc-900 to-slate-900 w-full h-auto justify-center items-center">
-     <div>
-      <h1 className="flex justify-center  text-xl font-bold mt-10 text-golden">Destacados del mes</h1>
+    <div className="w-9/12 mx-auto h-auto justify-center items-center">
+     <div className="w-full">
+        <div className=" w-full">
+            <h1 className="text-xl text-center font-bold mt-10 text-golden">Miembros verificados</h1>
+            <p className="text-center text-white">Experiencia de los talentos fueron verificados por los administradores</p>
+        </div>
       {/* cards de destacados */}
             <Marquee speed={30}  pauseOnHover={true} autoFill={true}>
             <TalentsCard
@@ -27,17 +30,21 @@ const TalentsMarquee = () => {
       Hace realidad tu proximo  <span className='degrade-text'> proyecto</span>
         </h1>
         {/* cards standard */}
-        <Marquee speed={10}  pauseOnHover={true} autoFill={true}>
-          <TalentsCard
-          MainCardsStyle={"max-w-sm rounded overflow-hidden shadow-lg bg-indigo-800 transition-transform transform hover:-translate-y-2 hover:scale-105 mx-6 relative w-200 h-300"}
-          CardColor={"bg-white  w-full mt-10 px-5 py-3 flex flex-col justify-between text-black"}
-          ImageColors={"w-20 h-20 rounded-full border-4 border-white absolute top-20 left-1/2 transform -translate-x-1/2      -translate-y-1/2"}
-          name={"Daniela Martinez"}
-          years={"2 yrs"}
-          seniority={"Junior"}
-          position={"Front-end"}
-          />
-        </Marquee>
+        <div className="grid grid-cols-5">
+        {
+            Array.from({ length: 15 }).map(() => (
+                <TalentsCard
+                    MainCardsStyle={"max-w-sm rounded overflow-hidden shadow-lg bg-indigo-800 transition-transform transform hover:-translate-y-2 hover:scale-105 mx-6 relative w-200 h-300"}
+                    CardColor={"bg-white  w-full mt-10 px-5 py-3 flex flex-col justify-between text-black"}
+                    ImageColors={"w-20 h-20 rounded-full border-4 border-white absolute top-20 left-1/2 transform -translate-x-1/2      -translate-y-1/2"}
+                    name={"Daniela Martinez"}
+                    years={"2 yrs"}
+                    seniority={"Junior"}
+                    position={"Front-end"}
+                />
+            ))
+        }
+        </div>
     </div>
   )
 }

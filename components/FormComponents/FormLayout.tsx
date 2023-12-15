@@ -8,8 +8,7 @@ import { launchToast } from '../../helpers/launchToast';
 var initialValuesMock = {
     title: "Nuevo curriculum",
     basic: [{
-        firstname: "",
-        lastname: "",
+        username: "",
         position: "",
         portfolio: "",
         linkedIn: "",
@@ -54,9 +53,26 @@ const FormLayout = (params) => {
         if (params.id && params.id !== 0) {
             loadResumeForm(params.id);
         } else {
-            setLoading(false);
+            getUserData();
         }
     }, []);
+
+    function getUserData() {
+        setLoading(true);
+        fetch('/api/user')
+            .then(response => {
+                if (response.status !== 200) throw Error();
+                return response.json()
+            })
+          .then(data => {
+            initialValuesMock.basic[0].username = data.username;
+            setInitialValues(initialValuesMock);
+            setLoading(false);
+        })
+          .catch(error => {
+            launchToast("error","Error al cargar lista de cv, intentelo nuevamente.");
+        });
+    }
 
     function loadResumeForm(resumeId: number) {
         setLoading(true);
@@ -69,8 +85,7 @@ const FormLayout = (params) => {
             const formatValue = {
                 title: cvData.title,
                 basic: [{
-                    firstname: "",
-                    lastname: "",
+                    username: cvData.user.username,
                     position: "",
                     portfolio: "",
                     linkedIn: "",
@@ -82,7 +97,6 @@ const FormLayout = (params) => {
                 experiences: cvData.experience.map(e => {e.dateSince = formatDateFromDatabase(e.dateSince);e.dateTo = formatDateFromDatabase(e.dateTo);return e;}) ,
                 languages: cvData.languages
             }
-            console.log(formatValue);
             setInitialValues(formatValue);
             setLoading(false);
         })
@@ -260,34 +274,21 @@ const FormLayout = (params) => {
                                                             </div>
                                                             <div className="w-full md:w-1/2 px-3 mb-0">
                                                                 <label className="text-white">
-                                                                    Nombre * 
+                                                                    Nombre de usuario * 
                                                                     {
-                                                                        getIn(errors, `basic.${index}.firstname`) && <span className='text-red-300 text-sm ml-2'>({getIn(errors, `basic.${index}.firstname`)})</span>
+                                                                        getIn(errors, `basic.${index}.username`) && <span className='text-red-300 text-sm ml-2'>({getIn(errors, `basic.${index}.username`)})</span>
                                                                     }
                                                                 </label>
                                                                 <Field
+                                                                    disabled="true"
                                                                     className="mt-2 appearance-none block w-full text-white border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none  bg-[#2D3138]"
-                                                                    name={`basic.${index}.firstname`}
+                                                                    name={`basic.${index}.username`}
                                                                     placeholder="Programadores Argentina"
                                                                     type="text"
-                                                                    id={getIn(errors, `basic.${index}.firstname`) && 'invalid'}
+                                                                    id={getIn(errors, `basic.${index}.username`) && 'invalid'}
                                                                 />
                                                             </div>
-                                                            <div className="w-full md:w-1/2 px-3 mb-0">
-                                                                <label className="text-white">
-                                                                    Apellido * 
-                                                                    {
-                                                                        getIn(errors, `basic.${index}.lastname`) && <span className='text-red-300 text-sm ml-2'>({getIn(errors, `basic.${index}.lastname`)})</span>
-                                                                    }
-                                                                </label>
-                                                                <Field
-                                                                    className="mt-2 appearance-none block w-full text-white border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none  bg-[#2D3138]"
-                                                                    name={`basic.${index}.lastname`}
-                                                                    placeholder="Programadores Argentina"
-                                                                    type="text"
-                                                                    id={getIn(errors, `basic.${index}.lastname`) && 'invalid'}
-                                                                />
-                                                            </div>
+                                                            
                                                             <div className="w-full md:w-1/2 px-3 mb-0 hidden">
                                                                 <label className=' flex whitespace-nowrap text-white'>
                                                                     Posición actual/buscada  *
@@ -472,7 +473,7 @@ const FormLayout = (params) => {
                                                         ))}
                                                     <div className="flex flex-wrap justify-end">
                                                         <AddBtn
-                                                            onClick={() => push(initialValues.education[0])}
+                                                            onClick={() => push(initialValuesMock.education[0])}
                                                             label='Agregar Educacion'
                                                         />
                                                     </div>
@@ -553,7 +554,7 @@ const FormLayout = (params) => {
                                                         ))}
                                                     <div className="flex flex-wrap justify-end">
                                                         <AddBtn
-                                                            onClick={() => push(initialValues.certificates[0])}
+                                                            onClick={() => push(initialValuesMock.certificates[0])}
                                                             label='Agregar Certificado'
                                                         />
                                                     </div>
@@ -689,7 +690,7 @@ const FormLayout = (params) => {
                                                     <div className="flex flex-wrap justify-end">
                                                         {/* Adds new experiences field */}
                                                         <AddBtn
-                                                            onClick={() => push(initialValues.experiences[0])}
+                                                            onClick={() => push(initialValuesMock.experiences[0])}
                                                             label='Agregar Experiencia'
                                                         />
                                                     </div>
@@ -767,7 +768,7 @@ const FormLayout = (params) => {
                                                     <div className="flex flex-wrap justify-end">
                                                         {/* Adds new language field */}
                                                         <AddBtn
-                                                            onClick={() => push(initialValues.languages[0])}
+                                                            onClick={() => push(initialValuesMock.languages[0])}
                                                             label='Agregar Idioma'
                                                         />
                                                     </div>

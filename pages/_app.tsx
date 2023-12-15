@@ -60,6 +60,14 @@ const MyApp: NextPage = ({ Component, pageProps }: AppProps) => {
             `}
             </Script>
             <ToastContainer />
+            <div className="fixed inset-x-0 bottom-0 w-1/2 mx-auto pb-5 z-10">
+                <div className="rounded-lg px-4 py-3 text-white shadow-lg">
+                    <p className="text-center text-sm font-medium">
+                    Estas en modo <b>Buscando trabajo</b>
+                    <a href="/mi-perfil" className="inline-block underline ml-2">Cambiar</a>
+                    </p>
+                </div>
+            </div>
 		</UserProvider>
 	);
 };

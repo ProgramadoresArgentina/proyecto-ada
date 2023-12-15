@@ -68,15 +68,19 @@ const Generarcv = () => {
                     </div>
                     :
                     <div className="grid grid-cols-2 lg:grid-cols-5 gap-10">
-                        <Link className='bg-[#1D232A] h-28 flex items-center justify-center rounded-lg text-5xl text-white
-                        flex-col cursor-pointer hover:bg-[#252a30] border-dashed border py-10'
-                        href="/generador-cv/0">
-                            <small className='text-sm uppercase font-bold'
-                            style={{'backgroundImage': 'linear-gradient(180deg, #57B33E00 77%, #5643CC 35%)'}}>Crear Nuevo CV</small>
-                        </Link>
+
+                        {
+                            cvList.length === 0 &&
+                            <Link className='bg-[#1D232A] h-10 flex items-center justify-center rounded-lg text-5xl text-white
+                            flex-col cursor-pointer hover:bg-[#252a30] border py-10'
+                            href="/generador-cv/0">
+                                <small className='text-sm uppercase font-bold'
+                                style={{'backgroundImage': 'linear-gradient(180deg, #57B33E00 77%, #5643CC 35%)'}}>Crear Nuevo CV</small>
+                            </Link>
+                        }
                         {
                             cvList.map((cv, i) => (
-                                <Link className='bg-[#1D232A] h-28 flex items-center justify-center rounded-lg text-md text-white hover:underline
+                                <Link className='bg-[#1D232A] h-10 flex items-center justify-center rounded-lg text-md text-white hover:underline
                                 flex-col cursor-pointer hover:bg-[#252a30] gap-6' key={i}
                                 href={`/generador-cv/${cv.id}`}>
                                     {cv.title}
