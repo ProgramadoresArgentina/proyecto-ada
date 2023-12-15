@@ -88,7 +88,7 @@ export const StateOptions = [
         value: "MIEMBRO"
     },
     {
-        label: "Reclutador",
+        label: "Reclutador / Busco talento",
         value: "CONTRATANDO"
     }
 ];

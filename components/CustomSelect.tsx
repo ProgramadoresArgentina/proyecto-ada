@@ -82,12 +82,12 @@ export const CustomSelect = ({
         ...styles,
         marginRight: '.3125rem',
         borderRadius: '5px',
-        backgroundImage: "linear-gradient(92.88deg,#455eb5 9.16%,#5643cc 43.89%,#673fd7 64.72%)",
+        backgroundImage: "white",
       };
     },
     multiValueLabel: (styles, { data }) => ({
       ...styles,
-      color: 'white',
+      color: 'black',
     }),
     clearIndicator: (styles) => ({
         ...styles,
@@ -100,9 +100,9 @@ export const CustomSelect = ({
     }),
     multiValueRemove: (styles, { data }) => ({
       ...styles,
-      color: 'white',
+      color: 'black',
       ':hover': {
-        backgroundColor: 'white',
+        backgroundColor: 'black',
         color: '#0D1117',
       },
     }),

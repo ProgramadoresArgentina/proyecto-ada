@@ -1,0 +1,13 @@
+import { PrismaClient } from '@prisma/client'
+import { achievementsSeed } from "../seeds/achievements"
+const prisma = new PrismaClient()
+
+achievementsSeed()
+  .then(async () => {
+    await prisma.$disconnect()
+  })
+  .catch(async (e) => {
+    console.error(e)
+    await prisma.$disconnect()
+    process.exit(1)
+})

@@ -1,19 +1,14 @@
 import { FC } from "react";
 
 const linksPages = [
-	{ id: 1, name: "About Us", to: "#" },
-	{ id: 2, name: "Press", to: "#" },
-	{ id: 3, name: "Investors", to: "#" },
-	{ id: 4, name: "Events", to: "#" },
-	{ id: 5, name: "Terms of use", to: "#" },
-	{ id: 6, name: "Privacy policy", to: "#" },
+	{ name: "Politicas de contenido", to: "/policies/content-policy" },
 ];
 export const Footer_Links: FC = () => (
 	<ul className="flex flex-row flex-wrap gap-10">
-		{linksPages.map((link) => (
-			<li key={link.id}>
+		{linksPages.map((link, i) => (
+			<li key={i}>
 				<a
-					className="text-greyMedium font-poppins font-normal text-sm hover:text-grey"
+					className="text-white font-poppins font-normal text-sm hover:underline"
 					href={link.to}>
 					{link.name}
 				</a>
