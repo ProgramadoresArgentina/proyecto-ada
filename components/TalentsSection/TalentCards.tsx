@@ -7,7 +7,7 @@ import {FaLinkedin}from 'react-icons/fa'
 
 const TalentCards = (props) => {
   return (
-  <div className="my-14">
+  <div className="my-8">
     <div className={props.MainCardsStyle}>
             <div className="flex flex-row justify-between px-2 mt-2">
            <span>{props.Medal}</span>
@@ -16,13 +16,14 @@ const TalentCards = (props) => {
         <div className={props.CardColor}>
               <Image src={defaultUser} className={props.ImageColors} alt="profile pic"/>
               <div className="mt-10">
-                        <p className="font-semibold text-center">{props.name}</p>
-                        <div className="flex flex-row justify-between">
-                        <p className="border border-gray-400 rounded-sm text-sm px-1">{props.position}</p>
-                          <p className="border border-gray-400 rounded-sm text-sm px-1">{props.seniority}</p>
-                        </div>
+                        <p className="font-bold text-center whitespace-nowrap">{props.name}</p>
+                        <p className="text-sm font-semibold text-center">{props.position}</p>
+                        <div className="flex flex-row sm:justify-center md:justify-start mt-2">
+                          <p className="border border-gray-400 rounded-sm text-xs  whitespace-nowrap px-1 mr-1">{props.seniority}</p>
+                          <p className="border border-gray-400 rounded-sm text-xs  whitespace-nowrap px-1">Argentina</p>
+                       </div>
               </div>
-              <div className="w-full flex  flex-row  items-center p-2">
+              <div className="w-full flex  flex-row  items-center py-2">
                   <Image src={uk} alt="English" className="w-4 h-4 mr-2"/> 
                   <Image src={spain} alt="Spanish" className="w-4 h-4 mr-2"/> 
               </div>
